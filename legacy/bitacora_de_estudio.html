@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bitácora de Estudio · Pomodoro, Repaso Espaciado y Curva del Olvido</title>
+<meta name="description" content="Bitácora de estudio con Pomodoro, repaso espaciado y curva del olvido. Registra tus asignaturas y temas, y descubre qué estudiar cada día para no olvidar.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Héctor Beltrán">
+<meta name="theme-color" content="#F3EEE2">
+<link rel="icon" type="image/jpeg" href="/logo.jpg">
+<link rel="apple-touch-icon" href="/logo.jpg">
+<link rel="canonical" href="https://www.hectorbeltran.com/bitacora">
+<meta property="og:site_name" content="Héctor Beltrán">
+<meta property="og:title" content="Bitácora de Estudio · Pomodoro, Repaso Espaciado y Curva del Olvido">
+<meta property="og:description" content="Bitácora de estudio con Pomodoro, repaso espaciado y curva del olvido. Registra tus asignaturas y temas, y descubre qué estudiar cada día para no olvidar.">
+<meta property="og:image" content="https://www.hectorbeltran.com/logo.jpg">
+<meta property="og:url" content="https://www.hectorbeltran.com/bitacora">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bitácora de Estudio · Pomodoro, Repaso Espaciado y Curva del Olvido">
+<meta name="twitter:description" content="Bitácora de estudio con Pomodoro, repaso espaciado y curva del olvido. Registra tus asignaturas y temas, y descubre qué estudiar cada día para no olvidar.">
+<meta name="twitter:image" content="https://www.hectorbeltran.com/logo.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Bitácora de Estudio",
+  "url": "https://www.hectorbeltran.com/bitacora",
+  "description": "Herramienta gratuita de estudio con Pomodoro, repaso espaciado y curva del olvido. Registra asignaturas y temas, y sabe qué repasar cada día.",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "es-CO",
+  "isAccessibleForFree": true,
+  "featureList": [
+    "Temporizador Pomodoro",
+    "Repaso espaciado",
+    "Curva del olvido",
+    "Registro de asignaturas y temas",
+    "Modo foco"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Héctor Beltrán",
+    "url": "https://www.hectorbeltran.com"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Karla:ital,wght@0,400..800;1,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3EEE2; --paper2:#EAE3D2; --card:#FCF9F0;
+    --ink:#26221A; --ink2:#6E6553; --line:rgba(38,34,26,.16);
+    --accent:#C8471F; --ok:#3E6B4F; --warn:#B98A1F; --bad:#B3372B; --gold:#C9A227;
+    --shadow:6px 7px 0 rgba(38,34,26,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  [hidden]{display:none !important}
+  body{font-family:'Karla',sans-serif;font-size:16px;line-height:1.5;color:var(--ink);
+    background-color:var(--paper);
+    background-image:radial-gradient(rgba(38,34,26,.12) 1.1px,transparent 1.1px);
+    background-size:24px 24px;}
+  ::selection{background:var(--accent);color:#fff}
+  button{font-family:inherit;cursor:pointer}
+  input,select{font-family:inherit;font-size:.86rem;color:var(--ink)}
+  :focus-visible{outline:2px dashed var(--accent);outline-offset:2px}
+  .grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  .topbar{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1.5px solid var(--ink)}
+  .topbar-in{max-width:1180px;margin:0 auto;padding:.6rem 1.2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;position:relative}
+  .brand{font-family:'Fraunces',serif;font-weight:900;font-style:italic;font-size:1.2rem;white-space:nowrap}
+  .burger{display:none;margin-left:auto;border:1.5px solid var(--ink);background:var(--card);border-radius:7px;font-size:1rem;font-weight:800;padding:.3rem .65rem;line-height:1;box-shadow:2px 2px 0 rgba(38,34,26,.8)}
+  .burger:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 rgba(38,34,26,.8)}
+  .brand .star{color:var(--accent);font-style:normal;display:inline-block;animation:twinkle 3s ease-in-out infinite}
+  .brand em{font-weight:500}
+  @keyframes twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.25) rotate(20deg)}}
+  .nav{display:flex;gap:2px;flex-wrap:wrap}
+  .nav button{border:none;background:none;font-weight:800;font-size:.8rem;letter-spacing:.03em;
+    padding:.42rem .7rem;border-radius:7px;color:var(--ink2);position:relative;transition:color .2s}
+  .nav button:hover{color:var(--ink)}
+  .nav button.active{color:var(--ink)}
+  .nav button.active::after{content:'';position:absolute;left:.65rem;right:.65rem;bottom:1px;height:3px;
+    background:var(--gold);border-radius:2px}
+  .top-right{display:flex;align-items:center;gap:.7rem;margin-left:auto}
+  .nav-date{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+  .streak-badge{display:inline-flex;align-items:center;gap:.4rem;border:1.5px solid var(--ink);border-radius:99px;
+    padding:.22rem .7rem;font-weight:800;font-size:.78rem;background:var(--card);box-shadow:3px 3px 0 rgba(38,34,26,.15)}
+  .streak-badge svg{animation:flick 1.6s ease-in-out infinite;transform-origin:bottom}
+  @keyframes flick{0%,100%{transform:scale(1)}50%{transform:scale(1.15) rotate(-4deg)}}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:2.2rem 1.2rem 1rem}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+  .c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}
+  .c7{grid-column:span 7}.c12{grid-column:span 12}
+
+  .opening{align-items:end;margin-bottom:1.4rem}
+  .eyebrow{font-weight:800;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);margin-bottom:.6rem}
+  h1{font-family:'Fraunces',serif;font-weight:900;letter-spacing:-.025em;font-size:clamp(2.5rem,6.2vw,4.4rem);line-height:1.02}
+  .rl{display:block;overflow:hidden;padding-bottom:.06em}
+  .rl>span{display:block;transform:translateY(115%);transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+  .rl:nth-child(2)>span{transition-delay:.14s}
+  body.in .rl>span{transform:none}
+  .underline{display:block;width:min(470px,82%);height:22px;margin-top:.2rem}
+  .underline path{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.1s ease .7s}
+  body.in .underline path{stroke-dashoffset:0}
+  .sub{margin-top:.9rem;font-size:1.02rem;color:var(--ink2);max-width:46ch}
+  .sub b{color:var(--ink)}
+  .edit-name{border:none;background:none;color:var(--accent);font-size:.95rem;padding:.1rem .2rem;border-bottom:1.5px dashed var(--accent)}
+
+  .card{background:var(--card);border:1.5px solid var(--ink);border-radius:10px;box-shadow:var(--shadow);
+    padding:1.25rem 1.35rem;position:relative}
+  .card::before{content:'';position:absolute;top:0;left:8px;right:8px;height:3.5px;background:var(--gold);
+    border-radius:0 0 3px 3px;opacity:0;transition:opacity .3s ease}
+  .card:hover::before{opacity:1}
+  .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;margin-bottom:.9rem}
+  .card-head h2{font-family:'Fraunces',serif;font-weight:800;font-size:1.3rem;letter-spacing:-.01em;line-height:1.15}
+  .card-desc{font-size:.74rem;color:var(--ink2);margin-top:.25rem;max-width:42ch}
+  .head-note{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink2);text-align:right}
+  .head-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+
+  .tiles{display:grid;grid-template-columns:1fr 1fr}
+  .tile{padding:.8rem .6rem}
+  .tile:nth-child(1){border-right:1px dashed var(--line);border-bottom:1px dashed var(--line)}
+  .tile:nth-child(2){border-bottom:1px dashed var(--line)}
+  .tile:nth-child(3){border-right:1px dashed var(--line)}
+  .tile .big{font-family:'Fraunces',serif;font-weight:900;font-size:1.85rem;line-height:1}
+  .tile .big em{font-style:normal;color:var(--accent)}
+  .tile .lbl{font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin-top:.3rem}
+  .next-due{margin-top:.9rem;padding-top:.8rem;border-top:1.5px solid var(--ink);display:flex;align-items:center;gap:.55rem;font-size:.85rem;cursor:pointer}
+  .next-due .pin{color:var(--accent);font-weight:800}
+  .next-due:hover b{text-decoration:underline}
+
+  .pomo-body{display:flex;flex-direction:column;align-items:center;gap:.8rem}
+  .ring-wrap{position:relative;width:150px;height:150px}
+  .ring-bg{fill:none;stroke:var(--paper2);stroke-width:9}
+  .ring-fg{fill:none;stroke:var(--accent);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset .25s linear}
+  .ring-digits{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ring-digits .time{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:1.8rem}
+  .ring-digits .state{font-size:.6rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2)}
+  .running .state{color:var(--accent)}
+  .dot-live{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:4px;animation:pulse 1.2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.7);opacity:.4}}
+  .pomo-body select{width:100%}
+  .presets{display:flex;gap:6px;width:100%}
+  .presets button{flex:1;border:1.5px solid var(--ink);background:var(--card);border-radius:6px;padding:.3rem 0;
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;transition:.15s}
+  .presets button.active{background:var(--ink);color:var(--card)}
+  .pomo-ctrl{display:flex;gap:8px;width:100%}
+  .sound-toggle{display:flex;align-items:center;gap:.4rem;font-size:.74rem;font-weight:700;color:var(--ink2);cursor:pointer;user-select:none}
+  .sound-toggle input{accent-color:var(--accent)}
+
+  select,input[type=text],input[type=number],input[type=date]{
+    border:1.5px solid rgba(38,34,26,.45);border-radius:6px;background:#FFFDF6;padding:.42rem .55rem;min-width:0}
+  select:focus,input:focus{border-color:var(--ink)}
+
+  .btn{border:1.5px solid var(--ink);border-radius:7px;background:var(--card);color:var(--ink);font-weight:800;
+    font-size:.83rem;padding:.55rem .95rem;box-shadow:3px 3px 0 rgba(38,34,26,.8);transition:transform .12s,box-shadow .12s}
+  .btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 rgba(38,34,26,.8)}
+  .btn:active{transform:translate(2px,2px);box-shadow:0 0 0 rgba(0,0,0,0)}
+  .btn-primary{background:var(--ink);color:var(--card)}
+  .btn-danger{background:var(--bad);border-color:var(--bad);color:#fff}
+  .btn-mini{padding:.3rem .65rem;font-size:.72rem;box-shadow:2px 2px 0 rgba(38,34,26,.8);white-space:nowrap}
+  .btn-tiny{padding:.22rem .5rem;font-size:.64rem;box-shadow:none}
+
+  .bars{display:flex;align-items:flex-end;gap:10px;height:168px;position:relative;padding-top:6px}
+  .goal-line{position:absolute;left:0;right:0;border-top:2px dashed rgba(200,71,31,.55);z-index:0}
+  .goal-line i{position:absolute;right:0;top:-18px;font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--accent);background:var(--card);padding:0 3px}
+  .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:5px;height:100%;position:relative;z-index:1}
+  .bar-val{font-family:'IBM Plex Mono',monospace;font-size:.58rem;color:var(--ink2);min-height:12px}
+  .bar{width:100%;max-width:36px;background:var(--ink);border-radius:5px 5px 2px 2px;transform-origin:bottom;
+    transition:transform .8s cubic-bezier(.2,.7,.2,1),background .3s}
+  .bar.today{background:var(--accent)}
+  .bar-col:hover .bar{background:var(--accent)}
+  .bar-lbl{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--ink2);text-transform:uppercase}
+  .bar-col.is-today .bar-lbl{color:var(--accent);font-weight:600}
+
+  .goal-ring-wrap{display:flex;flex-direction:column;align-items:center;gap:.4rem;margin-bottom:1rem}
+  .gring{position:relative;width:118px;height:118px}
+  .gring svg{width:100%;height:100%}
+  .gr-bg{fill:none;stroke:var(--paper2);stroke-width:10}
+  .gr-fg{fill:none;stroke:var(--ok);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1)}
+  .gr-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .gr-center .v{font-family:'Fraunces',serif;font-weight:900;font-size:1.15rem;line-height:1}
+  .gr-center .t{font-size:.58rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-top:.2rem}
+  .heat{display:flex;flex-wrap:wrap;gap:5px;margin:.6rem 0 .35rem}
+  .heat i{width:13px;height:13px;border-radius:3px;border:1px solid var(--line);display:block;transition:transform .15s}
+  .heat i:hover{transform:scale(1.3)}
+  .heat .l1{background:rgba(200,71,31,.25)}.heat .l2{background:rgba(200,71,31,.5)}
+  .heat .l3{background:rgba(200,71,31,.75)}.heat .l4{background:rgba(200,71,31,1)}
+  .heat-cap{font-size:.66rem;color:var(--ink2)}
+  .link-btn{border:none;background:none;color:var(--accent);font-weight:800;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;border-bottom:1.5px dashed var(--accent);padding:0 0 1px}
+
+  .add-form{display:flex;flex-wrap:wrap;gap:8px;border:1.5px dashed rgba(38,34,26,.4);border-radius:8px;padding:.7rem;margin-bottom:1rem;background:rgba(234,227,210,.4)}
+  .add-form input{flex:1;min-width:120px}
+  .f-sm{width:84px !important;flex:none !important}
+  .f-grow{flex:1;min-width:130px}
+
+  .q-head{font-weight:800;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin:.9rem 0 .3rem;display:flex;gap:.4rem;align-items:center}
+  .q-head::after{content:'';flex:1;border-top:1px dashed var(--line)}
+  .qrow{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:.55rem .3rem;border-top:1px dashed var(--line)}
+  .q-main{display:flex;align-items:center;gap:.5rem;min-width:0;flex-wrap:wrap}
+  .q-main b{font-size:.9rem}
+  .q-main small{color:var(--ink2);font-size:.7rem;font-family:'IBM Plex Mono',monospace}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+
+  .pill{font-size:.62rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border:1.5px solid var(--ink2);
+    border-radius:99px;padding:.2rem .6rem;white-space:nowrap;color:var(--ink2)}
+  .pill.late{background:var(--bad);border-color:var(--bad);color:#fff}
+  .pill.today{background:var(--accent);border-color:var(--accent);color:#fff}
+  .pill.soon{border-color:var(--warn);color:var(--warn)}
+  .pill.ok{border-color:var(--ok);color:var(--ok)}
+  .pill.new{border-style:dashed;border-color:var(--ink);color:var(--ink)}
+  .pill.master{background:var(--ok);border-color:var(--ok);color:#fff}
+
+  .curve-box{border:1.5px solid var(--line);border-radius:8px;padding:.6rem;background:#FFFDF6}
+  svg.curve{width:100%;height:auto;display:block}
+  .curve-help{margin-top:.8rem;font-size:.78rem;color:var(--ink2);background:var(--paper2);border-radius:7px;
+    padding:.6rem .8rem;line-height:1.55}
+  .curve-help b{color:var(--ink)}
+  .milestones{display:flex;gap:12px;flex-wrap:wrap;margin-top:.7rem}
+  .ms{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--ink2)}
+  .ms i{width:14px;height:14px;border-radius:50%;border:2px solid rgba(38,34,26,.35);display:block}
+  .ms.done i{background:var(--ok);border-color:var(--ok)}
+  .ms.done{color:var(--ok);font-weight:600}
+  .ms.now i{border-color:var(--accent);animation:pulse 1.6s ease-in-out infinite}
+  .ms.now{color:var(--accent);font-weight:600}
+  .mesa-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;margin-bottom:1rem}
+  .mesa-side{border-left:1px dashed var(--line);padding-left:16px;display:flex;flex-direction:column;gap:.55rem}
+  .big-ret{font-family:'Fraunces',serif;font-weight:900;font-size:2.6rem;line-height:1}
+  .big-ret.xl{font-size:3.4rem}
+  .big-ret.g-ok{color:var(--ok)}.big-ret.g-warn{color:var(--warn)}.big-ret.g-bad{color:var(--bad)}
+  .ret-lbl{font-size:.62rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+  .side-meta{font-size:.78rem;color:var(--ink2);display:flex;flex-direction:column;gap:.25rem}
+  .side-meta b{color:var(--ink)}
+  .mesa-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .mesa-next{font-size:.8rem;font-weight:700;background:var(--paper2);border-radius:7px;padding:.5rem .7rem}
+  .today-info{font-size:.74rem;color:var(--ok);font-weight:700}
+  .steps{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
+  .step{display:flex;gap:8px;align-items:stretch;border:1.5px solid var(--line);border-radius:8px;padding:.55rem .7rem;background:#FFFDF6;transition:.18s}
+  .step:hover{border-color:var(--ink)}
+  .step-check{flex:1;display:flex;gap:11px;align-items:flex-start;cursor:pointer;user-select:none}
+  .step input{position:absolute;opacity:0;pointer-events:none}
+  .step .n{width:23px;height:23px;border:1.5px solid var(--ink);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:600;flex:none;transition:.18s;margin-top:1px}
+  .step .s-txt{font-size:.87rem;font-weight:600}
+  .step .s-txt small{display:block;font-weight:400;color:var(--ink2);font-size:.72rem}
+  .step.on{border-color:var(--ink);background:var(--paper2)}
+  .step.on .n{background:var(--ok);border-color:var(--ok);color:#fff}
+  .step-pomo{border:1.5px dashed rgba(200,71,31,.55);background:none;border-radius:6px;padding:0 .55rem;
+    font-size:.82rem;color:var(--accent);align-self:center;transition:.15s}
+  .step-pomo:hover{background:rgba(200,71,31,.1);border-style:solid}
+  .mesa-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+  .fld{display:flex;flex-direction:column;gap:3px}
+  .fld>span{font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+  .fld input{width:100%}
+  .foot-note{font-size:.72rem;color:var(--ink2);margin-top:.55rem;font-style:italic}
+  .mesa-empty{padding:2rem 1rem;text-align:center;color:var(--ink2);font-style:italic;border:1.5px dashed var(--line);border-radius:8px}
+
+  .subj-block{border-top:1.5px solid var(--ink);margin-top:.4rem}
+  .subj-block:first-child{border-top:none;margin-top:0}
+  .subj-head{display:flex;align-items:center;gap:10px;padding:.85rem .2rem;cursor:pointer}
+  .chip{width:15px;height:15px;border-radius:4px;display:inline-block;border:1.5px solid rgba(38,34,26,.4);flex:none}
+  .subj-head h3{font-family:'Fraunces',serif;font-weight:800;font-size:1.2rem}
+  .subj-counts{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--ink2);margin-left:auto;text-align:right}
+  .chev{transition:transform .25s;font-size:.8rem;color:var(--ink2)}
+  .collapsed .chev{transform:rotate(-90deg)}
+  .topic{display:grid;grid-template-columns:96px 1fr 110px auto;gap:12px;align-items:center;
+    padding:.6rem .4rem .6rem 1.6rem;border-top:1px dashed var(--line);cursor:pointer;transition:background .15s}
+  .topic:hover{background:rgba(234,227,210,.55)}
+  .topic.selected{background:rgba(200,71,31,.07);box-shadow:inset 3px 0 0 var(--accent)}
+  .t-name{font-weight:800;font-size:.93rem}
+  .t-meta{font-family:'IBM Plex Mono',monospace;font-size:.64rem;color:var(--ink2);margin-top:.15rem}
+  .retbar{height:7px;background:var(--paper2);border-radius:99px;overflow:hidden}
+  .retbar i{display:block;height:100%;border-radius:99px;transition:width .9s cubic-bezier(.2,.7,.2,1)}
+  .g-ok{background:var(--ok)}.g-warn{background:var(--warn)}.g-bad{background:var(--bad)}
+  .topic-form{display:flex;gap:8px;padding:.7rem .4rem .4rem 1.6rem}
+  .topic-form input{flex:1}
+  .del{border:none;background:none;color:var(--ink2);font-size:1.05rem;line-height:1;padding:.15rem .35rem;border-radius:5px;opacity:0;transition:.15s}
+  .topic:hover .del,.subj-head:hover .del,.sess:hover .del{opacity:1}
+  .del:hover{color:var(--bad);background:rgba(179,55,43,.1)}
+
+  .scroll{max-height:460px;overflow-y:auto;padding-right:4px}
+  .scroll::-webkit-scrollbar{width:8px}
+  .scroll::-webkit-scrollbar-thumb{background:rgba(38,34,26,.22);border-radius:99px}
+  .sess{display:grid;grid-template-columns:96px 1fr 60px 1fr auto;gap:12px;align-items:center;padding:.6rem .3rem;border-top:1px dashed var(--line);font-size:.86rem}
+  .sess-date{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink2);text-transform:capitalize}
+  .sess-subj{display:flex;align-items:center;gap:.45rem;font-weight:700;font-size:.84rem;min-width:0}
+  .sess-subj .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sess-min{font-family:'IBM Plex Mono',monospace;font-weight:600;text-align:right}
+  .sess-note{font-style:italic;color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.8rem}
+  .empty{padding:1.2rem .3rem;color:var(--ink2);font-style:italic;font-size:.9rem}
+
+  .view-top{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.1rem}
+  .view-title{font-size:clamp(1.9rem,4vw,2.8rem) !important}
+  .view-sub{color:var(--ink2);font-size:.92rem;margin-top:.35rem;max-width:60ch}
+
+  .focus-veil{position:fixed;inset:0;z-index:500;background:var(--paper);
+    background-image:radial-gradient(rgba(38,34,26,.10) 1.1px,transparent 1.1px);
+    background-size:28px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:2rem;animation:fadeIn .5s ease}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .focus-inner{max-width:780px;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1.2rem}
+  .focus-subject{font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink2)}
+  .focus-topic{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(1.2rem,2.4vw,1.7rem);color:var(--ink);margin-top:.2rem}
+  .focus-ring-wrap{position:relative;width:min(440px,80vw);height:min(440px,80vw);aspect-ratio:1/1}
+  .focus-ring-wrap svg{width:100%;height:100%}
+  .focus-ring-bg{fill:none;stroke:var(--paper2);stroke-width:8}
+  .focus-ring-fg{fill:none;stroke:var(--accent);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .25s linear}
+  .focus-digits{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem}
+  .focus-time{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:clamp(4rem,13vw,8rem);line-height:1;letter-spacing:-.03em}
+  .focus-state{display:flex;align-items:center;gap:.45rem;font-size:.78rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+  .focus-phrase{max-width:60ch;font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:clamp(1rem,1.6vw,1.2rem);line-height:1.45;color:var(--ink)}
+  .focus-phrase .f-aut{display:block;margin-top:.3rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+  .focus-foot{position:absolute;bottom:1.5rem;left:0;right:0;display:flex;justify-content:center;gap:.8rem}
+  .focus-btn{background:var(--card);border:1.5px solid var(--ink);border-radius:8px;font-weight:800;font-size:.8rem;
+    padding:.55rem 1.1rem;box-shadow:3px 3px 0 rgba(38,34,26,.7);transition:transform .12s,box-shadow .12s;cursor:pointer}
+  .focus-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 rgba(38,34,26,.7)}
+  .focus-btn .long{display:none}
+  @media(min-width:760px){.focus-btn .long{display:inline}.focus-btn .short{display:none}}
+  .focus-close{position:absolute;top:1.2rem;right:1.2rem;background:none;border:1.5px solid var(--ink);
+    border-radius:99px;width:38px;height:38px;font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .focus-close:hover{background:var(--ink);color:var(--card)}
+
+  .src-intro{max-width:780px;margin:0 auto 1.6rem}
+  .src-intro .lead{font-size:1rem;color:var(--ink2);line-height:1.55}
+  .src-list{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:1.2rem}
+  .src-item{padding:1rem 1.2rem}
+  .src-cite{font-size:.9rem;line-height:1.55;margin-bottom:.4rem}
+  .src-cite .tit{font-style:italic}
+  .src-cite .src{color:var(--ink2)}
+  .src-link{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--accent);word-break:break-all;display:inline-block;margin:.25rem 0 .6rem}
+  .src-link:hover{text-decoration:underline}
+  .src-sum{font-size:.88rem;color:var(--ink2);line-height:1.55;padding-left:1rem;border-left:3px solid var(--gold);margin-top:.4rem}
+  .src-tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:800;
+    letter-spacing:.1em;text-transform:uppercase;padding:.18rem .55rem;border-radius:4px;
+    background:var(--paper2);color:var(--ink2);margin-left:.4rem;vertical-align:middle}
+  .src-tag.curva{background:rgba(200,71,31,.12);color:var(--accent)}
+  .src-tag.meta{background:rgba(62,107,79,.12);color:var(--ok)}
+  .src-tag.bio{background:rgba(47,93,138,.12);color:#2F5D8A}
+  .src-tag.ia{background:rgba(125,74,146,.12);color:#7D4A92}
+  .src-tag.tool{background:rgba(185,138,31,.12);color:var(--warn)}
+
+  .tools-wrap{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:1.2rem}
+  .tool-feat .nb-figs{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin:1rem 0}
+  .tool-feat figure{border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+  .tool-feat img{width:100%;display:block}
+  .tool-feat figcaption{font-size:.68rem;color:var(--ink2);padding:.45rem .6rem;border-top:1px dashed var(--line);background:var(--card)}
+  .tool-feat h2{font-family:'Fraunces',serif;font-weight:800;font-size:1.5rem;margin:.4rem 0 .5rem}
+  .tool-feat h3{font-family:'Fraunces',serif;font-weight:800;font-size:1.05rem;margin:1rem 0 .4rem}
+  .tool-feat p{font-size:.92rem;margin-bottom:.6rem}
+  .tool-feat ol{padding-left:1.3rem;margin-bottom:.8rem;font-size:.92rem}
+  .tool-feat li{margin-bottom:.35rem}
+  .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .tool-card h3{font-family:'Fraunces',serif;font-weight:800;font-size:1.05rem;margin-bottom:.3rem}
+  .tool-card p{font-size:.84rem;color:var(--ink2);margin-bottom:.6rem}
+  .tool-card a{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent)}
+
+  .guide{max-width:860px;margin:0 auto}
+  .guide h2{font-family:'Fraunces',serif;font-weight:800;font-size:1.5rem;margin:1.8rem 0 .5rem;letter-spacing:-.01em}
+  .guide h2 .gnum{color:var(--accent)}
+  .guide h3{font-family:'Fraunces',serif;font-weight:800;font-size:1.1rem;margin:1.1rem 0 .4rem}
+  .guide p{margin-bottom:.6rem;font-size:.95rem}
+  .guide ul,.guide ol{padding-left:1.3rem;margin-bottom:.8rem;font-size:.95rem}
+  .guide li{margin-bottom:.3rem}
+  .warn-box{border:1.5px solid var(--gold);border-left-width:6px;background:rgba(201,162,39,.12);
+    border-radius:8px;padding:.9rem 1rem;font-size:.9rem;margin:.8rem 0}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.72rem;color:var(--ink2);margin-top:.5rem}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+
+  .veil{position:fixed;inset:0;background:rgba(38,34,26,.5);z-index:600;display:flex;align-items:center;justify-content:center;padding:1rem}
+  .modal{background:var(--card);border:1.5px solid var(--ink);border-radius:12px;box-shadow:8px 9px 0 rgba(38,34,26,.28);
+    max-width:440px;width:100%;padding:1.4rem;position:relative;animation:pop .28s cubic-bezier(.2,.7,.2,1)}
+  .modal::before{content:'';position:absolute;top:0;left:10px;right:10px;height:3.5px;background:var(--gold);border-radius:0 0 3px 3px}
+  .modal.wide{max-width:580px}
+  .modal h3{font-family:'Fraunces',serif;font-weight:800;font-size:1.25rem;margin-bottom:.5rem}
+  .modal .m-msg{font-size:.92rem;color:var(--ink2)}
+  .modal input[type=text]{width:100%;margin-top:.8rem}
+  .modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:1.2rem}
+  @keyframes pop{from{transform:translateY(16px) scale(.98);opacity:0}}
+  .set-body{max-height:62vh;overflow-y:auto;padding-right:6px}
+  .set-sec{border-top:1px dashed var(--line);padding:.95rem 0}
+  .set-sec:first-child{border-top:none;padding-top:.2rem}
+  .set-title{font-weight:800;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.5rem}
+  .set-note{font-size:.78rem;color:var(--ink2);margin-bottom:.6rem}
+  .iv-chips{display:flex;gap:8px;flex-wrap:wrap}
+  .iv-chip{border:1.5px solid var(--ink2);border-radius:99px;padding:.38rem .85rem;font-weight:800;font-size:.78rem;background:none;color:var(--ink2);transition:.15s}
+  .iv-chip.active{background:var(--gold);border-color:var(--ink);color:var(--ink);box-shadow:2px 2px 0 rgba(38,34,26,.5)}
+  .step-edit{display:flex;gap:6px;margin-bottom:6px;align-items:center}
+  .step-edit .se-n{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;color:var(--ink2);width:16px;flex:none}
+  .step-edit input{flex:1}
+  .step-edit .del{opacity:1}
+  .set-links{display:flex;gap:14px;margin-top:.5rem;flex-wrap:wrap}
+  .set-toggle{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:.86rem;margin-bottom:.6rem;cursor:pointer}
+  .steps-off{opacity:.45;pointer-events:none}
+
+  footer{max-width:1180px;margin:2.4rem auto 0;padding:1.4rem 1.2rem 2.2rem;border-top:1.5px solid var(--ink);
+    display:flex;flex-wrap:wrap;gap:.8rem;justify-content:space-between;font-size:.76rem;color:var(--ink2)}
+  #toast{position:fixed;bottom:22px;right:22px;z-index:700;background:var(--ink);color:var(--card);font-weight:700;
+    font-size:.86rem;padding:.75rem 1.1rem;border-radius:8px;box-shadow:5px 6px 0 rgba(38,34,26,.2);opacity:0;
+    transform:translateY(16px);transition:opacity .3s,transform .3s;pointer-events:none;max-width:340px}
+  #toast.show{opacity:1;transform:none}
+  .confetti{position:fixed;width:9px;height:9px;z-index:650;pointer-events:none;border-radius:2px;animation:fly .95s cubic-bezier(.2,.7,.4,1) forwards}
+  @keyframes fly{to{transform:translate(var(--tx),var(--ty)) rotate(var(--r));opacity:0}}
+
+  .nb-card{padding:0;overflow:hidden}
+  .nb-tabs{display:flex;align-items:flex-end;gap:4px;flex-wrap:nowrap;overflow-x:auto;border-bottom:1.5px solid var(--ink);background:var(--paper2);padding:.7rem .7rem 0}
+  .nb-tab{border:1.5px solid var(--ink);border-bottom:none;border-radius:8px 8px 0 0;background:var(--card);
+    font-family:'Fraunces',serif;font-weight:800;font-size:.85rem;padding:.5rem 1rem;cursor:pointer;white-space:nowrap;
+    box-shadow:2px 2px 0 rgba(38,34,26,.1);position:relative;top:1.5px;color:var(--ink)}
+  .nb-tab:hover{filter:brightness(.97)}
+  .nb-tab.active{background:var(--ink);color:var(--card)}
+  .nb-tab.new{border-style:dashed;background:none;color:var(--accent);font-family:'Karla',sans-serif;font-weight:800;box-shadow:none}
+  .nb-tab.new:hover{background:rgba(200,71,31,.08);filter:none}
+  .nb-stabs{display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:.6rem 1.2rem .4rem;border-bottom:1.5px dashed var(--line);background:rgba(234,227,210,.35)}
+  .nb-stab{border:1.5px dashed var(--ink2);border-radius:99px;background:none;font-weight:800;font-size:.72rem;padding:.3rem .75rem;cursor:pointer;color:var(--ink2);white-space:nowrap;transition:.15s}
+  .nb-stab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .nb-stab:hover{border-color:var(--ink);color:var(--ink)}
+  .nb-body{display:flex;flex-direction:column}
+  .nb-editor-head{display:flex;align-items:center;gap:.8rem;padding:.9rem 1.2rem;flex-wrap:wrap}
+  .nb-editor-head input{flex:1;min-width:180px;font-family:'Fraunces',serif;font-weight:800;font-size:1.15rem;border:1.5px dashed transparent;background:none}
+  .nb-editor-head input:hover,.nb-editor-head input:focus{border-color:rgba(38,34,26,.4);background:#FFFDF6}
+  .nb-toolbar{display:flex;gap:4px;flex-wrap:wrap;padding:.55rem 1.2rem;border-top:1.5px dashed var(--line);border-bottom:1.5px dashed var(--line)}
+  .nb-tool{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;border:1.5px solid rgba(38,34,26,.35);
+    background:var(--card);border-radius:6px;padding:.28rem .55rem;transition:.15s}
+  .nb-tool:hover{border-color:var(--ink);transform:translate(-1px,-1px)}
+  .nb-panes{display:grid;grid-template-columns:1fr 1fr}
+  .nb-input{width:100%;min-height:420px;resize:vertical;border:none;background:#FFFDF6;padding:1.3rem 1.5rem;font-size:.95rem;line-height:1.65;color:var(--ink)}
+  .nb-input:focus{outline:none;box-shadow:inset 3px 0 0 var(--gold)}
+  .nb-preview{border-left:1.5px dashed var(--line);padding:1.3rem 1.5rem;min-height:420px;max-height:72vh;overflow-y:auto;font-size:.95rem;line-height:1.65;word-wrap:break-word}
+  .nb-foot{display:flex;gap:1.2rem;flex-wrap:wrap;padding:.6rem 1.2rem;border-top:1.5px dashed var(--line);font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--ink2)}
+  #nbSaved{color:var(--ok);font-weight:600}
+  #nbSaved.warn{color:var(--warn)}
+  .nb-mode-seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:7px;overflow:hidden}
+  .nb-mode-btn{border:none;background:var(--card);font-weight:800;font-size:.7rem;padding:.38rem .75rem;color:var(--ink2);transition:.15s}
+  .nb-mode-btn.active{background:var(--ink);color:var(--card)}
+  .nb-mode-btn:not(.active):hover{color:var(--ink)}
+  .nb-wysiwyg{width:100%;min-height:420px;padding:1.3rem 1.5rem;font-size:.95rem;line-height:1.65;color:var(--ink);outline:none;background:#FFFDF6;word-wrap:break-word;caret-color:var(--accent)}
+  .nb-wysiwyg:focus{box-shadow:inset 3px 0 0 var(--gold)}
+  .nb-wysiwyg:empty::before{content:'Escribe aquí tus apuntes… (Ctrl+B negrita, Ctrl+I cursiva, Ctrl+U subrayado)';color:rgba(110,101,83,.65)}
+  .nb-wysiwyg li input[type=checkbox]{margin-right:.5em;accent-color:var(--ok)}
+  .nb-panes.wys{grid-template-columns:1fr}
+  .nb-preview h1,.nb-wysiwyg h1{font-family:'Fraunces',serif;font-weight:900;font-size:1.65rem;letter-spacing:-.02em;margin:.3em 0 .6em}
+  .nb-preview h2,.nb-wysiwyg h2{font-family:'Fraunces',serif;font-weight:800;font-size:1.3rem;margin:1.5em 0 .5em;padding-bottom:.2em;border-bottom:1.5px dashed var(--line)}
+  .nb-preview h3,.nb-wysiwyg h3{font-family:'Fraunces',serif;font-weight:800;font-size:1.1rem;margin:1.2em 0 .4em}
+  .nb-preview h4,.nb-preview h5,.nb-preview h6,.nb-wysiwyg h4,.nb-wysiwyg h5,.nb-wysiwyg h6{font-family:'Fraunces',serif;font-weight:800;margin:1em 0 .35em}
+  .nb-preview p,.nb-wysiwyg p{margin-bottom:.7em}
+  .nb-preview ul,.nb-preview ol,.nb-wysiwyg ul,.nb-wysiwyg ol{padding-left:1.4rem;margin-bottom:.7em}
+  .nb-preview li,.nb-wysiwyg li{margin-bottom:.25em}
+  .nb-preview li::marker,.nb-wysiwyg li::marker{color:var(--accent)}
+  .nb-preview ul.md-cbl{list-style:none;padding-left:.2rem}
+  .nb-preview code,.nb-wysiwyg code{font-family:'IBM Plex Mono',monospace;font-size:.82em;background:var(--paper2);border-radius:4px;padding:.12em .35em}
+  .nb-preview pre.md-code,.nb-wysiwyg pre{background:#26221A;color:var(--card);border-radius:8px;padding:.85rem 1rem;margin:.7em 0;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:.82rem}
+  .nb-preview pre.md-code code,.nb-wysiwyg pre code{background:none;color:inherit;padding:0}
+  .nb-preview blockquote,.nb-wysiwyg blockquote{border-left:3px solid var(--gold);margin:.7em 0;padding:.25em 0 .25em 1em;color:var(--ink2);font-style:italic}
+  .nb-preview blockquote p,.nb-wysiwyg blockquote p{margin-bottom:.35em}
+  .nb-preview img,.nb-wysiwyg img{max-width:100%;border:1.5px solid var(--line);border-radius:8px;margin:.6em 0;display:block;height:auto}
+  .nb-preview a,.nb-wysiwyg a{color:var(--accent);font-weight:700}
+  .nb-preview hr,.nb-wysiwyg hr{border:none;border-top:1.5px dashed var(--line);margin:1.2em 0}
+  .nb-preview table,.nb-wysiwyg table{border-collapse:collapse;margin:.8em 0;font-size:.88rem;width:100%}
+  .nb-preview th,.nb-preview td,.nb-wysiwyg th,.nb-wysiwyg td{border:1px solid var(--line);padding:.35rem .6rem;text-align:left;vertical-align:top}
+  .nb-preview th,.nb-wysiwyg th{background:var(--paper2);font-weight:800}
+  .nb-preview del,.nb-wysiwyg del{opacity:.55}
+  .nb-preview sub,.nb-preview sup,.nb-wysiwyg sub,.nb-wysiwyg sup{font-size:.8em}
+  .nb-preview label.md-cb{display:inline-flex;align-items:center;gap:.5em;cursor:default}
+  .nb-preview label.md-cb input{accent-color:var(--ok)}
+  .nb-preview .md-table{overflow-x:auto}
+
+  @media(max-width:1020px){
+    .c3,.c4,.c5{grid-column:span 6}
+    .c7,.opening .c7,.opening .c5{grid-column:span 12}
+    .mesa-grid{grid-template-columns:1fr}
+    .mesa-side{border-left:none;padding-left:0;border-top:1px dashed var(--line);padding-top:12px}
+    .tool-feat .nb-figs{grid-template-columns:1fr}
+  }
+  @media(max-width:660px){
+    .grid>*{grid-column:span 12 !important}
+    .sess{grid-template-columns:80px 1fr 54px auto}
+    .sess-note{display:none}
+    .topic{grid-template-columns:86px 1fr auto;padding-left:.6rem}
+    .topic .retbar{display:none}
+    .top-right{margin-left:0}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important}
+    .rl>span{transform:none}.underline path{stroke-dashoffset:0}
+  }
+  @media(max-width:760px){
+    .burger{display:inline-block}
+    .nav{position:absolute;top:100%;left:0;right:0;background:var(--paper);border-bottom:1.5px solid var(--ink);
+      flex-direction:column;gap:2px;padding:.5rem .8rem 1rem;display:none;box-shadow:0 12px 0 rgba(38,34,26,.12);z-index:55}
+    .nav.open{display:flex}
+    .nav button{text-align:left;padding:.6rem .7rem;border-radius:7px}
+    .nb-panes{grid-template-columns:1fr}
+    .nb-preview{border-left:none;border-top:1.5px dashed var(--line);max-height:none;min-height:0}
+    .nb-input{min-height:300px}
+    .nb-wysiwyg{min-height:300px}
+  }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand"><span class="star">✦</span> Bitácora <em>de estudio</em></div>
+    <button class="burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav" title="Menú">☰</button>
+    <nav class="nav" id="mainNav" aria-label="Vistas">
+      <button data-goto="hoy" class="active">Hoy</button>
+      <button data-goto="mesa">Mesa de estudio</button>
+      <button data-goto="notebook">Cuaderno</button>
+      <button data-goto="historial">Historial</button>
+      <button data-goto="herr">Herramientas</button>
+      <button data-goto="guia">Cómo funciona</button>
+      <button data-goto="fuentes">Fuentes</button>
+      <button id="navSettings" title="Repasos, pasos y meta">⚙ Ajustes</button>
+    </nav>
+    <div class="top-right">
+      <span class="nav-date" id="navDate">—</span>
+      <span class="streak-badge" title="Días seguidos estudiando">
+        <svg width="13" height="15" viewBox="0 0 13 15" fill="none"><path d="M6.5 0C7 3 10 4.2 10.8 7a4.4 4.4 0 1 1-8.6.4C2.6 4.6 5.8 3.4 6.5 0Z" fill="#C8471F"/><path d="M6.4 7.2c.3 1.5 1.7 2 2 3.4a2.1 2.1 0 1 1-4.2.2c.2-1.4 1.8-2 2.2-3.6Z" fill="#F3EEE2"/></svg>
+        <span id="streakTxt">0 días</span>
+      </span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section data-view="hoy">
+    <div class="grid opening">
+      <div class="c7">
+        <p class="eyebrow">Repaso espaciado contra la curva del olvido · <span id="greetTag">—</span></p>
+        <h1><span class="rl"><span id="dateL1">Hoy estudia</span></span><span class="rl"><span id="dateL2">lo que toca</span></span></h1>
+        <svg class="underline" viewBox="0 0 470 24" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M4 16 C 90 4, 180 24, 280 10 S 420 16, 466 8"/></svg>
+        <p class="sub" id="subline">Cargando…</p>
+      </div>
+      <aside class="card c5" aria-label="Resumen de hoy">
+        <div class="card-head"><div><p class="eyebrow">Resumen</p><h2>Hoy</h2>
+          <p class="card-desc">Tu día de un vistazo: tiempo, racha y repasos.</p></div>
+          <span class="head-note" id="todayNote">—</span></div>
+        <div class="tiles">
+          <div class="tile"><p class="big" id="tToday">0</p><p class="lbl">horas hoy</p></div>
+          <div class="tile"><p class="big" id="tWeek">0</p><p class="lbl">esta semana</p></div>
+          <div class="tile"><p class="big"><em id="tStreak">0</em></p><p class="lbl">racha · días</p></div>
+          <div class="tile"><p class="big" id="tPomo">0</p><p class="lbl">pomodoros</p></div>
+        </div>
+        <p class="next-due" id="nextDue" title="Ir a repasos"><span class="pin">📌</span> —</p>
+      </aside>
+    </div>
+
+    <div class="grid">
+      <article class="card c4" id="pomoCard">
+        <div class="card-head"><div><p class="eyebrow">En foco</p><h2>Pomodoro</h2>
+          <p class="card-desc">Temporizador de concentración. Al iniciar, entras al modo foco a pantalla completa.</p></div>
+          <div style="display:flex;flex-direction:column;gap:.3rem;align-items:flex-end">
+            <span class="head-note" style="white-space:nowrap">15 · 25 · 50<br>minutos</span>
+            <label class="sound-toggle" title="Sonidos suaves de inicio y cierre"><input type="checkbox" id="soundOn" checked><span>🔔 sonidos</span></label>
+          </div>
+        </div>
+        <div class="pomo-body">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 150 150" width="150" height="150">
+              <circle class="ring-bg" cx="75" cy="75" r="62"/>
+              <circle class="ring-fg" id="ringFg" cx="75" cy="75" r="62" stroke-dasharray="389.56" stroke-dashoffset="0" transform="rotate(-90 75 75)"/>
+            </svg>
+            <div class="ring-digits"><span class="time" id="pomoTime">25:00</span><span class="state" id="pomoState">listo</span></div>
+          </div>
+          <select id="pomoSubject" aria-label="Asignatura"></select>
+          <select id="pomoTopic" aria-label="Tema"></select>
+          <div class="presets" role="group" aria-label="Duración">
+            <button data-min="15">15m</button><button data-min="25" class="active">25m</button><button data-min="50">50m</button>
+          </div>
+          <div class="pomo-ctrl">
+            <button class="btn btn-primary" id="pomoStart" style="flex:1">▶ Empezar</button>
+            <button class="btn" id="pomoReset" aria-label="Reiniciar">↺</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card c5">
+        <div class="card-head"><div><p class="eyebrow">Últimos 7 días</p><h2>Minutos de estudio</h2>
+          <p class="card-desc">Cuánto estudiaste cada día. La línea punteada es tu meta diaria.</p></div>
+          <span class="head-note" id="chartTotal">—</span></div>
+        <div class="bars" id="bars"></div>
+      </article>
+
+      <article class="card c3">
+        <div class="card-head"><div><p class="eyebrow">Meta semanal</p><h2>Objetivo</h2>
+          <p class="card-desc">Horas que quieres estudiar esta semana. Se edita en ⚙ Ajustes.</p></div>
+          <button class="link-btn" id="editGoal">editar</button></div>
+        <div class="goal-ring-wrap">
+          <div class="gring">
+            <svg viewBox="0 0 118 118">
+              <circle class="gr-bg" cx="59" cy="59" r="50"/>
+              <circle class="gr-fg" id="goalRing" cx="59" cy="59" r="50" stroke-dasharray="314.16" stroke-dashoffset="314.16" transform="rotate(-90 59 59)"/>
+            </svg>
+            <div class="gr-center"><span class="v" id="goalTxt">0 h</span><span class="t">de <span id="goalMax">20</span> h</span></div>
+          </div>
+        </div>
+        <p class="eyebrow" style="margin-bottom:.1rem">Últimos 14 días</p>
+        <div class="heat" id="heat"></div>
+        <p class="heat-cap">Cada cuadrado es un día · más color = más estudio</p>
+      </article>
+
+      <article class="card c7" id="mesaCardMini">
+        <div class="card-head">
+          <div><p class="eyebrow" id="mesaEyebrow">Mesa de estudio</p><h2 id="mesaMiniTitle">Tu sesión activa</h2>
+            <p class="card-desc">El tema que estás trabajando, con su curva del olvido.</p></div>
+          <span id="mesaPillMini"></span>
+        </div>
+        <div id="mesaMini"></div>
+        <div style="margin-top:.9rem;display:flex;justify-content:flex-end">
+          <button class="btn" data-goto="mesa">Ver vista completa →</button>
+        </div>
+      </article>
+
+      <article class="card c5" id="queueCard">
+        <div class="card-head"><div><p class="eyebrow">¿Qué repaso toca?</p><h2>Repasos</h2>
+          <p class="card-desc">Temas que debes reestudiar según tus intervalos activos.</p></div>
+          <span class="head-note" id="queueCount">—</span></div>
+        <div id="queueList"></div>
+      </article>
+
+      <article class="card c12">
+        <div class="card-head"><div><p class="eyebrow">Tu mapa de conocimiento</p><h2>Asignaturas y temas</h2>
+          <p class="card-desc">Crea asignaturas y agrégales temas. Toca cada asignatura para desplegar sus temas.</p></div>
+          <span class="head-note" id="ivNote">intervalos<br>—</span></div>
+        <form class="add-form" id="subjForm">
+          <input id="subjName" placeholder="Nueva asignatura… (ej. Geometría)" maxlength="40" required>
+          <button class="btn" type="submit">+ Añadir asignatura</button>
+        </form>
+        <div id="subjList"></div>
+      </article>
+    </div>
+  </section>
+
+  <section data-view="mesa" hidden>
+    <div class="view-top">
+      <div>
+        <p class="eyebrow">Vista completa · gráfico a detalle</p>
+        <h1 class="view-title">Mesa de estudio</h1>
+        <p class="view-sub">Observa la curva del olvido de tu tema, lanza pomodoros por paso y registra tu sesión.</p>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <select id="mesaTopicSel" style="min-width:240px" aria-label="Elegir tema"></select>
+        <span id="mesaPillFull"></span>
+      </div>
+    </div>
+    <div class="card"><div id="mesaFull"></div></div>
+  </section>
+
+  <section data-view="notebook" hidden>
+    <div class="view-top">
+      <div>
+        <p class="eyebrow">Tu conocimiento escrito</p>
+        <h1 class="view-title">Cuaderno</h1>
+        <p class="view-sub">La asignatura es tu cuaderno: cada pestaña es un tema y dentro viven los subtemas. Escribe normal (como en Word) o en Markdown; se guarda solo y viaja en tu backup.</p>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <select id="nbSubjSel" style="min-width:240px" aria-label="Elegir asignatura del cuaderno"></select>
+        <span id="nbPill"></span>
+        <button class="btn btn-mini" id="nbNewTopicBtn">+ Tema</button>
+      </div>
+    </div>
+    <div class="card nb-card" id="nbCard">
+      <div class="nb-tabs" id="nbTabs" role="tablist" aria-label="Temas"></div>
+      <div class="nb-stabs" id="nbStabs" role="tablist" aria-label="Subtemas"></div>
+      <div class="nb-body" id="nbBody"></div>
+    </div>
+    <input type="file" id="nbImgInp" accept="image/*" hidden>
+  </section>
+
+  <section data-view="historial" hidden>
+    <div class="view-top">
+      <div>
+        <p class="eyebrow">Todo tu recorrido</p>
+        <h1 class="view-title">Historial</h1>
+        <p class="view-sub">Cada sesión registrada, incluidos los archivados al restablecer un tema.</p>
+      </div>
+      <div class="head-actions">
+        <button class="btn btn-tiny" id="btnJson">⬇ Backup .json</button>
+        <button class="btn btn-tiny" id="btnMd">⬇ Informe .md</button>
+        <button class="btn btn-tiny" id="btnLoad">⬆ Cargar</button>
+        <input type="file" id="fileInput" accept=".json,application/json" hidden>
+      </div>
+    </div>
+    <div class="card">
+      <div class="warn-box">⚠️ <b>Tus datos viven solo en este navegador.</b> Si borras caché o cambias de equipo, descarga antes el <b>Backup .json</b> y restáuralo con <b>⬆ Cargar</b>.</div>
+      <p class="head-note" id="logTotal" style="text-align:left;margin-bottom:.5rem">—</p>
+      <div class="scroll" id="logList"></div>
+    </div>
+  </section>
+
+  <section data-view="herr" hidden>
+    <div class="view-top">
+      <div>
+        <p class="eyebrow">Complementan tu esfuerzo, no lo reemplazan</p>
+        <h1 class="view-title">Herramientas de aprendizaje sugeridas</h1>
+        <p class="view-sub">Selección curada para estudiar mejor: primero tu cerebro (lectura, ejercicios, Feynman), después la tecnología como andamio y verificación.</p>
+      </div>
+    </div>
+    <div class="tools-wrap">
+      <article class="card tool-feat">
+        <p class="eyebrow">Destacada · IA como andamio</p>
+        <h2>NotebookLM (Google)</h2>
+        <p>Un «cuaderno de investigación» gratuito de Google que <b>responde únicamente con las fuentes que tú subes</b> (PDF, Docs, enlaces web, videos de YouTube, texto) y muestra <b>citaciones clicables</b> en cada afirmación. Por eso es ideal para estudiar: no inventa, te devuelve tu propio material organizado, y te obliga a trabajar con tus apuntes en vez de con respuestas genéricas.</p>
+        <div class="nb-figs">
+          <figure><img loading="lazy" src="https://image.qwenlm.ai/public_source/5a4d554f-47ec-41b9-844c-bf601688ebd4/26ab26334-a126-4261-aad5-6e3c6c9be61e1094.png" alt="Flujo de trabajo de NotebookLM" onerror="this.parentNode.style.display='none'">
+            <figcaption>Flujo típico: de tus fuentes a una guía de estudio en 6 pasos.</figcaption></figure>
+          <figure><img loading="lazy" src="https://image.qwenlm.ai/public_source/5a4d554f-47ec-41b9-844c-bf601688ebd4/56ab26334-a126-4261-aad5-6e3c6c9be61e3536.png" alt="Panel principal de NotebookLM" onerror="this.parentNode.style.display='none'">
+            <figcaption>Panel de cuadernos: cada tema puede ser su propio cuaderno.</figcaption></figure>
+        </div>
+        <h3>Guía oficial, paso a paso</h3>
+        <ol>
+          <li><b>Crea un cuaderno</b> en notebooklm.google.com con tu cuenta de Google.</li>
+          <li><b>Añade fuentes</b>: hasta 50 por cuaderno (PDF, Docs, enlaces, YouTube, texto pegado).</li>
+          <li><b>Pregunta</b> y lee las citaciones en línea: cada respuesta indica de qué fuente sale.</li>
+          <li><b>Guarda notas</b> dentro del cuaderno con lo que valga la pena reutilizar.</li>
+          <li><b>Genera salidas de estudio</b>: guías de estudio, FAQ, flashcards, quizzes y el <b>Audio Overview</b>, una conversación tipo podcast entre dos anfitriones que resume tus fuentes.</li>
+          <li><b>Refina</b> con instrucciones propias («hazme 10 preguntas difíciles de…», «explícalo como para un niño»).</li>
+        </ol>
+        <p>Consejos del propio equipo de Google: empieza con ~10 fuentes buenas, convierte cada documento en Audio Overview para repasarlo caminando, y haz preguntas específicas en lugar de pedir resúmenes genéricos.</p>
+        <div class="warn-box"><b>Cómo usarlo sin depender de él:</b> la lectura, los dibujos y los ejercicios propios van primero. <i>Después</i> la herramienta sirve para verificarse: pedir quizzes, detectar lagunas en la explicación Feynman o aclarar lo que no quedó claro. Copiar el resumen no equivale a aprender: si algo no se puede explicar sin la herramienta, todavía no se domina.</div>
+        <p style="margin-top:.6rem">
+          <a class="src-link" href="https://notebooklm.google.com/" target="_blank" rel="noopener">notebooklm.google.com</a> ·
+          <a class="src-link" href="https://support.google.com/gemininotebook/" target="_blank" rel="noopener">Ayuda oficial (Google)</a> ·
+          <a class="src-link" href="https://blog.google/innovation-and-ai/products/notebooklm-beginner-tips/" target="_blank" rel="noopener">Tips oficiales para empezar</a>
+        </p>
+      </article>
+      <div class="tools-grid">
+        <article class="card tool-card"><span class="src-tag meta">repaso espaciado</span>
+          <h3>Anki</h3><p>Tarjetas de memoria con repetición espaciada automática.</p>
+          <a href="https://apps.ankiweb.net/" target="_blank" rel="noopener">apps.ankiweb.net →</a></article>
+        <article class="card tool-card"><span class="src-tag tool">notas enlazadas</span>
+          <h3>Obsidian</h3><p>Cuaderno local en Markdown con enlaces bidireccionales.</p>
+          <a href="https://obsidian.md/" target="_blank" rel="noopener">obsidian.md →</a></article>
+        <article class="card tool-card"><span class="src-tag meta">foco</span>
+          <h3>Pomofocus</h3><p>Temporizador Pomodoro web minimalista.</p>
+          <a href="https://pomofocus.io/" target="_blank" rel="noopener">pomofocus.io →</a></article>
+        <article class="card tool-card"><span class="src-tag bio">cursos libres</span>
+          <h3>Khan Academy</h3><p>Cursos gratuitos con ejercicios y videos.</p>
+          <a href="https://es.khanacademy.org/" target="_blank" rel="noopener">es.khanacademy.org →</a></article>
+        <article class="card tool-card"><span class="src-tag tool">citas APA</span>
+          <h3>Zotero</h3><p>Gestor de referencias gratuito con citaciones APA automáticas.</p>
+          <a href="https://www.zotero.org/" target="_blank" rel="noopener">zotero.org →</a></article>
+        <article class="card tool-card"><span class="src-tag bio">lectura</span>
+          <h3>Project Gutenberg</h3><p>Más de 70 000 libros libres para tu lectura primaria.</p>
+          <a href="https://www.gutenberg.org/" target="_blank" rel="noopener">gutenberg.org →</a></article>
+      </div>
+    </div>
+  </section>
+
+  <section data-view="guia" hidden>
+    <article class="card guide">
+      <p class="eyebrow">Guía completa</p>
+      <h1 class="view-title" style="margin-bottom:.6rem">Cómo funciona</h1>
+      <p>Esta bitácora convierte métodos de la psicología del aprendizaje —todos de dominio público y uso libre— en una rutina diaria simple: estudias un tema, y la app te dice <b>cuándo repasarlo</b> para que no lo olvides.</p>
+
+      <h2><span class="gnum">1 ·</span> La curva del olvido</h2>
+      <p>Desde los experimentos de Hermann Ebbinghaus (1885) sabemos que lo aprendido se desvanece de forma exponencial si no se repasa. Cada repaso «rescata» la memoria y hace que la siguiente caída sea más lenta.</p>
+      <div class="curve-box" id="guideCurve"></div>
+      <div class="legend">
+        <span><i class="dot" style="background:#3E6B4F"></i> repaso realizado</span>
+        <span><i class="dot" style="background:#C8471F"></i> hoy / próximo repaso</span>
+        <span style="color:#C8471F">— — umbral del 55%</span>
+      </div>
+
+      <h3>Cómo leer el gráfico, sin haber leído nada antes</h3>
+      <ol>
+        <li><b>Eje vertical (0–100):</b> tu <b>retención estimada</b>, es decir, cuánto recuerdas hoy de lo estudiado.</li>
+        <li><b>Eje horizontal:</b> los días transcurridos, con fechas reales abajo.</li>
+        <li><b>Línea negra sólida:</b> tu memoria <b>cayendo</b> desde cada sesión.</li>
+        <li><b>Puntos verdes:</b> repasos que ya hiciste. Cada uno devuelve la memoria a ~100% y aplana la siguiente caída.</li>
+        <li><b>Punto naranja «hoy»:</b> dónde estás ahora mismo, con tu porcentaje de retención.</li>
+        <li><b>Línea gris punteada:</b> la <b>predicción</b> de hacia dónde va tu memoria si no repasas.</li>
+        <li><b>Círculo naranja (R# · fecha):</b> el día en que esa predicción cruzará el umbral: es tu <b>próximo repaso programado</b>.</li>
+        <li><b>Línea roja punteada = umbral de repaso (~55%):</b> ver abajo qué significa.</li>
+      </ol>
+      <p><b>¿Qué es un umbral?</b> Es el <b>límite mínimo de retención que decides tolerar</b> antes de repasar. Aquí usamos ~55%: si repasas <i>por encima</i> del umbral, el repaso es rápido y fortalece; si dejas que la memoria caiga <i>por debajo</i>, ya no estarías repasando sino <b>reaprendiendo</b> (cuesta casi como aprender de cero). Por eso, cuando un repaso se vence por muchos días, la bitácora te recomienda <b>restablecer el tema</b> y empezar la curva de nuevo.</p>
+
+      <h2><span class="gnum">2 ·</span> Repasos espaciados (1 · 3 · 7 · 15 · 30 días)</h2>
+      <p>Cuando estudias un tema por primera vez, se agenda tu primer repaso para <b>1 día</b> después. Al completarlo, el siguiente cae a los <b>3 días</b>, luego <b>7</b>, <b>15</b> y <b>30</b>. Tras el último, el tema queda <b>Dominado ✓</b>.</p>
+      <ul>
+        <li>La cola <b>«Repasos»</b> te muestra lo vencido, lo de hoy y lo próximo.</li>
+        <li>En <b>⚙ Ajustes</b> decides <b>cuántos repasos quieres activar</b>. El calendario y la curva se adaptan.</li>
+        <li>Si un repaso <b>se venció</b>, verás en la Mesa de estudio el aviso «se recomienda restablecer el repaso» con su botón para hacerlo (el historial viejo se archiva, no se pierde).</li>
+      </ul>
+
+      <h2><span class="gnum">3 ·</span> Tu método de sesión</h2>
+      <p>La plantilla de ejemplo trae 5 pasos inspirados en técnicas conocidas:</p>
+      <ol id="guideSteps"></ol>
+      <p>Es solo una plantilla: en <b>⚙ Ajustes</b> puedes <b>renombrar, añadir o quitar pasos</b>, o <b>desactivar el checklist</b>. Cada paso tiene un botón ⏱ que lanza un pomodoro y, al terminar, marca ese paso como completo.</p>
+
+      <h2><span class="gnum">4 ·</span> Tus datos: son tuyos, cuídalos</h2>
+      <div class="warn-box">⚠️ Todo se guarda en <b>localStorage</b>, es decir, <b>solo en este navegador</b>. Si borras los datos de navegación, usas modo incógnito o cambias de equipo, <b>se pierde todo</b>.</div>
+      <ul>
+        <li><b>⬇ Backup .json</b>: descarga <b>todo</b> tu progreso.</li>
+        <li><b>⬆ Cargar</b>: restaura ese archivo y sigues donde ibas.</li>
+        <li><b>⬇ Informe .md</b>: un notebook legible por asignatura → tema.</li>
+      </ul>
+
+      <p style="margin-top:1.4rem"><button class="btn btn-primary" data-goto="hoy" style="flex:none">Entendido, ¡a estudiar! →</button></p>
+    </article>
+  </section>
+
+  <section data-view="fuentes" hidden>
+    <div class="view-top">
+      <div>
+        <p class="eyebrow">Sobre qué se sostiene esta bitácora</p>
+        <h1 class="view-title">Fuentes y referencias</h1>
+        <p class="view-sub">Este proyecto se basa en búsquedas que buscan fortalecer el aprendizaje <b>sin depender de inteligencia artificial</b>: construir pensamiento profundo, cultivar la memoria propia y mejorar cada día.</p>
+      </div>
+    </div>
+    <div class="card src-intro">
+      <p class="lead">Cada referencia está citada según las normas <b>APA (7ª edición)</b> e incluye un breve resumen. Áreas: <span class="src-tag curva">curva del olvido</span><span class="src-tag bio">biografías</span><span class="src-tag meta">métodos</span><span class="src-tag ia">IA y pensamiento</span><span class="src-tag tool">herramientas</span>.</p>
+    </div>
+    <div class="src-list" id="srcList"></div>
+  </section>
+</main>
+
+<div class="focus-veil" id="focusVeil" hidden>
+  <div class="grain" aria-hidden="true" style="z-index:505"></div>
+  <button class="focus-close" id="focusClose" title="Salir del modo foco">×</button>
+  <div class="focus-inner">
+    <p class="focus-subject" id="focusSubj">—</p>
+    <p class="focus-topic" id="focusTopic">—</p>
+    <div class="focus-ring-wrap">
+      <svg viewBox="0 0 440 440">
+        <circle class="focus-ring-bg" cx="220" cy="220" r="190"/>
+        <circle class="focus-ring-fg" id="focusRing" cx="220" cy="220" r="190"
+          stroke-dasharray="1193.81" stroke-dashoffset="0" transform="rotate(-90 220 220)"/>
+      </svg>
+      <div class="focus-digits">
+        <span class="focus-time" id="focusTime">25:00</span>
+        <span class="focus-state" id="focusState"><span class="dot-live"></span>en foco</span>
+      </div>
+    </div>
+    <p class="focus-phrase" id="focusPhrase"></p>
+  </div>
+  <div class="focus-foot">
+    <button class="focus-btn" id="focusPause">❚❚ Pausar</button>
+    <button class="focus-btn" id="focusStop">↺ <span class="short">Detener</span><span class="long">Restablecer</span></button>
+  </div>
+</div>
+
+<footer>
+  <span>✦ Repaso espaciado y método Feynman: técnicas de estudio libres.</span>
+  <span><button class="link-btn" id="btnDemo">Restablecer demo</button> · <button class="btn btn-primary" id="btnWipe">Comenzar a usar</button></span>
+</footer>
+
+<div class="veil" id="modalVeil" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle"></h3>
+    <p class="m-msg" id="modalMsg"></p>
+    <div id="modalField" hidden><input type="text" id="modalInput"></div>
+    <div class="modal-btns">
+      <button class="btn" id="modalCancel">Cancelar</button>
+      <button class="btn btn-primary" id="modalOk" style="flex:none">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<div class="veil" id="setVeil" hidden>
+  <div class="modal wide" role="dialog" aria-modal="true">
+    <h3>⚙ Personaliza tu bitácora</h3>
+    <div class="set-body">
+      <div class="set-sec">
+        <p class="set-title">Repasos espaciados</p>
+        <p class="set-note">Activa los intervalos que quieras usar.</p>
+        <div class="iv-chips" id="ivChips"></div>
+      </div>
+      <div class="set-sec">
+        <p class="set-title">Pasos de tu sesión</p>
+        <label class="set-toggle"><input type="checkbox" id="setStepsOn"> Usar checklist antes de guardar cada sesión</label>
+        <div id="stepsEditor"></div>
+      </div>
+      <div class="set-sec">
+        <p class="set-title">Meta semanal</p>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="number" id="setGoal" min="1" max="168" step="0.5" style="width:90px"> <span style="font-size:.85rem">horas por semana</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-btns">
+      <button class="btn" id="setCancel">Cancelar</button>
+      <button class="btn btn-primary" id="setSave" style="flex:none">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const KEY='bitacora-olvido-v4';
+const PALETTE=['#C8471F','#2F5D8A','#3E6B4F','#8A5A17','#7D4A92','#A63A4B','#22706B'];
+const IV=[1,3,7,15,30];
+const DEFAULT_STEPS=[
+  {t:'Lectura del tema',s:'o visualización de material / video'},
+  {t:'Graficar o dibujar',s:'aquellas partes que lo permitan'},
+  {t:'Ejercicios',s:'resolver de 10 a 20'},
+  {t:'Demostración del tema',s:'hazla tú, sin mirar apuntes'},
+  {t:'Método Feynman',s:'explícalo por escrito y reevalúa qué falló'}
+];
+
+let audioCtx=null;
+function getAudio(){if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx;}
+function chime(freq,vol=0.15,att=0.05,dec=1.2){
+  if(!$('#soundOn').checked)return;
+  const ctx=getAudio(),now=ctx.currentTime;
+  const osc=ctx.createOscillator(),gain=ctx.createGain();
+  osc.type='sine';osc.frequency.value=freq;
+  gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(vol,now+att);
+  gain.gain.exponentialRampToValueAtTime(0.0001,now+att+dec);
+  osc.connect(gain);gain.connect(ctx.destination);osc.start(now);osc.stop(now+att+dec+0.1);
+  const o2=ctx.createOscillator(),g2=ctx.createGain();
+  o2.type='triangle';o2.frequency.value=freq*2;
+  g2.gain.setValueAtTime(0,now);g2.gain.linearRampToValueAtTime(vol*0.25,now+att);
+  g2.gain.exponentialRampToValueAtTime(0.0001,now+att+dec*0.7);
+  o2.connect(g2);g2.connect(ctx.destination);o2.start(now);o2.stop(now+att+dec+0.1);}
+function playStart(){chime(392,0.12,0.08,1.4);setTimeout(()=>chime(493.88,0.12,0.08,1.2),180);setTimeout(()=>chime(587.33,0.14,0.08,1.6),360);}
+function playEnd(){chime(587.33,0.18,0.04,2.8);setTimeout(()=>chime(440,0.16,0.05,2.4),420);setTimeout(()=>chime(293.66,0.2,0.06,3.2),900);}
+
+const PHRASES=[
+  {t:'Necesito saberlo todo de una manera que pueda explicárselo a un niño.',a:'— Richard Feynman'},
+  {t:'Si no puedes explicarlo en términos simples, no lo has comprendido lo suficiente.',a:'— Albert Einstein'},
+  {t:'La memoria es el centinela del cerebro.',a:'— William Shakespeare'},
+  {t:'No es que sea muy inteligente, es que me quedo con los problemas más tiempo.',a:'— Albert Einstein'},
+  {t:'La mente no es un vaso que llenar, sino una lámpara que encender.',a:'— Plutarco'},
+  {t:'La repetición es la madre del aprendizaje.',a:'— Tony Robbins'},
+  {t:'El que estudia, vive el doble.',a:'— Marco Valerio Marcial'},
+  {t:'Comienza donde estás. Usa lo que tienes. Haz lo que puedas.',a:'— Arthur Ashe'},
+  {t:'La curiosidad es la mecha en la vela del aprendizaje.',a:'— William Arthur Ward'},
+  {t:'El experto en algo fue una vez un principiante.',a:'— Helen Hayes'},
+  {t:'La lectura es a la mente lo que el ejercicio al cuerpo.',a:'— Joseph Addison'},
+  {t:'Lo que oigo, lo olvido; lo que veo, lo recuerdo; lo que hago, lo entiendo.',a:'— Confucio'}
+];
+
+const SOURCES=[
+  {tag:'curva',tagText:'Curva del olvido',
+   cite:'iSpring Solutions. (s.f.). <span class="tit">Curva del olvido de Ebbinghaus</span>. <span class="src">iSpring Blog.</span>',
+   url:'https://www.ispring.es/blog/curva-del-olvido',
+   sum:'Explica con gráficos y ejemplos la famosa curva del olvido y cómo el repaso espaciado la aplana.'},
+  {tag:'curva',tagText:'Curva del olvido',
+   cite:'Psicología y Mente. (s.f.). <span class="tit">La curva del olvido de Ebbinghaus: qué es y cómo funciona</span>. <span class="src">Psicología y Mente.</span>',
+   url:'https://psicologiaymente.com/psicologia/curva-del-olvido',
+   sum:'Artículo divulgativo que contextualiza los experimentos originales y propone estrategias prácticas.'},
+  {tag:'bio',tagText:'Biografía',
+   cite:'Psicología y Mente. (s.f.). <span class="tit">Hermann Ebbinghaus: biografía del psicólogo alemán pionero en el estudio de la memoria</span>. <span class="src">Psicología y Mente.</span>',
+   url:'https://psicologiaymente.com/biografias/hermann-ebbinghaus',
+   sum:'Biografía del padre de la psicología experimental de la memoria.'},
+  {tag:'meta',tagText:'Métodos de estudio',
+   cite:'Universidad Internacional de La Rioja. (s.f.). <span class="tit">Técnicas de estudio: 11 métodos y estrategias para mejorar el rendimiento académico</span>. <span class="src">UNIR Revista.</span>',
+   url:'https://www.unir.net/revista/educacion/tecnicas-de-estudio/',
+   sum:'Panorama de métodos validados: Pomodoro, Cornell, Feynman, mapas mentales.'},
+  {tag:'bio',tagText:'Biografía',
+   cite:'Encyclopædia Britannica. (2024). <span class="tit">Hermann Ebbinghaus | Biography, Memory, &amp; Psychology</span>. <span class="src">En Encyclopædia Britannica.</span>',
+   url:'https://www.britannica.com/biography/Hermann-Ebbinghaus',
+   sum:'Entrada enciclopédica que resume la obra Über das Gedächtnis (1885).'},
+  {tag:'meta',tagText:'Neurociencia',
+   cite:'Cleveland Clinic. (2022, 2 de mayo). <span class="tit">Memory: Types, processes and how to improve</span>. <span class="src">Health Essentials.</span>',
+   url:'https://my.clevelandclinic.org/health/articles/memory',
+   sum:'Guía clínica sobre memoria a corto y largo plazo, el papel del sueño y estrategias de retención.'},
+  {tag:'meta',tagText:'Métodos de estudio',
+   cite:'IE School of Business. (s.f.). <span class="tit">¿Qué es el método Pomodoro y cómo se aplica?</span> <span class="src">IE Insights.</span>',
+   url:'https://iep.edu.es/que-es-el-metodo-pomodoro/',
+   sum:'Presenta el método de Francesco Cirillo: bloques de 25 minutos de foco + descansos.'},
+  {tag:'meta',tagText:'Métodos de estudio',
+   cite:'BS Valencia. (s.f.). <span class="tit">La técnica Feynman: el método definitivo para aprender cualquier cosa</span>. <span class="src">Blog BS Valencia.</span>',
+   url:'https://www.bsvalencia.com/es/blog/tecnica-feynman/',
+   sum:'Los cuatro pasos del método Feynman y por qué explicar por escrito prueba el aprendizaje real.'},
+  {tag:'ia',tagText:'IA y pensamiento',
+   cite:'Universidad de Londres. (2026, marzo). <span class="tit">Cómo usar la inteligencia artificial sin depender de ella</span>. <span class="src">UDLondres Blog.</span>',
+   url:'https://udlondres.com/2026/03/ia-como-usarla-sin-depender-de-ella/',
+   sum:'Reflexión sobre cómo aprovechar la IA como herramienta puntual sin que suplante el esfuerzo cognitivo.'},
+  {tag:'ia',tagText:'IA y pensamiento',
+   cite:'Aprendizaje Infinito. (s.f.). <span class="tit">Cómo aprender usando la inteligencia artificial</span>. <span class="src">Aprendizaje Infinito Newsletter.</span>',
+   url:'https://www.aprendizajeinfinito.com/p/como-aprender-usando-la-inteligencia',
+   sum:'Uso estratégico de la IA como tutor socrático sin reemplazar el recuerdo activo.'},
+  {tag:'tool',tagText:'Herramientas',
+   cite:'Campos, C. (s.f.). <span class="tit">Cómo dominar NotebookLM: guía práctica y 5 lecciones básicas</span>. <span class="src">Concepción Campos.</span>',
+   url:'https://concepcioncampos.org/como-dominar-notebooklm-guia-practica-y-5-lecciones-basicas/',
+   sum:'Tutorial práctico de NotebookLM en español.'},
+];
+
+const pad=n=>String(n).padStart(2,'0');
+const key=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const parseKey=s=>{const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c);};
+const noon=s=>{const d=typeof s==='string'?parseKey(s):new Date(s);d.setHours(12,0,0,0);return d;};
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+const daysAgo=n=>addDays(new Date(),-n);
+const monday=d=>{const x=new Date(d);x.setDate(x.getDate()-((x.getDay()+6)%7));return x;};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const fmtH=m=>{const h=Math.round(m/6)/10;return (Number.isInteger(h)?String(h):h.toFixed(1).replace('.',','))+' h';};
+const fmtD=d=>d.toLocaleDateString('es-ES',{day:'numeric',month:'short'});
+
+let state, firstRender=true, selectedTopicId=null, currentView='hoy', pendingStep=null;
+const collapsed=new Set();
+function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+function seed(){
+  const k=n=>key(daysAgo(n));
+  const st=(off,min,st5,note)=>({ts:Date.now()-off*864e5,date:k(off),minutes:min,steps:st5,note:note||''});
+  const A=[1,1,1,1,1].map(Boolean);
+  return {name:'',weeklyGoal:20,pomodoros:7,lastNb:{subjId:null,topicId:null,pageId:null,mode:'w'},
+    ivActive:[true,true,true,true,true],stepsOn:true,steps:DEFAULT_STEPS.map(s=>({...s})),archived:[],
+    subjects:[
+      {id:'g',name:'Geometría',color:PALETTE[0]},
+      {id:'c',name:'Cálculo',color:PALETTE[1]},
+      {id:'h',name:'Historia del Arte',color:PALETTE[2]}],
+    topics:[
+      {id:'t1',subjectId:'g',name:'Cálculo de áreas',created:k(22),studies:[st(20,55,A),st(18,50,A),st(16,45,[1,1,1,1,0].map(Boolean)),st(13,50,A,'Fórmulas de figuras compuestas')],
+        notes:[
+          {id:'n1',name:'Fórmulas',updatedAt:Date.now(),md:'# Fórmulas clave\n\n- Triángulo: `A = (b·h)/2`\n- Círculo: `A = πr²`\n- Cuadrado: `A = l²`\n\n> Página para acumular las fórmulas que vayas dominando.'},
+          {id:'n2',name:'Ejemplos resueltos',updatedAt:Date.now(),md:'## Triángulo: base 10, altura 5\n\n`A = (10·5)/2 = 25`\n\n| Figura | Fórmula | Ejemplo |\n|---|---|---|\n| Triángulo | (b·h)/2 | 25 |\n| Círculo | πr² | — |\n\n- [x] Revisar unidades\n- [ ] Practicar figuras compuestas'}]},
+      {id:'t2',subjectId:'g',name:'Cálculo de volúmenes',created:k(6),studies:[st(4,50,A),st(1,45,A)]},
+      {id:'t3',subjectId:'g',name:'Círculo unitario y coseno',created:k(9),studies:[st(2,55,[1,1,1,0,0].map(Boolean),'Falta Feynman')]},
+      {id:'t4',subjectId:'c',name:'Límites y continuidad',created:k(8),studies:[st(5,50,A),st(2,45,A)],
+        notes:[
+          {id:'n3',name:'Apuntes',updatedAt:Date.now(),md:'## Lo que me cuesta\n\n- Entender qué significa el límite en la gráfica.\n\n## Ideas\n\n1. El límite es «a dónde se acerca».\n2. Repasarlo con la técnica Feynman.'}]},
+      {id:'t5',subjectId:'c',name:'Derivadas',created:k(4),studies:[st(4,50,A,'Regla de la cadena')]},
+      {id:'t6',subjectId:'c',name:'Integrales básicas',created:k(1),studies:[]},
+      {id:'t7',subjectId:'h',name:'Renacimiento italiano',created:k(30),studies:[st(26,40,A),st(24,40,A),st(22,35,A),st(21,40,A),st(20,45,A)],
+        notes:[
+          {id:'n4',name:'Línea del tiempo',updatedAt:Date.now(),md:'## Artistas clave\n\n- **Leonardo da Vinci** (1452–1519)\n- **Miguel Ángel** (1475–1564)\n\n> Añadir imágenes de las obras estudiadas.'}]}],
+    loose:[{id:uid(),ts:Date.now(),date:key(new Date()),minutes:25}]};
+}
+function load(){
+  try{const r=localStorage.getItem(KEY);if(r)state=JSON.parse(r);}catch(e){}
+  if(!state)state=seed();
+  normalizeState(state);
+  save();
+}
+// Extraída: valida y rellena campos faltantes en cualquier objeto de estado
+function normalizeState(st){
+  if(!Array.isArray(st.ivActive)||st.ivActive.length!==5)st.ivActive=[true,true,true,true,true];
+  if(typeof st.stepsOn!=='boolean')st.stepsOn=true;
+  if(!Array.isArray(st.steps)||!st.steps.length)st.steps=DEFAULT_STEPS.map(s=>({...s}));
+  if(!Array.isArray(st.loose))st.loose=[];
+  if(!Array.isArray(st.archived))st.archived=[];
+  if(typeof st.weeklyGoal!=='number')st.weeklyGoal=20;
+  if(typeof st.pomodoros!=='number')st.pomodoros=0;
+  if(!Array.isArray(st.subjects))st.subjects=[];
+  if(!Array.isArray(st.topics))st.topics=[];
+  st.topics.forEach(tp=>{if(!Array.isArray(tp.notes))tp.notes=[];});
+  if(!st.lastNb||typeof st.lastNb!=='object')st.lastNb={subjId:null,topicId:null,pageId:null};
+  if(!('subjId' in st.lastNb)){
+    const oldT=st.topics.find(t=>t.id===st.lastNb.topicId);
+    st.lastNb={subjId:oldT?oldT.subjectId:null,topicId:oldT?oldT.id:null,pageId:st.lastNb.pageId??null};
+  }
+  if(st.lastNb.mode!=='md')st.lastNb.mode='w';
+  return st;
+}
+const activeIV=()=>IV.filter((v,i)=>state.ivActive[i]);
+
+const subjectOf=id=>state.subjects.find(s=>s.id===id);
+function entries(){
+  const out=[];
+  state.topics.forEach(tp=>{const sub=subjectOf(tp.subjectId);
+    tp.studies.forEach(s=>out.push({kind:'estudio',date:s.date,ts:s.ts,minutes:s.minutes,
+      subName:sub?sub.name:'—',color:sub?sub.color:'#8a8272',topic:tp.name,topicId:tp.id,stTs:s.ts,
+      steps:s.steps.filter(Boolean).length,stepsTot:s.steps.length,note:s.note}));});
+  state.archived.forEach(a=>out.push({kind:'archivo',date:a.date,ts:a.ts,minutes:a.minutes,
+    subName:a.subName,color:a.color,topic:a.topic,archId:a.id,
+    steps:a.steps.filter(Boolean).length,stepsTot:a.steps.length,note:'↺ archivado (tema restablecido)'}));
+  state.loose.forEach(l=>out.push({kind:'pomo',date:l.date,ts:l.ts,minutes:l.minutes,
+    subName:'Sesión libre',color:'#8a8272',topic:'Pomodoro sin tema',looseId:l.id,steps:null,note:''}));
+  return out.sort((a,b)=>a.date<b.date?1:a.date>b.date?-1:b.ts-a.ts);
+}
+const minsOn=k=>entries().filter(e=>e.date===k).reduce((a,e)=>a+e.minutes,0);
+const todayMins=()=>minsOn(key(new Date()));
+const weekMins=()=>{const mk=key(monday(new Date()));return entries().filter(e=>e.date>=mk).reduce((a,e)=>a+e.minutes,0);};
+function calcStreak(){const ds=new Set(entries().map(e=>e.date));let n=0,d=new Date();
+  if(!ds.has(key(d)))d=addDays(d,-1);while(ds.has(key(d))){n++;d=addDays(d,-1);}return n;}
+
+function topicStatus(tp){
+  const iv=activeIV(),n=tp.studies.length;
+  if(!n)return{cls:'new',label:'Nuevo',diff:null,due:null,ret:100,n};
+  const last=noon(tp.studies[n-1].date),today=noon(new Date());
+  const since=Math.max(0,(today-last)/864e5);
+  if(!iv.length)return{cls:'master',label:'Sin repasos activos',diff:null,due:null,ret:Math.round(Math.exp(-since/50)*100),n};
+  const S=iv[Math.min(n-1,iv.length-1)]/0.6;
+  const ret=Math.round(Math.exp(-since/S)*100);
+  if(n>iv.length)return{cls:'master',label:'Dominado ✓',diff:null,due:null,ret,n};
+  const due=addDays(last,iv[n-1]);
+  const diff=Math.round((due-today)/864e5);
+  let cls,label;
+  if(diff<0){cls='late';label=diff===-1?'Vencido 1d':'Vencido '+(-diff)+'d';}
+  else if(diff===0){cls='today';label='¡Repasar hoy!';}
+  else if(diff===1){cls='soon';label='Mañana';}
+  else{cls='ok';label='En '+diff+' días';}
+  return{cls,label,diff,due,ret,n};
+}
+function curveSVG(tp){
+  const W=600,H=210,L=38,Rp=16,T=22,B=30,iv=activeIV();
+  const st=[...tp.studies].sort((a,b)=>a.date<b.date?-1:1);
+  const frame=`<line x1="${L}" y1="${H-B}" x2="${W-Rp}" y2="${H-B}" stroke="rgba(38,34,26,.35)" stroke-width="1.5"/>
+    <line x1="${L}" y1="${T}" x2="${L}" y2="${H-B}" stroke="rgba(38,34,26,.35)" stroke-width="1.5"/>`;
+  if(!st.length)return `<svg class="curve" viewBox="0 0 ${W} ${H}">${frame}
+    <text x="${W/2}" y="${H/2}" text-anchor="middle" font-size="12.5" fill="#6E6553" font-style="italic">Tu curva empieza con la primera sesión de estudio ✦</text></svg>`;
+  const stab=i=>((iv.length?iv[Math.min(i,iv.length-1)]:30))/0.6;
+  const t0=noon(st[0].date),dayOf=d=>(noon(d)-t0)/864e5;
+  const todayF=Math.max(0,(noon(new Date())-t0)/864e5),n=st.length;
+  const nextF=(iv.length&&n<=iv.length)?dayOf(st[n-1].date)+iv[n-1]:null;
+  const xMax=Math.max(todayF,nextF??0)+2.5;
+  const x=f=>L+f/xMax*(W-L-Rp),y=r=>T+(1-r)*(H-T-B);
+  const halo=`paint-order="stroke" stroke="#FCF9F0" stroke-width="3"`;
+  let grid='';[.25,.5,.75,1].forEach(g=>{grid+=`<line x1="${L}" y1="${y(g)}" x2="${W-Rp}" y2="${y(g)}" stroke="rgba(38,34,26,.08)"/>
+    <text x="${L-5}" y="${y(g)+3}" text-anchor="end" font-size="8.5" fill="#6E6553" font-family="IBM Plex Mono,monospace">${g*100}</text>`;});
+  const thr=`<line x1="${L}" y1="${y(.55)}" x2="${W-Rp}" y2="${y(.55)}" stroke="rgba(200,71,31,.5)" stroke-dasharray="4 4" stroke-width="1.5"/>
+    <text x="${L+6}" y="${y(.55)-6}" text-anchor="start" font-size="9" fill="#C8471F" font-family="IBM Plex Mono,monospace" ${halo}>umbral de repaso · 55%</text>`;
+  let areas='',curves='',connect='',dots='',ghost='';
+  st.forEach((s,i)=>{
+    const f0=dayOf(s.date),S=stab(i);
+    const f1=Math.min(i<n-1?dayOf(st[i+1].date):todayF,todayF);
+    const step=Math.max(.15,(f1-f0)/80)||.5;const pts=[];
+    for(let f=f0;f<=f1+1e-9;f+=step)pts.push([x(f),y(Math.exp(-(f-f0)/S))]);
+    if(pts.length<2)pts.push([x(f1),y(Math.exp(-(f1-f0)/S))]);
+    const pl=pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+    curves+=`<polyline points="${pl}" fill="none" stroke="#26221A" stroke-width="2.5" stroke-linecap="round"/>`;
+    areas+=`<polygon points="${pl} ${x(f1).toFixed(1)},${y(0)} ${x(f0).toFixed(1)},${y(0)}" fill="rgba(200,71,31,.08)"/>`;
+    if(i>0){const rP=Math.exp(-(f0-dayOf(st[i-1].date))/stab(i-1));
+      connect+=`<line x1="${x(f0)}" y1="${y(rP)}" x2="${x(f0)}" y2="${y(1)}" stroke="#3E6B4F" stroke-width="2" stroke-dasharray="2 3"/>`;}
+    dots+=`<circle cx="${x(f0)}" cy="${y(1)}" r="4" fill="${i?'#3E6B4F':'#26221A'}" stroke="#FCF9F0" stroke-width="1.5">
+      <title>${i?'Repaso R'+i:'Primera sesión'} · ${fmtD(noon(s.date))} · ${s.minutes} min · pasos ${s.steps.filter(Boolean).length}/${s.steps.length}</title></circle>`;
+    if(i===n-1&&nextF!==null){
+      const from=Math.max(f0,todayF);
+      if(from<nextF){const pts2=[];const sp=Math.max(.2,(nextF-from)/60);
+        for(let f=from;f<=nextF+1e-9;f+=sp)pts2.push(`${x(f).toFixed(1)},${y(Math.exp(-(f-f0)/S)).toFixed(1)}`);
+        curves+=`<polyline points="${pts2.join(' ')}" fill="none" stroke="rgba(38,34,26,.4)" stroke-width="2" stroke-dasharray="5 5"/>`;}
+      const gx=Math.min(Math.max(x(nextF),L+44),W-Rp-44);
+      ghost+=`<circle cx="${x(nextF)}" cy="${y(Math.exp(-(nextF-f0)/S))}" r="5.5" fill="none" stroke="#C8471F" stroke-width="2"/>
+        <line x1="${x(nextF)}" y1="${y(.55)+8}" x2="${x(nextF)}" y2="${H-B-16}" stroke="rgba(200,71,31,.4)" stroke-dasharray="2 3"/>
+        <text x="${gx}" y="${H-B-6}" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#C8471F" font-family="IBM Plex Mono,monospace" ${halo}>R${n} · ${fmtD(addDays(noon(st[n-1].date),iv[n-1]))}</text>`;}
+  });
+  const rT=Math.exp(-(todayF-dayOf(st[n-1].date))/stab(n-1)),hx=x(todayF);
+  const hxc=Math.min(Math.max(hx,L+40),W-Rp-40);
+  const hoy=`<line x1="${hx}" y1="${T}" x2="${hx}" y2="${H-B}" stroke="rgba(200,71,31,.6)" stroke-dasharray="3 4" stroke-width="1.5"/>
+    <circle cx="${hx}" cy="${y(rT)}" r="5" fill="#C8471F" stroke="#FCF9F0" stroke-width="2"/>
+    <text x="${hxc}" y="${T+4}" text-anchor="middle" font-size="11" font-weight="bold" fill="#C8471F" font-family="IBM Plex Mono,monospace" ${halo}>hoy · ${Math.round(rT*100)}%</text>`;
+  let ticks='';const tstep=Math.max(1,Math.round(xMax/4));
+  for(let f=0;f<=xMax;f+=tstep)ticks+=`<text x="${x(f)}" y="${H-9}" text-anchor="middle" font-size="9" fill="#6E6553" font-family="IBM Plex Mono,monospace">${fmtD(addDays(t0,Math.round(f)))}</text>`;
+  return `<svg class="curve" viewBox="0 0 ${W} ${H}">${grid}${frame}${areas}${thr}${curves}${connect}${ghost}${hoy}${dots}${ticks}</svg>`;
+}
+function milestonesHTML(tp){const iv=activeIV(),n=tp.studies.length,done=Math.min(Math.max(n-1,0),iv.length),target=Math.max(n,1);
+  return iv.map((d,k)=>{const kx=k+1;const cls=kx<=done?'done':(kx===target&&n<=iv.length?'now':'');
+    return `<span class="ms ${cls}" title="Repaso ${kx}: ${d} día${d>1?'s':''} después"><i></i>R${kx} · ${d}d</span>`;}).join('')
+    ||'<span style="font-size:.72rem;color:var(--ink2);font-style:italic">Sin repasos activos — actívalos en ⚙ Ajustes.</span>';}
+const CURVE_HELP=`<p class="curve-help"><b>Cómo leer tu curva:</b> la <b>línea negra</b> es tu memoria decayendo desde cada sesión; los <b>puntos verdes</b> son repasos que la devuelven al 100% (y aplanan la siguiente caída); el <b>punto naranja</b> es <b>hoy</b> con tu retención estimada; la <b>línea gris punteada</b> predice hacia dónde vas; el <b>círculo naranja</b> marca el día en que cruzarás el <b>umbral de repaso (55%)</b> — tu próxima cita con el tema. <button class="link-btn" data-goto="guia">Guía completa →</button></p>`;
+
+let toastT;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),3200);}
+function confetti(el){if(RM)return;const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/3;
+  for(let i=0;i<18;i++){const p=document.createElement('span');p.className='confetti';
+    const a=Math.random()*Math.PI*2,d=60+Math.random()*110;
+    p.style.cssText=`left:${cx}px;top:${cy}px;background:${PALETTE[i%PALETTE.length]};--tx:${Math.cos(a)*d}px;--ty:${Math.sin(a)*d-40}px;--r:${Math.random()*540-270}deg`;
+    document.body.appendChild(p);setTimeout(()=>p.remove(),1000);}}
+function tween(el,to,fmt){if(RM||!firstRender){el.textContent=fmt(to);return;}
+  const t0=performance.now(),dur=900;
+  (function step(t){const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);
+    el.textContent=fmt(to*e);if(p<1)requestAnimationFrame(step);})(t0);}
+const retClass=r=>r>=70?'g-ok':r>=55?'g-warn':'g-bad';
+
+let modalResolve=null;
+function openModal(o){return new Promise(res=>{modalResolve=res;
+  $('#modalTitle').textContent=o.title;$('#modalMsg').innerHTML=o.msg||'';
+  const hasInput=o.inputValue!==null&&o.inputValue!==undefined;
+  $('#modalField').hidden=!hasInput;
+  if(hasInput)$('#modalInput').value=o.inputValue;
+  $('#modalCancel').hidden=!(o.showCancel!==false);
+  const ok=$('#modalOk');ok.textContent=o.okText||'Aceptar';ok.classList.toggle('btn-danger',!!o.danger);
+  $('#modalVeil').hidden=false;
+  setTimeout(()=>{(hasInput?$('#modalInput'):ok).focus();if(hasInput)$('#modalInput').select();},40);});}
+function closeModal(val){if($('#modalVeil').hidden)return;$('#modalVeil').hidden=true;
+  if(modalResolve){const r=modalResolve;modalResolve=null;r(val);}}
+const isPrompt=()=>!$('#modalField').hidden;
+$('#modalOk').onclick=()=>closeModal(isPrompt()?$('#modalInput').value.trim():true);
+$('#modalCancel').onclick=()=>closeModal(isPrompt()?null:false);
+$('#modalVeil').onclick=e=>{if(e.target.id==='modalVeil')closeModal(isPrompt()?null:false);};
+$('#modalInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('#modalOk').click();});
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;
+  if(!$('#modalVeil').hidden)closeModal(isPrompt()?null:false);
+  if(!$('#setVeil').hidden)$('#setVeil').hidden=true;
+  if(!$('#focusVeil').hidden){stopTimer();exitFocus();}});
+const mConfirm=(t,m,ok='Confirmar',danger=false)=>openModal({title:t,msg:m,okText:ok,danger});
+const mPrompt=(t,m,val='')=>openModal({title:t,msg:m,inputValue:val});
+
+function switchView(v){currentView=v;
+  $$('[data-view]').forEach(s=>s.hidden=s.dataset.view!==v);
+  $$('.nav button[data-goto]').forEach(b=>b.classList.toggle('active',b.dataset.goto===v));
+  const mnav=$('#mainNav');if(mnav)mnav.classList.remove('open');
+  const nb=$('#navBurger');if(nb)nb.setAttribute('aria-expanded','false');
+  window.scrollTo({top:0,behavior:RM?'auto':'smooth'});}
+
+function renderTopbar(){
+  $('#navDate').textContent=new Date().toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  const s=calcStreak();$('#streakTxt').textContent=s>0?s+' días':'¡hoy toca!';
+  const iv=activeIV();$('#ivNote').innerHTML=iv.length?('intervalos<br>'+iv.join(' · ')+' días'):'sin repasos<br>activos ⚙';}
+
+function renderOpening(){
+  const d=new Date(),f=new Intl.DateTimeFormat('es-ES',{weekday:'long'}).format(d),
+    g=new Intl.DateTimeFormat('es-ES',{day:'numeric',month:'long'}).format(d),
+    cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+  $('#dateL1').textContent=cap(f)+',';$('#dateL2').textContent=cap(g)+'.';
+  const h=d.getHours(),greet=h<12?'Buenos días':h<20?'Buenas tardes':'Buenas noches';
+  $('#greetTag').textContent=greet.toLowerCase();
+  const dueN=state.topics.filter(t=>{const s=topicStatus(t);return s.diff!==null&&s.diff<=0;}).length;
+  const nm=state.name?`, <b>${esc(state.name)}</b>`:'';
+  $('#subline').innerHTML=`¡${greet}${nm}! Llevas <b>${fmtH(weekMins())}</b> esta semana y
+    <b>${dueN}</b> ${dueN===1?'repaso espera':'repasos esperan'} hoy. La constancia vence a la curva del olvido.
+    <button class="edit-name" id="editName" title="Cambiar nombre">✎</button>`;
+  $('#todayNote').textContent=d.toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'});
+  $('#editName').onclick=async()=>{const n=await mPrompt('Tu nombre','¿Cómo te llamas? Solo para saludarte.','');
+    if(n!==null){state.name=n;save();renderOpening();}};}
+
+function renderToday(){
+  tween($('#tToday'),todayMins(),v=>fmtH(Math.round(v)));
+  tween($('#tWeek'),weekMins(),v=>fmtH(Math.round(v)));
+  tween($('#tStreak'),calcStreak(),v=>String(Math.round(v)));
+  tween($('#tPomo'),state.pomodoros,v=>String(Math.round(v)));
+  const due=state.topics.map(t=>({t,s:topicStatus(t)})).filter(x=>x.s.diff!==null&&x.s.diff<=0)
+    .sort((a,b)=>a.s.diff-b.s.diff);
+  $('#nextDue').innerHTML=due.length
+    ?`<span class="pin">📌</span> <span><b>${due.length}</b> ${due.length===1?'repaso':'repasos'} para hoy · primero: <b>${esc(due[0].t.name)}</b> →</span>`
+    :`<span class="pin">📌</span> Sin repasos pendientes ahora mismo. ¡Bien hecho!`;}
+
+function renderChart(){
+  const goalDaily=state.weeklyGoal*60/7,el=$('#bars'),days=[];
+  for(let i=6;i>=0;i--)days.push(daysAgo(i));
+  const mins=days.map(d=>minsOn(key(d)));
+  const max=Math.max(...mins,goalDaily,60),tk=key(new Date()),Ls=['D','L','M','X','J','V','S'];
+  el.innerHTML=days.map((d,i)=>{
+    const h=Math.max(mins[i]>0?6:3,mins[i]/max*108),today=key(d)===tk;
+    return `<div class="bar-col ${today?'is-today':''}">
+      <span class="bar-val">${mins[i]||''}</span>
+      <div class="bar ${today?'today':''}" style="height:${h}px;transform:scaleY(0)" data-i="${i}"></div>
+      <span class="bar-lbl">${Ls[d.getDay()]}</span></div>`;}).join('')
+    +`<div class="goal-line" style="bottom:${24+goalDaily/max*108}px"><i>meta diaria</i></div>`;
+  $('#chartTotal').textContent=fmtH(mins.reduce((a,b)=>a+b,0))+' en total';
+  const apply=()=>el.querySelectorAll('.bar').forEach(b=>{b.style.transitionDelay=(RM?0:b.dataset.i*70)+'ms';b.style.transform='scaleY(1)';});
+  RM?apply():requestAnimationFrame(()=>requestAnimationFrame(apply));}
+
+function renderGoal(){
+  const wk=weekMins(),C=314.16,pct=Math.min(1,wk/(state.weeklyGoal*60));
+  $('#goalRing').style.strokeDashoffset=C*(1-pct);
+  $('#goalTxt').textContent=fmtH(wk);$('#goalMax').textContent=state.weeklyGoal;
+  const el=$('#heat');let html='';
+  for(let i=13;i>=0;i--){const k=key(daysAgo(i)),m=minsOn(k);
+    const lvl=m<=0?'':m<30?'l1':m<60?'l2':m<90?'l3':'l4';
+    html+=`<i class="${lvl}" title="${fmtD(daysAgo(i))}: ${m} min"></i>`;}
+  el.innerHTML=html;}
+
+function renderQueue(){
+  const all=state.topics.map(t=>({t,s:topicStatus(t)}));
+  const due=all.filter(x=>x.s.diff!==null&&x.s.diff<=0).sort((a,b)=>a.s.diff-b.s.diff);
+  const news=all.filter(x=>x.s.n===0);
+  const soon=all.filter(x=>x.s.diff!==null&&x.s.diff>0&&x.s.diff<=2).sort((a,b)=>a.s.diff-b.s.diff);
+  $('#queueCount').textContent=due.length+' para hoy';
+  const row=(x,btn)=>{const sub=subjectOf(x.t.subjectId);
+    return `<div class="qrow"><span class="pill ${x.s.cls}">${x.s.label}</span>
+      <div class="q-main"><span class="dot" style="background:${sub?sub.color:'#888'}"></span>
+      <b>${esc(x.t.name)}</b><small>${sub?esc(sub.name):''} · ret. ${x.s.ret}%</small></div>
+      ${btn?`<button class="btn btn-mini" data-open="${x.t.id}">Estudiar →</button>`:''}</div>`;};
+  let html='';
+  if(due.length)html+=`<p class="q-head">Vencidos y de hoy</p>`+due.map(x=>row(x,true)).join('');
+  if(news.length)html+=`<p class="q-head">Sin estudiar aún</p>`+news.map(x=>row(x,true)).join('');
+  if(soon.length)html+=`<p class="q-head">Próximos (1–2 días)</p>`+soon.map(x=>row(x,false)).join('');
+  $('#queueList').innerHTML=html||'<p class="empty">Todo al día ✦ La curva del olvido no puede contigo.</p>';}
+
+function resetTopic(tp){
+  const sub=subjectOf(tp.subjectId);
+  const old=tp.studies.map(s=>({...s,id:uid(),topic:tp.name,
+    color:sub?sub.color:'#8a8272',subName:sub?sub.name:'—'}));
+  state.archived=state.archived.concat(old);
+  tp.studies=[];save();renderAll();
+  toast('Tema restablecido ↺ Lo anterior quedó archivado en Historial.');}
+
+function mesaBodyHTML(tp,xl){
+  const sub=subjectOf(tp.subjectId),s=topicStatus(tp),iv=activeIV();
+  const todayK=key(new Date()),ex=tp.studies.find(x=>x.date===todayK);
+  const totMin=tp.studies.reduce((a,x)=>a+x.minutes,0);
+  let nextTxt;
+  if(s.n===0)nextTxt='Tu primera sesión pone en marcha la curva. Después llega el repaso R1.';
+  else if(s.cls==='master')nextTxt='Curva completada: todos los repasos hechos. Memoria de largo plazo 🎉';
+  else nextTxt=`Próximo repaso <b>R${s.n}</b>: ${fmtD(s.due)} (${s.diff===0?'¡hoy!':s.diff<0?'vencido':'en '+s.diff+' días'}). Retención estimada hoy: <b>${s.ret}%</b>.`;
+  const useSteps=state.stepsOn&&state.steps.length;
+  const lateWarn=s.cls==='late'
+    ?`<div class="warn-box">⚠ <b>Repaso vencido ${s.diff===-1?'hace 1 día':'hace '+(-s.diff)+' días'}:</b> tu retención cayó por debajo del umbral. <b>Se recomienda restablecer el repaso</b> (empezar la curva de nuevo) o repasarlo hoy mismo con sesión completa.</div>`:'';
+  const saveLabel=s.n===0?'✓ Guardar primera sesión':s.cls==='master'?'✓ Guardar sesión de refuerzo':`✓ Guardar repaso nº${s.n} (R${s.n})`;
+  const saveExpl=s.n===0
+    ?'Al guardar: queda registrada la fecha de hoy, suman los minutos y se agenda tu repaso R1.'
+    :s.cls==='master'
+    ?'Este tema ya completó toda la curva: guarda refuerzos cuando quieras.'
+    :`R${s.n} significa «repaso número ${s.n}» (${iv.join(' · ')} días). Al guardar se programa R${s.n+1}.`;
+  return `<div class="mesa-grid">
+    <div><div class="curve-box">${curveSVG(tp)}</div>
+      <div class="milestones">${milestonesHTML(tp)}</div>
+      ${CURVE_HELP}</div>
+    <div class="mesa-side">
+      <div><p class="big-ret ${xl?'xl':''} ${retClass(s.ret)}">${s.n?s.ret+'%':'—'}</p><p class="ret-lbl">retención estimada</p></div>
+      <div class="side-meta">
+        <span>Sesiones: <b>${s.n}</b> · <b>${fmtH(totMin)}</b></span>
+        <span>Última: <b>${s.n?fmtD(noon(tp.studies[s.n-1].date)):'—'}</b></span>
+        <span>Repasos completados: <b>${Math.min(Math.max(s.n-1,0),iv.length)} / ${iv.length}</b></span>
+      </div>
+      <div class="mesa-actions">
+        <button class="btn btn-mini" id="mesaPomo">⏱ Pomodoro de este tema</button>
+        <button class="btn btn-mini" id="mesaResetT">↺ Restablecer tema</button>
+      </div>
+      ${ex?`<p class="today-info">✓ Hoy ya registraste ${ex.minutes} min en este tema.</p>`:''}
+      <p class="mesa-next">${nextTxt}</p>
+    </div></div>
+    ${lateWarn}
+    ${useSteps?`<div class="steps" id="stepsList">${state.steps.map((stp,i)=>`
+      <div class="step ${ex&&ex.steps[i]?'on':''}">
+        <label class="step-check"><input type="checkbox" ${ex&&ex.steps[i]?'checked':''}>
+          <span class="n">${i+1}</span>
+          <span class="s-txt">${esc(stp.t)}${stp.s?`<small>${esc(stp.s)}</small>`:''}</span></label>
+        <button class="step-pomo" data-steppomo="${i}" title="Lanzar pomodoro; al terminar, este paso se marca completo">⏱</button>
+      </div>`).join('')}</div>`
+    :`<p style="font-size:.78rem;color:var(--ink2);font-style:italic;margin-bottom:1rem">Checklist desactivado — puedes activarlo en ⚙ Ajustes.</p>`}
+    <div class="mesa-foot">
+      <label class="fld"><span>Minutos de esta sesión</span>
+        <input class="f-sm" type="number" id="mesaMin" min="5" max="600" step="5" value="45"></label>
+      <label class="fld f-grow"><span>Nota breve (opcional)</span>
+        <input type="text" id="mesaNote" maxlength="90" placeholder="ej. Regla de la cadena…" value="${esc(ex?ex.note:'')}"></label>
+      <button class="btn btn-primary" id="mesaSave" style="flex:none">${saveLabel}</button>
+    </div>
+    <p class="foot-note">${saveExpl}</p>`;}
+
+function bindMesa(tp){
+  const sl=$('#stepsList');
+  if(sl)sl.addEventListener('change',e=>{if(e.target.matches('input')){
+    const lab=e.target.closest('.step');if(lab)lab.classList.toggle('on',e.target.checked);}});
+  sl&&sl.querySelectorAll('[data-steppomo]').forEach(b=>b.onclick=()=>startPomoFor(tp,+b.dataset.steppomo));
+  const mp=$('#mesaPomo');if(mp)mp.onclick=()=>startPomoFor(tp,null);
+  const mr=$('#mesaResetT');if(mr)mr.onclick=()=>mConfirm('Restablecer tema',
+      `¿Restablecer <b>«${esc(tp.name)}»</b>? Sus sesiones actuales se archivarán en el Historial y el tema volverá a «Nuevo» (primera sesión).`,'Restablecer',true)
+    .then(ok=>{if(ok)resetTopic(tp);});
+  const btn=$('#mesaSave');
+  if(btn)btn.onclick=()=>{
+    const boxes=sl?[...sl.querySelectorAll('input')]:[];
+    const steps=boxes.length?boxes.map(i=>i.checked):[];
+    const min=Math.max(5,+$('#mesaMin').value||45),note=$('#mesaNote').value.trim();
+    const tk=key(new Date()),ex=tp.studies.find(s=>s.date===tk);
+    if(ex){ex.steps=steps.length?ex.steps.map((v,i)=>v||(steps[i]||false)):ex.steps;ex.minutes+=min;ex.note=note||ex.note;ex.ts=Date.now();}
+    else tp.studies.push({ts:Date.now(),date:tk,minutes:min,steps,note});
+    save();const ns=topicStatus(tp);renderAll();confetti(btn);
+    toast(ns.cls==='master'?'¡Tema dominado! Curva completada 🎉'
+      :ns.due?`Sesión registrada ✓ Próximo repaso: ${fmtD(ns.due)}`:'Sesión registrada ✓');};}
+
+function renderMesa(){
+  const tp=state.topics.find(t=>t.id===selectedTopicId);
+  const sel=$('#mesaTopicSel');
+  sel.innerHTML='<option value="">— elige un tema —</option>'+state.subjects.map(sub=>{
+    const tps=state.topics.filter(t=>t.subjectId===sub.id);
+    return tps.length?`<optgroup label="${esc(sub.name)}">${tps.map(t=>{
+      const s=topicStatus(t);return `<option value="${t.id}">${esc(t.name)} (${s.label})</option>`;}).join('')}</optgroup>`:'';
+  }).join('');
+  if(tp)sel.value=tp.id;
+  if(!tp){
+    $('#mesaPillFull').innerHTML='';
+    $('#mesaFull').innerHTML=`<div class="mesa-empty">${state.topics.length?'Elige un tema en el selector de arriba para ver su curva a detalle.':'Crea una asignatura y un tema en «Hoy» para empezar. ✍'}</div>`;
+  }else{
+    $('#mesaPillFull').innerHTML=`<span class="pill ${topicStatus(tp).cls}">${topicStatus(tp).label}</span>`;
+    $('#mesaFull').innerHTML=mesaBodyHTML(tp,true);bindMesa(tp);}
+  const nSteps=state.stepsOn?state.steps.length:0;
+  $('#mesaEyebrow').textContent='Mesa de estudio'+(nSteps?` · checklist de ${nSteps} pasos`:'');
+  if(!tp){$('#mesaMiniTitle').textContent='Tu sesión activa';$('#mesaPillMini').innerHTML='';
+    $('#mesaMini').innerHTML='<div class="mesa-empty">Aún no hay tema seleccionado.</div>';return;}
+  const s=topicStatus(tp),sub=subjectOf(tp.subjectId);
+  $('#mesaMiniTitle').textContent=(sub?sub.name+' · ':'')+tp.name;
+  $('#mesaPillMini').innerHTML=`<span class="pill ${s.cls}">${s.label}</span>`;
+  $('#mesaMini').innerHTML=`<div class="curve-box">${curveSVG(tp)}</div>
+    <div class="milestones">${milestonesHTML(tp)}</div>
+    <p class="mesa-next" style="margin-top:.8rem">Retención hoy: <b>${s.n?s.ret+'%':'—'}</b> · ${s.cls==='master'?'curva completada':s.n===0?'primera sesión pendiente':`próximo repaso: <b>${fmtD(s.due)}</b>`}</p>`;}
+
+function renderSubjects(){
+  const el=$('#subjList');
+  if(!state.subjects.length){el.innerHTML='<p class="empty">Crea tu primera asignatura arriba para empezar. ✍</p>';return;}
+  el.innerHTML=state.subjects.map(sub=>{
+    const topics=state.topics.filter(t=>t.subjectId===sub.id);
+    const due=topics.filter(t=>{const s=topicStatus(t);return s.diff!==null&&s.diff<=0;}).length;
+    const tot=topics.reduce((a,t)=>a+t.studies.reduce((b,s)=>b+s.minutes,0),0);
+    const col=collapsed.has(sub.id);
+    return `<div class="subj-block ${col?'collapsed':''}">
+      <div class="subj-head" data-subhead="${sub.id}">
+        <span class="chip" style="background:${sub.color}"></span><h3>${esc(sub.name)}</h3>
+        <span class="subj-counts">${topics.length} ${topics.length===1?'tema':'temas'} · ${fmtH(tot)}${due?` · <b style="color:var(--accent)">${due} hoy</b>`:''}</span>
+        <button class="del" data-del-subject="${sub.id}" title="Eliminar asignatura">×</button>
+        <span class="chev">▾</span></div>
+      <div class="subj-body" ${col?'hidden':''}>
+        ${topics.map(tp=>{const s=topicStatus(tp);
+          return `<div class="topic ${tp.id===selectedTopicId?'selected':''}" data-topic="${tp.id}">
+            <span class="pill ${s.cls}">${s.label}</span>
+            <div><p class="t-name">${esc(tp.name)}</p>
+              <p class="t-meta">${s.n} ${s.n===1?'sesión':'sesiones'} · ${s.n?'últ. '+fmtD(noon(tp.studies[s.n-1].date)):'sin estudiar'} · ret. ${s.n?s.ret+'%':'—'}</p></div>
+            <div class="retbar"><i class="${retClass(s.ret)}" data-w="${s.n?s.ret:0}"></i></div>
+            <button class="del" data-del-topic="${tp.id}" title="Eliminar tema">×</button></div>`;}).join('')
+          ||'<p class="empty" style="padding-left:1.6rem">Sin temas todavía.</p>'}
+        <form class="topic-form" data-add-topic="${sub.id}">
+          <input placeholder="Nuevo tema… (ej. Cálculo de volúmenes)" maxlength="60" required>
+          <button class="btn btn-mini" type="submit">+ Tema</button></form>
+      </div></div>`;}).join('');
+  const go=()=>el.querySelectorAll('.retbar i').forEach(i=>i.style.width=i.dataset.w+'%');
+  RM?go():requestAnimationFrame(()=>requestAnimationFrame(go));
+  el.querySelectorAll('[data-add-topic]').forEach(f=>f.onsubmit=e=>{
+    e.preventDefault();const nm=f.querySelector('input').value.trim();if(!nm)return;
+    const subId=f.dataset.addTopic;const id=uid();
+    state.topics.push({id,subjectId:subId,name:nm,created:key(new Date()),studies:[]});
+    collapsed.delete(subId);
+    save();selectedTopicId=id;renderAll();toast('Tema añadido: '+nm);});}
+
+function renderLog(){
+  const list=entries().slice(0,150),total=entries().reduce((a,e)=>a+e.minutes,0);
+  $('#logTotal').textContent=entries().length+' sesiones · '+fmtH(total)+' de estudio total';
+  $('#logList').innerHTML=list.map(e=>`<div class="sess">
+      <span class="sess-date">${noon(e.date).toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'short'})}</span>
+      <span class="sess-subj"><span class="dot" style="background:${e.color}"></span><span class="nm">${esc(e.topic)}</span></span>
+      <span class="sess-min">${e.minutes}′</span>
+      <span class="sess-note">${e.kind==='estudio'?esc(e.subName)+' · pasos '+e.steps+'/'+(e.stepsTot||5)+(e.note?' · “'+esc(e.note)+'”':''):esc(e.note)}</span>
+      <button class="del" data-del-entry="${e.kind==='estudio'?'t:'+e.topicId+':'+e.stTs:e.kind==='archivo'?'a:'+e.archId:'l:'+e.looseId}" title="Eliminar">×</button></div>`)
+    .join('')||'<p class="empty">Todavía no hay sesiones registradas.</p>';}
+
+function renderGuide(){
+  const fake={studies:[{date:key(daysAgo(12)),minutes:50,steps:[1,1,1,1,1].map(Boolean),note:''},
+    {date:key(daysAgo(10)),minutes:45,steps:[1,1,1,1,1].map(Boolean),note:''},
+    {date:key(daysAgo(6)),minutes:50,steps:[1,1,1,1,1].map(Boolean),note:''},
+    {date:key(daysAgo(3)),minutes:40,steps:[1,1,1,1,1].map(Boolean),note:''}]};
+  $('#guideCurve').innerHTML=curveSVG(fake);
+  $('#guideSteps').innerHTML=state.steps.map(s=>`<li><b>${esc(s.t)}</b>${s.s?' — '+esc(s.s):''}</li>`).join('');}
+
+function renderFuentes(){
+  $('#srcList').innerHTML=SOURCES.map(s=>`
+    <article class="card src-item">
+      <p class="src-cite">${s.cite} <span class="src-tag ${s.tag}">${s.tagText}</span></p>
+      <a class="src-link" href="${s.url}" target="_blank" rel="noopener noreferrer">${s.url.replace(/^https?:\/\//,'')}</a>
+      <p class="src-sum">${s.sum}</p>
+    </article>`).join('');}
+
+function renderPomoSelects(){
+  const ps=$('#pomoSubject'),pt=$('#pomoTopic');
+  const cs=ps.value,ct=pt.value;
+  ps.innerHTML='<option value="">— Sin asignatura (libre) —</option>'+
+    state.subjects.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('');
+  if([...ps.options].some(o=>o.value===cs))ps.value=cs;
+  if(!ps.value){pt.innerHTML='<option value="">— sin tema —</option>';pt.disabled=true;return;}
+  pt.disabled=false;
+  pt.innerHTML='<option value="">— elegir tema —</option>'+
+    state.topics.filter(t=>t.subjectId===ps.value).map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join('');
+  if(ct&&[...pt.options].some(o=>o.value===ct))pt.value=ct;}
+
+/* ═══ Cuaderno (vista Notebook) ═══ */
+const NB_TOOLS=[
+  {id:'b',lbl:'B',h:'Negrita',pre:'**',post:'**',ph:'negrita',cmd:'bold'},
+  {id:'i',lbl:'I',h:'Cursiva',pre:'*',post:'*',ph:'cursiva',cmd:'italic'},
+  {id:'u',lbl:'U',h:'Subrayado',cmd:'underline'},
+  {id:'s',lbl:'S',h:'Tachado',pre:'~~',post:'~~',ph:'tachado',cmd:'strikeThrough'},
+  {id:'h2',lbl:'H2',h:'Subtítulo',pre:'## ',post:'\n',ph:'Subtítulo',cmd:'formatBlock',arg:'H2'},
+  {id:'h3',lbl:'H3',h:'Sub-subtítulo',pre:'### ',post:'\n',ph:'Sub-subtítulo',cmd:'formatBlock',arg:'H3'},
+  {id:'ul',lbl:'•',h:'Lista',pre:'- ',post:'\n- ',ph:'elemento',cmd:'insertUnorderedList'},
+  {id:'ol',lbl:'1.',h:'Lista numerada',pre:'1. ',post:'\n2. ',ph:'elemento',cmd:'insertOrderedList'},
+  {id:'cb',lbl:'☑',h:'Checklist',pre:'- [ ] ',post:'\n- [ ] ',ph:'tarea',html:'<ul><li><input type="checkbox"> tarea</li></ul>'},
+  {id:'q',lbl:'❝',h:'Cita',pre:'> ',post:'\n',ph:'cita',cmd:'formatBlock',arg:'BLOCKQUOTE'},
+  {id:'code',lbl:'</>',h:'Bloque de código',pre:'```\n',post:'\n```',ph:'código',html:'<pre><code>código</code></pre>'},
+  {id:'tbl',lbl:'▦',h:'Tabla',pre:'| Encabezado | Dato |\n|---|---|\n| celda | celda |',post:'',ph:'',html:'<table><tr><th>Encabezado</th><th>Dato</th></tr><tr><td>celda</td><td>celda</td></tr></table>'},
+  {id:'link',lbl:'🔗',h:'Enlace',pre:'[',post:'](https://)',ph:'texto del enlace',link:true},
+  {id:'img',lbl:'🖼',h:'Imagen (subir desde tu PC)',img:true}
+];
+let nbSubjId=null,nbTopicId=null,nbPageId=null,nbSaveT=null,nbMode='w';
+function nbPage(){
+  const tp=state.topics.find(t=>t.id===nbTopicId);
+  return tp?tp.notes.find(n=>n.id===nbPageId)||null:null;}
+function mdToHTML(src){
+  let t=String(src??'').replace(/\r\n/g,'\n');
+  const blocks=[];
+  t=t.replace(/```[^\n]*\n([\s\S]*?)```/g,(m,code)=>{
+    blocks.push('<pre class="md-code"><code>'+esc(code).replace(/^\n+|\n+$/g,'')+'</code></pre>');
+    return '\u0000'+String(blocks.length-1)+'\u0000';});
+  const inline=s=>{
+    let x=esc(s);
+    x=x.replace(/&lt;u&gt;([^<]*)&lt;\/u&gt;/g,'<u>$1</u>');
+    x=x.replace(/&lt;sub&gt;([^<]*)&lt;\/sub&gt;/g,'<sub>$1</sub>');
+    x=x.replace(/&lt;sup&gt;([^<]*)&lt;\/sup&gt;/g,'<sup>$1</sup>');
+    x=x.replace(/&lt;mark&gt;([^<]*)&lt;\/mark&gt;/g,'<mark>$1</mark>');
+    x=x.replace(/`([^`\n]+)`/g,'<code>$1</code>');
+    x=x.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g,'<img src="$2" alt="$1" loading="lazy">');
+    x=x.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+    x=x.replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>');
+    x=x.replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<em>$2</em>');
+    x=x.replace(/~~([^~\n]+)~~/g,'<del>$1</del>');
+    return x;};
+  const lines=t.split('\n');
+  let html='',i=0,list=null,quote=null,tableRows=[];
+  const closeList=()=>{if(list){html+='</'+list+'>\n';list=null;}};
+  const closeQuote=()=>{if(quote){html+='<blockquote>\n'+quote+'</blockquote>\n';quote=null;}};
+  const closeTable=()=>{
+    if(tableRows.length){html+='<div class="md-table"><table>'+tableRows.map((r,ri)=>
+      '<tr>'+r.map(c=>'<'+(ri?'td':'th')+'>'+inline(c)+'</'+(ri?'td':'th')+'>').join('')+'</tr>').join('')+'</table></div>\n';}
+    tableRows=[];};
+  while(i<lines.length){
+    const ln=lines[i],m=ln.match(/^\u0000(\d+)\u0000$/);
+    if(m){closeList();closeQuote();closeTable();html+=blocks[+m[1]]+'\n';i++;continue;}
+    if(/^\s*$/.test(ln)){closeList();closeQuote();closeTable();i++;continue;}
+    let cm;
+    if((cm=ln.match(/^(#{1,6})\s+(.*)$/))){closeList();closeQuote();closeTable();
+      html+='<h'+cm[1].length+'>'+inline(cm[2])+'</h'+cm[1].length+'>\n';i++;continue;}
+    if(/^\s*([-*_])(?:\s*\1){2,}\s*$/.test(ln)){closeList();closeQuote();closeTable();
+      html+='<hr>\n';i++;continue;}
+    if((cm=ln.match(/^>\s?(.*)$/))){
+      closeList();closeTable();
+      if(!quote){quote='';html+='<blockquote>\n';}
+      quote+='<p>'+inline(cm[1])+'</p>';i++;continue;}
+    if((cm=ln.match(/^\s*[-*]\s+\[([ xX])\]\s+(.*)$/))){
+      closeQuote();closeTable();
+      if(list!=='ul'){closeList();list='ul';html+='<ul class="md-cbl">\n';}
+      html+='<li><label class="md-cb"><input type="checkbox" disabled '+(cm[1].toLowerCase()==='x'?'checked':'')+'><span>'+inline(cm[2])+'</span></label></li>\n';
+      i++;continue;}
+    if((cm=ln.match(/^\s*([-*])\s+(.*)$/))){
+      closeQuote();closeTable();
+      if(list!=='ul'){closeList();list='ul';html+='<ul>\n';}
+      html+='<li>'+inline(cm[2])+'</li>\n';i++;continue;}
+    if((cm=ln.match(/^\s*(\d+)[.)]\s+(.*)$/))){
+      closeQuote();closeTable();
+      if(list!=='ol'){closeList();list='ol';html+='<ol>\n';}
+      html+='<li>'+inline(cm[2])+'</li>\n';i++;continue;}
+    if(ln.trim().startsWith('|')){
+      closeList();closeQuote();
+      const cells=ln.trim().replace(/^\||\|$/g,'').split('|').map(c=>c.trim());
+      if(!/^:?-+:?$/.test(cells.join('').replace(/:/g,'')))tableRows.push(cells);
+      i++;continue;}
+    closeList();closeQuote();closeTable();
+    html+='<p>'+inline(ln)+'</p>\n';i++;
+  }
+  closeList();closeQuote();closeTable();
+  return html||'<p class="empty">Esta página está en blanco. Empieza a escribir ✍</p>';}
+function nbEditorHTML(pg){
+  const w=nbMode!=='md';
+  return `<div class="nb-editor-head">
+    <input id="nbPageTitle" maxlength="60" value="${esc(pg.name)}" placeholder="Nombre del subtema…" aria-label="Nombre del subtema">
+    <div class="nb-mode-seg" role="group" aria-label="Modo de escritura">
+      <button class="nb-mode-btn ${w?'active':''}" id="nbModeW" type="button" title="Escribir normal, como en Word (Ctrl+B negrita, Ctrl+I cursiva, Ctrl+U subrayado)">✏ Normal</button>
+      <button class="nb-mode-btn ${!w?'active':''}" id="nbModeMd" type="button" title="Escribir con sintaxis Markdown (#, **, -, [x])"># Markdown</button>
+    </div>
+    <div class="head-actions">
+      <button class="btn btn-mini" id="nbMd" title="Descargar esta página como .md">⬇ .md</button>
+      <button class="btn btn-mini" id="nbDup" title="Duplicar esta página">⧉</button>
+      <button class="btn btn-mini" id="nbDel" title="Borrar esta página">🗑</button>
+    </div>
+  </div>
+  <div class="nb-toolbar" id="nbToolbar"></div>
+  <div class="nb-panes ${w?'wys':'split'}" id="nbPanes">
+    ${w?'<div class="nb-wysiwyg" id="nbWys" contenteditable="true" role="textbox" aria-multiline="true" spellcheck="true"></div>':''}
+    <textarea class="nb-input" id="nbInput" ${w?'hidden':''} placeholder="Escribe tus apuntes aquí… Markdown: # Título, **negrita**, - listas, - [ ] tareas, ![alt](imagen), [texto](url)" spellcheck="false"></textarea>
+    <div class="nb-preview" id="nbPreview" ${w?'hidden':''} aria-label="Vista previa"></div>
+  </div>
+  <div class="nb-foot">
+    <span id="nbWords">0 palabras</span>
+    <span id="nbSaved">guardado ✓</span>
+    <span id="nbUpdated">—</span>
+  </div>`;}
+function updateNbMeta(){
+  const wys=document.getElementById('nbWys'),ta=document.getElementById('nbInput');
+  const v=wys?wys.textContent:(ta?ta.value:'');
+  const w=v.trim()?v.trim().split(/\s+/).length:0;
+  $('#nbWords').textContent=w+' palabra'+(w===1?'':'s');
+  const pg=nbPage();
+  $('#nbUpdated').textContent=pg&&pg.updatedAt?'editado '+new Date(pg.updatedAt).toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}):'—';}
+function nbSaveNow(){
+  clearTimeout(nbSaveT);nbSaveT=null;
+  const tp=state.topics.find(t=>t.id===nbTopicId);
+  if(!tp)return;
+  const pg=nbPage();if(!pg)return;
+  const wys=document.getElementById('nbWys'),ta=document.getElementById('nbInput');
+  if(nbMode!=='md'&&wys)pg.md=domToMd(wys);
+  else if(ta)pg.md=ta.value;
+  const ti=document.getElementById('nbPageTitle');
+  const nm=(ti&&ti.value.trim())||pg.name;
+  if(nm!==pg.name)pg.name=nm;
+  pg.updatedAt=Date.now();
+  state.lastNb={subjId:nbSubjId,topicId:nbTopicId,pageId:nbPageId,mode:nbMode};
+  let size=0;
+  try{size=JSON.stringify(state).length;save();
+    $('#nbSaved').textContent=size>3.5e6?'guardado ✓ · '+Math.round(size/1e6*10)/10+' MB':'guardado ✓';
+    $('#nbSaved').classList.toggle('warn',size>3.5e6);}
+  catch(err){$('#nbSaved').textContent='⚠ cuota superada';$('#nbSaved').classList.add('warn');
+    toast('El cuaderno superó el límite de almacenamiento: borra imágenes o usa URLs externas.');}
+  renderStabsOnly();}
+function renderStabsOnly(){
+  const tp=state.topics.find(t=>t.id===nbTopicId);
+  if(!tp)return;
+  $('#nbStabs').innerHTML=tp.notes.map(n=>
+    `<button class="nb-stab ${n.id===nbPageId?'active':''}" data-nb-page="${n.id}" role="tab" title="${esc(n.name)}">${esc(n.name)}</button>`).join('')
+    +`<button class="nb-tab new" id="nbTabNewPage" title="Nuevo subtema">+ Subtema</button>`;}
+function renderNotebook(){
+  const sel=$('#nbSubjSel'),cur=sel.value;
+  sel.innerHTML='<option value="">— elige una asignatura —</option>'
+    +state.subjects.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('');
+  let sid=nbSubjId&&state.subjects.some(s=>s.id===nbSubjId)?nbSubjId:null;
+  if(!sid&&state.lastNb&&state.subjects.some(s=>s.id===state.lastNb.subjId))sid=state.lastNb.subjId;
+  if(!sid&&state.subjects.some(s=>s.id===cur))sid=cur;
+  if(!sid&&state.subjects.length)sid=state.subjects[0].id;
+  nbSubjId=sid;sel.value=sid||'';
+  nbMode=state.lastNb.mode==='md'?'md':'w';
+  const sub=state.subjects.find(s=>s.id===sid);
+  if(!sub){
+    $('#nbPill').innerHTML='';
+    $('#nbTabs').innerHTML='';
+    $('#nbStabs').innerHTML='';
+    $('#nbBody').innerHTML='<div class="mesa-empty" style="padding:3rem 1rem">Todavía no hay asignaturas.<br>Crea una en la vista <b>Hoy</b> y sus temas aparecerán aquí como pestañas ✍</div>';
+    return;}
+  const topics=state.topics.filter(t=>t.subjectId===sid);
+  $('#nbPill').innerHTML=`<span class="pill new" style="border-style:solid">${topics.length} ${topics.length===1?'tema':'temas'}</span>`;
+  let tid=nbTopicId&&topics.some(t=>t.id===nbTopicId)?nbTopicId:null;
+  if(!tid&&state.lastNb&&topics.some(t=>t.id===state.lastNb.topicId))tid=state.lastNb.topicId;
+  if(!tid&&topics.length)tid=topics[0].id;
+  nbTopicId=tid;
+  $('#nbTabs').innerHTML=topics.map(t=>
+    `<button class="nb-tab ${t.id===tid?'active':''}" data-nb-topic="${t.id}" role="tab" title="${esc(t.name)}">${esc(t.name)}</button>`).join('')
+    +`<button class="nb-tab new" id="nbTabNewTopic" title="Nuevo tema en ${esc(sub.name)}">+ Tema</button>`;
+  const tp=topics.find(t=>t.id===tid);
+  if(!tp){
+    $('#nbStabs').innerHTML='';
+    $('#nbBody').innerHTML='<div class="mesa-empty" style="padding:3rem 1rem">«'+esc(sub.name)+'» no tiene temas todavía.<br>Presiona <b>+ Tema</b> para crear la primera pestaña ✍</div>';
+    return;}
+  if(!tp.notes.some(n=>n.id===nbPageId))nbPageId=tp.notes.length?tp.notes[0].id:null;
+  $('#nbStabs').innerHTML=tp.notes.map(n=>
+    `<button class="nb-stab ${n.id===nbPageId?'active':''}" data-nb-page="${n.id}" role="tab" title="${esc(n.name)}">${esc(n.name)}</button>`).join('')
+    +`<button class="nb-tab new" id="nbTabNewPage" title="Nuevo subtema en «${esc(tp.name)}»">+ Subtema</button>`;
+  const body=$('#nbBody');
+  if(!nbPageId){
+    body.innerHTML='<div class="mesa-empty" style="padding:3rem 1rem">«'+esc(tp.name)+'» no tiene subtemas todavía.<br>Presiona <b>+ Subtema</b> para escribir tu primer apunte ✍</div>';
+    return;}
+  const activeEl=document.activeElement;
+  if(activeEl&&(activeEl.id==='nbInput'||activeEl.id==='nbWys')){updateNbMeta();return;}
+  const pg=nbPage();
+  body.innerHTML=nbEditorHTML(pg);
+  document.getElementById('nbToolbar').innerHTML=NB_TOOLS.map(x=>
+    `<button class="nb-tool" data-nbt="${x.id}" title="${x.h}" type="button">${x.lbl}</button>`).join('');
+  const t2=document.getElementById('nbInput');
+  if(t2){
+    t2.value=pg.md;
+    document.getElementById('nbPreview').innerHTML=mdToHTML(pg.md);
+    t2.addEventListener('input',()=>{
+      document.getElementById('nbPreview').innerHTML=mdToHTML(t2.value);
+      updateNbMeta();
+      clearTimeout(nbSaveT);
+      nbSaveT=setTimeout(nbSaveNow,600);});
+    t2.addEventListener('keydown',e=>{
+      if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();nbSaveNow();}});
+  }
+  const wys=document.getElementById('nbWys');
+  if(wys){
+    wys.innerHTML=mdToHTML(pg.md);
+    wys.querySelectorAll('input[type=checkbox]').forEach(i=>i.disabled=false);
+    wys.addEventListener('input',()=>{
+      updateNbMeta();
+      clearTimeout(nbSaveT);
+      nbSaveT=setTimeout(nbSaveNow,600);});
+    wys.addEventListener('paste',e=>{
+      e.preventDefault();
+      const txt=(e.clipboardData||window.clipboardData).getData('text/plain');
+      document.execCommand('insertText',false,txt);});
+    wys.addEventListener('keydown',e=>{
+      const k=e.key.toLowerCase();
+      if((e.ctrlKey||e.metaKey)&&k==='s'){e.preventDefault();nbSaveNow();return;}
+      if((e.ctrlKey||e.metaKey)&&['b','i','u'].includes(k)){
+        e.preventDefault();
+        document.execCommand(k==='b'?'bold':k==='i'?'italic':'underline');}});
+  }
+  const mw=document.getElementById('nbModeW'),mm=document.getElementById('nbModeMd');
+  if(mw)mw.onclick=()=>nbSetMode('w');
+  if(mm)mm.onclick=()=>nbSetMode('md');
+  document.getElementById('nbPageTitle').addEventListener('change',nbSaveNow);
+  updateNbMeta();}
+async function addNbTopic(){
+  const sub=state.subjects.find(s=>s.id===nbSubjId);
+  if(!sub){toast('Primero crea una asignatura en la vista Hoy');return;}
+  const nm=await mPrompt('Nuevo tema','¿Cómo se llama este tema del cuaderno?','');
+  if(nm===null)return;
+  const id=uid();
+  state.topics.push({id,subjectId:sub.id,name:nm||('Tema '+(state.topics.filter(t=>t.subjectId===sub.id).length+1)),created:key(new Date()),studies:[],notes:[]});
+  nbTopicId=id;nbPageId=null;
+  state.lastNb={subjId:nbSubjId,topicId:id,pageId:null,mode:nbMode};
+  collapsed.delete(sub.id);
+  save();renderNotebook();toast('Tema creado: '+nm);}
+async function addNbPage(){
+  const tp=state.topics.find(t=>t.id===nbTopicId);
+  if(!tp){toast('Primero crea un tema');return;}
+  const nm=await mPrompt('Nuevo subtema','¿Cómo se llama este subtema?','');
+  if(nm===null)return;
+  const pg={id:uid(),name:nm||'Subtema '+(tp.notes.length+1),md:'',updatedAt:Date.now()};
+  tp.notes.push(pg);nbPageId=pg.id;
+  state.lastNb={subjId:nbSubjId,topicId:nbTopicId,pageId:nbPageId,mode:nbMode};
+  save();renderNotebook();toast('Subtema creado: '+pg.name);}
+function nbDupPage(){
+  const tp=state.topics.find(t=>t.id===nbTopicId),pg=nbPage();
+  if(!tp||!pg)return;
+  nbSaveNow();
+  const c={id:uid(),name:pg.name+' (copia)',md:pg.md,updatedAt:Date.now()};
+  tp.notes.splice(tp.notes.findIndex(n=>n.id===pg.id)+1,0,c);
+  nbPageId=c.id;state.lastNb={subjId:nbSubjId,topicId:nbTopicId,pageId:nbPageId,mode:nbMode};
+  save();renderNotebook();toast('Subtema duplicado ⧉');}
+function nbDelPage(){
+  const tp=state.topics.find(t=>t.id===nbTopicId),pg=nbPage();
+  if(!tp||!pg)return;
+  mConfirm('Borrar subtema',`¿Borrar el subtema <b>«${esc(pg.name)}»</b> de «${esc(tp.name)}»? Su contenido se pierde.`,'Borrar',true)
+    .then(ok=>{if(!ok)return;
+      tp.notes=tp.notes.filter(n=>n.id!==pg.id);
+      nbPageId=tp.notes.length?tp.notes[0].id:null;
+      state.lastNb={subjId:nbSubjId,topicId:nbTopicId,pageId:nbPageId,mode:nbMode};
+      save();renderNotebook();toast('Subtema borrado');});}
+const slugNb=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+  .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'nota';
+function nbExportMd(){
+  const tp=state.topics.find(t=>t.id===nbTopicId),pg=nbPage();
+  if(!tp||!pg)return;
+  const sub=subjectOf(tp.subjectId);
+  const md='# '+pg.name+'\n\n> Cuaderno de '+tp.name+(sub?' · '+sub.name:'')+'\n> Generado el '+new Date().toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'})+'\n\n---\n\n'+(pg.md.trim()||'_página vacía_')+'\n';
+  download(slugNb(pg.name)+'.md',md,'text/markdown');
+  toast('Página descargada ⬇ .md');}
+function nbInsertWrap(x){
+  if(x.img){document.getElementById('nbImgInp').click();return;}
+  const ta=$('#nbInput');if(!ta)return;
+  const a=ta.selectionStart,b=ta.selectionEnd;
+  const sel=ta.value.slice(a,b)||x.ph||'';
+  ta.value=ta.value.slice(0,a)+x.pre+sel+x.post+ta.value.slice(b);
+  const np=a+x.pre.length+sel.length;
+  ta.focus();ta.setSelectionRange(np,np+(x.post||'').length);
+  ta.dispatchEvent(new Event('input'));}
+function domToMd(root){
+  const inline=n=>{
+    let out='';
+    n.childNodes.forEach(c=>{
+      if(c.nodeType===3){out+=c.textContent;return;}
+      if(c.nodeType!==1)return;
+      const tag=c.tagName.toLowerCase(),inner=inline(c);
+      if(tag==='br')out+='\n';
+      else if(tag==='strong'||tag==='b')out+='**'+inner+'**';
+      else if(tag==='em'||tag==='i')out+='*'+inner+'*';
+      else if(tag==='u')out+='<u>'+inner+'</u>';
+      else if(tag==='del'||tag==='s'||tag==='strike')out+='~~'+inner+'~~';
+      else if(tag==='sub')out+='<sub>'+inner+'</sub>';
+      else if(tag==='sup')out+='<sup>'+inner+'</sup>';
+      else if(tag==='mark')out+='<mark>'+inner+'</mark>';
+      else if(tag==='code')out+=c.closest('pre')?inner:'`'+inner+'`';
+      else if(tag==='a')out+='['+inner+']('+(c.getAttribute('href')||'')+')';
+      else if(tag==='img')out+='!['+((c.getAttribute('alt')||'').replace(/]/g,''))+']('+((c.getAttribute('src')||'').replace(/\s/g,''))+')';
+      else if(tag==='input')out+='';
+      else out+=inner;});
+    return out;};
+  const blocks=[];
+  root.childNodes.forEach(n=>{
+    if(n.nodeType===3){if(n.textContent.trim())blocks.push({t:'p',md:n.textContent});return;}
+    if(n.nodeType!==1)return;
+    const tag=n.tagName.toLowerCase();
+    if(tag==='p'||tag==='div')blocks.push({t:'p',md:inline(n)});
+    else if(/^h[1-6]$/.test(tag))blocks.push({t:'h',lvl:+tag[1],md:inline(n)});
+    else if(tag==='hr')blocks.push({t:'hr',md:''});
+    else if(tag==='blockquote')blocks.push({t:'q',md:inline(n)});
+    else if(tag==='ul'||tag==='ol'){
+      n.querySelectorAll(':scope > li').forEach(li=>{
+        const cb=li.querySelector('input[type=checkbox]');
+        const m=inline(li);
+        if(cb)blocks.push({t:'li',md:'- ['+(cb.checked?'x':' ')+'] '+m});
+        else blocks.push({t:'li',md:(tag==='ul'?'- ':'1. ')+m});});}
+    else if(tag==='table'){
+      const lines=[];
+      n.querySelectorAll('tr').forEach(tr=>{
+        const cells=[...tr.children].map(td=>inline(td).replace(/\|/g,'\\|').trim());
+        lines.push('| '+cells.join(' | ')+' |');});
+      if(lines.length){
+        const ncols=n.querySelector('tr')?n.querySelector('tr').children.length:2;
+        lines.splice(1,0,'|'+'---|'.repeat(ncols));
+        blocks.push({t:'raw',md:lines.join('\n')+'\n\n'});}}
+    else if(tag==='pre')blocks.push({t:'code',md:inline(n)});
+    else if(tag==='li')blocks.push({t:'li',md:inline(n)});
+    else blocks.push({t:'p',md:inline(n)});
+  });
+  let out='';
+  blocks.forEach(b=>{
+    if(b.t==='raw')out+=b.md;
+    else if(b.t==='h')out+='#'.repeat(b.lvl)+' '+b.md.trim()+'\n\n';
+    else if(b.t==='p')out+=(b.md||'')+'\n\n';
+    else if(b.t==='hr')out+='---\n\n';
+    else if(b.t==='q')out+='> '+b.md.replace(/\n+/g,'\n> ').trim()+'\n\n';
+    else if(b.t==='li')out+=b.md.trim()+'\n';
+    else if(b.t==='code')out+='```\n'+b.md.trim()+'\n```\n\n';});
+  return out.replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n').trim();}
+function wysTool(x){
+  const wys=document.getElementById('nbWys');
+  if(!wys)return;
+  wys.focus();
+  if(x.cmd){document.execCommand(x.cmd,false,x.arg||null);nbFireInput();return;}
+  if(x.html){document.execCommand('insertHTML',false,x.html);nbFireInput();return;}
+  if(x.link){mPrompt('Enlace','¿A qué URL apunta el enlace?','https://')
+    .then(u=>{if(u!==null&&u!==false){document.execCommand('createLink',false,u);nbFireInput();}});return;}
+  if(x.img){document.getElementById('nbImgInp').click();}}
+function nbFireInput(){
+  const el=document.getElementById('nbWys')||document.getElementById('nbInput');
+  if(el)el.dispatchEvent(new Event('input'));}
+function nbSetMode(m){
+  if(nbMode===m)return;
+  if(nbMode==='md')nbSaveNow();
+  else{
+    const wys=document.getElementById('nbWys'),pg=nbPage();
+    if(wys&&pg)pg.md=domToMd(wys);}
+  nbMode=m;state.lastNb.mode=m;save();
+  renderNotebook();
+  toast(m==='md'
+    ?'Modo Markdown: escribe con sintaxis #, **, -, [x]'
+    :'Modo Normal: escribe como en Word — Ctrl+B negrita, Ctrl+I cursiva, Ctrl+U subrayado');}
+function shrinkImage(f,cb){
+  const r=new FileReader();
+  r.onload=()=>{const img=new Image();
+    img.onload=()=>{
+      const MAX=1200;let w=img.width,h=img.height;
+      const s=Math.min(1,MAX/w,MAX/h);
+      if(s<1){w=Math.round(w*s);h=Math.round(h*s);}
+      const cv=document.createElement('canvas');cv.width=w;cv.height=h;
+      cv.getContext('2d').drawImage(img,0,0,w,h);
+      let url=null;
+      try{url=cv.toDataURL('image/webp',0.75);}catch(err){}
+      if(!url)try{url=cv.toDataURL('image/jpeg',0.75);}catch(err){}
+      if(!url){toast('No se pudo procesar la imagen ✕');return;}
+      if(JSON.stringify(state).length+url.length>3.5e6)
+        toast('⚠ La imagen es pesada: el cuaderno se acerca al límite de almacenamiento (~3.5 MB).');
+      cb(url);};
+    img.onerror=()=>toast('Imagen no válida ✕');
+    img.src=r.result;};
+  r.readAsDataURL(f);}
+
+function renderAll(){
+  renderTopbar();renderOpening();renderToday();renderChart();renderGoal();
+  renderQueue();renderMesa();renderSubjects();renderLog();renderGuide();renderFuentes();renderPomoSelects();renderNotebook();
+  firstRender=false;}
+
+const FCIRC=1193.81;
+let focusPhraseIdx=Math.floor(Math.random()*PHRASES.length),phraseIv=null;
+function rotatePhrase(){focusPhraseIdx=(focusPhraseIdx+1)%PHRASES.length;
+  const p=PHRASES[focusPhraseIdx];
+  $('#focusPhrase').innerHTML=`“${p.t}”<span class="f-aut">${p.a}</span>`;}
+function updateFocusTime(){const m=Math.floor(T.left/60),s=T.left%60;
+  $('#focusTime').textContent=pad(m)+':'+pad(s);
+  $('#focusRing').style.strokeDashoffset=FCIRC*(1-T.left/T.dur);}
+function enterFocus(){
+  const subId=$('#pomoSubject').value,tpId=$('#pomoTopic').value;
+  const sub=state.subjects.find(s=>s.id===subId);
+  const tp=state.topics.find(t=>t.id===tpId);
+  $('#focusSubj').textContent=sub?sub.name:'Sesión libre';
+  $('#focusTopic').textContent=tp?tp.name:'Pomodoro sin tema específico';
+  rotatePhrase();phraseIv=setInterval(rotatePhrase,18000);
+  $('#focusVeil').hidden=false;updateFocusTime();
+  $('#focusPause').textContent='❚❚ Pausar';
+  $('#focusState').innerHTML='<span class="dot-live"></span>en foco';}
+function exitFocus(){$('#focusVeil').hidden=true;if(phraseIv){clearInterval(phraseIv);phraseIv=null;}}
+$('#focusClose').onclick=()=>{stopTimer();exitFocus();};
+$('#focusPause').onclick=()=>{
+  if(T.running){stopTimer();$('#focusPause').textContent='▶ Continuar';$('#focusState').textContent='en pausa';}
+  else if(T.left>0&&T.left<T.dur){resumeTimer();$('#focusPause').textContent='❚❚ Pausar';
+    $('#focusState').innerHTML='<span class="dot-live"></span>en foco';}};
+$('#focusStop').onclick=()=>mConfirm('Restablecer pomodoro','Se detiene el pomodoro actual y el reloj vuelve a su duración completa. ¿Continuar?','Restablecer',true)
+  .then(ok=>{if(!ok)return;stopTimer();T.left=T.dur;exitFocus();drawTimer();
+    $('#pomoState').textContent='listo';toast('Pomodoro restablecido ↺');});
+function resumeTimer(){T.end=Date.now()+T.left*1000;T.running=true;
+  T.iv=setInterval(tick,250);}
+
+const CIRC=389.56,DEFAULT_TITLE=document.title;
+const T={dur:1500,left:1500,running:false,iv:null,end:0};
+function drawTimer(){const m=Math.floor(T.left/60),s=T.left%60;
+  $('#pomoTime').textContent=pad(m)+':'+pad(s);
+  $('#ringFg').style.strokeDashoffset=CIRC*(1-T.left/T.dur);
+  document.title=T.running?`⏱ ${pad(m)}:${pad(s)} · Bitácora`:DEFAULT_TITLE;}
+function tick(){T.left=Math.max(0,Math.round((T.end-Date.now())/1000));
+  drawTimer();updateFocusTime();if(T.left<=0)completeTimer();}
+function stopTimer(){clearInterval(T.iv);T.running=false;$('#pomoCard').classList.remove('running');
+  $('#pomoStart').textContent='▶ Empezar';if($('#pomoState').textContent.includes('foco'))$('#pomoState').textContent='en pausa';}
+function beginTimer(){try{getAudio();}catch(e){}
+  playStart();
+  T.end=Date.now()+T.left*1000;T.running=true;
+  $('#pomoCard').classList.add('running');
+  $('#pomoStart').textContent='❚❚ Pausar';
+  $('#pomoState').innerHTML='<span class="dot-live"></span>en foco';
+  T.iv=setInterval(tick,250);
+  enterFocus();}
+function startPomoFor(tp,stepIdx){
+  $('#pomoSubject').value=tp.subjectId;renderPomoSelects();
+  $('#pomoTopic').value=tp.id;
+  pendingStep=(stepIdx==null?null:stepIdx);
+  if(T.running)stopTimer();
+  T.left=T.dur;beginTimer();}
+function completeTimer(){stopTimer();T.left=T.dur;drawTimer();updateFocusTime();
+  const mins=T.dur/60,tk=key(new Date());
+  const tp=state.topics.find(t=>t.id===$('#pomoTopic').value);
+  let stepMsg='';
+  if(tp){let st=tp.studies.find(s=>s.date===tk);
+    if(st)st.minutes+=mins;
+    else{st={ts:Date.now(),date:tk,minutes:mins,steps:state.steps.map(()=>false),note:''};tp.studies.push(st);}
+    if(pendingStep!=null&&state.stepsOn){
+      while(st.steps.length<state.steps.length)st.steps.push(false);
+      st.steps[pendingStep]=true;stepMsg=` · paso ${pendingStep+1} ✓`;}
+    toast(`¡Pomodoro! +${mins} min en «${tp.name}»${stepMsg} ⏱`);}
+  else{state.loose.push({id:uid(),ts:Date.now(),date:tk,minutes:mins});
+    toast(`¡Pomodoro completado! +${mins} min ⏱`);}
+  pendingStep=null;
+  state.pomodoros++;save();renderAll();confetti($('#pomoCard'));
+  $('#pomoState').textContent='¡hecho!';
+  playEnd();setTimeout(()=>exitFocus(),1500);}
+$('#pomoStart').onclick=()=>{if(T.running){stopTimer();return;}beginTimer();};
+$('#pomoReset').onclick=()=>{stopTimer();exitFocus();T.left=T.dur;$('#pomoState').textContent='listo';drawTimer();updateFocusTime();};
+$$('.presets button').forEach(b=>b.onclick=()=>{
+  $$('.presets button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  T.dur=+b.dataset.min*60;stopTimer();T.left=T.dur;$('#pomoState').textContent='listo';drawTimer();updateFocusTime();});
+$('#pomoSubject').onchange=renderPomoSelects;
+
+let setDraft=null;
+function openSettings(){
+  setDraft={iv:[...state.ivActive],steps:state.steps.map(s=>({...s})),stepsOn:state.stepsOn,goal:state.weeklyGoal};
+  drawSettings();$('#setVeil').hidden=false;}
+function drawSettings(){
+  $('#ivChips').innerHTML=IV.map((d,i)=>`<button class="iv-chip ${setDraft.iv[i]?'active':''}" data-iv="${i}" type="button">${d} ${d===1?'día':'días'}</button>`).join('');
+  $('#ivChips').querySelectorAll('[data-iv]').forEach(b=>b.onclick=()=>{
+    setDraft.iv[+b.dataset.iv]=!setDraft.iv[+b.dataset.iv];b.classList.toggle('active',setDraft.iv[+b.dataset.iv]);});
+  $('#setStepsOn').checked=setDraft.stepsOn;
+  $('#setStepsOn').onchange=e=>{setDraft.stepsOn=e.target.checked;drawSetSteps();};
+  $('#setGoal').value=setDraft.goal;
+  drawSetSteps();}
+function drawSetSteps(){
+  const ed=$('#stepsEditor');
+  ed.className=setDraft.stepsOn?'':'steps-off';
+  ed.innerHTML=setDraft.steps.map((s,i)=>`
+    <div class="step-edit"><span class="se-n">${i+1}</span>
+      <input data-step="${i}" value="${esc(s.t)}" maxlength="70" placeholder="Paso ${i+1}…">
+      <button class="del" style="opacity:1" data-delstep="${i}" title="Quitar paso" type="button">×</button></div>`).join('')+
+    `<div class="set-links"><button class="link-btn" id="addStep" type="button">+ Añadir paso</button>
+     <button class="link-btn" id="restoreSteps" type="button">Restaurar plantilla de ejemplo</button></div>`;
+  ed.querySelectorAll('[data-step]').forEach(inp=>inp.oninput=e=>{setDraft.steps[+inp.dataset.step].t=e.target.value;});
+  ed.querySelectorAll('[data-delstep]').forEach(b=>b.onclick=()=>{setDraft.steps.splice(+b.dataset.delstep,1);drawSetSteps();});
+  $('#addStep').onclick=()=>{setDraft.steps.push({t:'',s:''});drawSetSteps();
+    const inputs=ed.querySelectorAll('[data-step]');inputs[inputs.length-1]?.focus();};
+  $('#restoreSteps').onclick=()=>{setDraft.steps=DEFAULT_STEPS.map(s=>({...s}));drawSetSteps();};}
+$('#setSave').onclick=()=>{
+  const g=parseFloat($('#setGoal').value);
+  state.ivActive=setDraft.iv;
+  state.steps=setDraft.steps.map(s=>({t:(s.t||'').trim(),s:s.s||''})).filter(s=>s.t);
+  state.stepsOn=setDraft.stepsOn&&state.steps.length>0;
+  if(g>0&&g<=168)state.weeklyGoal=Math.round(g*10)/10;
+  save();$('#setVeil').hidden=true;renderAll();toast('Ajustes guardados ✓');};
+$('#setCancel').onclick=()=>$('#setVeil').hidden=true;
+$('#setVeil').onclick=e=>{if(e.target.id==='setVeil')$('#setVeil').hidden=true;};
+$('#navSettings').onclick=openSettings;
+$('#editGoal').onclick=openSettings;
+$('#navBurger').onclick=e=>{e.stopPropagation();
+  const n=$('#mainNav');n.classList.toggle('open');
+  $('#navBurger').setAttribute('aria-expanded',n.classList.contains('open'));};
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.topbar')){
+    const n=$('#mainNav');if(n)n.classList.remove('open');
+    $('#navBurger').setAttribute('aria-expanded','false');}});
+
+$('#subjForm').onsubmit=e=>{e.preventDefault();
+  const nm=$('#subjName').value.trim();if(!nm)return;
+  const id=uid();state.subjects.push({id,name:nm,color:PALETTE[state.subjects.length%PALETTE.length]});
+  collapsed.add(id);
+  save();renderAll();toast('Asignatura creada: '+nm);e.target.reset();};
+
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-goto]');
+  if(g){switchView(g.dataset.goto);return;}
+  const op=e.target.closest('[data-open]');
+  if(op){selectedTopicId=op.dataset.open;renderMesa();renderSubjects();switchView('mesa');return;}
+  const dt=e.target.closest('[data-del-topic]');
+  if(dt){e.stopPropagation();const tp=state.topics.find(t=>t.id===dt.dataset.delTopic);
+    mConfirm('Eliminar tema',`¿Eliminar <b>«${esc(tp.name)}»</b> y todo su historial de repasos?`,'Eliminar',true)
+      .then(ok=>{if(!ok)return;state.topics=state.topics.filter(t=>t.id!==tp.id);
+        if(selectedTopicId===tp.id)selectedTopicId=null;
+        if(state.lastNb&&state.lastNb.topicId===tp.id)state.lastNb={subjId:null,topicId:null,pageId:null,mode:state.lastNb.mode||'w'};
+        save();renderAll();});return;}
+  const ds=e.target.closest('[data-del-subject]');
+  if(ds){e.stopPropagation();const sub=subjectOf(ds.dataset.delSubject);
+    const n=state.topics.filter(t=>t.subjectId===sub.id).length;
+    mConfirm('Eliminar asignatura',`¿Eliminar <b>«${esc(sub.name)}»</b> con sus ${n} temas?`,'Eliminar',true)
+      .then(ok=>{if(!ok)return;
+        state.topics=state.topics.filter(t=>t.subjectId!==sub.id);
+        state.subjects=state.subjects.filter(s=>s.id!==sub.id);collapsed.delete(sub.id);
+        if(selectedTopicId&&!state.topics.find(t=>t.id===selectedTopicId))selectedTopicId=null;
+        if(state.lastNb&&!state.subjects.some(s=>s.id===state.lastNb.subjId))state.lastNb={subjId:null,topicId:null,pageId:null,mode:state.lastNb.mode||'w'};
+        save();renderAll();});return;}
+  const sh=e.target.closest('[data-subhead]');
+  if(sh&&!e.target.closest('.del')){const id=sh.dataset.subhead;
+    collapsed.has(id)?collapsed.delete(id):collapsed.add(id);renderSubjects();return;}
+  const tpEl=e.target.closest('[data-topic]');
+  if(tpEl&&!e.target.closest('.del')){selectedTopicId=tpEl.dataset.topic;renderMesa();renderSubjects();return;}
+  const de=e.target.closest('[data-del-entry]');
+  if(de){mConfirm('Eliminar sesión','¿Eliminar esta entrada del historial?','Eliminar',true)
+    .then(ok=>{if(!ok)return;const v=de.dataset.delEntry;
+      if(v[0]==='t'){const p=v.split(':');const tp=state.topics.find(t=>t.id===p[1]);
+        if(tp)tp.studies=tp.studies.filter(s=>String(s.ts)!==p[2]);}
+      else if(v[0]==='a')state.archived=state.archived.filter(a=>a.id!==v.slice(2));
+      else state.loose=state.loose.filter(l=>l.id!==v.slice(2));
+      save();renderAll();});return;}});
+
+$('#mesaTopicSel').onchange=e=>{selectedTopicId=e.target.value||null;renderMesa();};
+$('#nextDue').onclick=()=>$('#queueCard').scrollIntoView({behavior:RM?'auto':'smooth'});
+
+$('#nbSubjSel').onchange=e=>{nbSaveNow();nbSubjId=e.target.value||null;nbTopicId=null;nbPageId=null;renderNotebook();};
+$('#nbTabs').addEventListener('click',e=>{
+  const t=e.target.closest('[data-nb-topic]');
+  if(t){nbSaveNow();nbTopicId=t.dataset.nbTopic;nbPageId=null;
+    state.lastNb={subjId:nbSubjId,topicId:nbTopicId,pageId:null,mode:nbMode};renderNotebook();return;}
+  if(e.target.closest('#nbTabNewTopic'))addNbTopic();});
+$('#nbStabs').addEventListener('click',e=>{
+  const t=e.target.closest('[data-nb-page]');
+  if(t){nbSaveNow();nbPageId=t.dataset.nbPage;
+    state.lastNb={subjId:nbSubjId,topicId:nbTopicId,pageId:nbPageId,mode:nbMode};renderNotebook();return;}
+  if(e.target.closest('#nbTabNewPage'))addNbPage();});
+$('#nbNewTopicBtn').onclick=addNbTopic;
+$('#nbCard').addEventListener('click',e=>{
+  const tb=e.target.closest('[data-nbt]');
+  if(tb){
+    const x=NB_TOOLS.find(x=>x.id===tb.dataset.nbt);
+    if(nbMode==='md')nbInsertWrap(x);
+    else wysTool(x);
+    return;}
+  const id=e.target.id;
+  if(id==='nbMd')nbExportMd();
+  else if(id==='nbDup')nbDupPage();
+  else if(id==='nbDel')nbDelPage();});
+$('#nbNewTopicBtn').onclick=addNbTopic;
+$('#nbImgInp').onchange=e=>{
+  const f=e.target.files[0];e.target.value='';
+  if(!f)return;
+  if(!f.type.startsWith('image/')){toast('El archivo no es una imagen ✕');return;}
+  if(f.size>4*1024*1024){toast('Imagen de más de 4 MB ✕ Elige una más ligera.');return;}
+  toast('Procesando imagen…');
+  shrinkImage(f,url=>{
+    const name=(f.name||'imagen').replace(/\.[^.]+$/,'').slice(0,40);
+    if(nbMode==='md'){
+      const ta=$('#nbInput');if(!ta)return;
+      const at=ta.selectionStart;
+      const ins='!['+name+']('+url+')';
+      ta.value=ta.value.slice(0,at)+ins+ta.value.slice(ta.selectionEnd);
+      ta.focus();ta.setSelectionRange(at+ins.length,at+ins.length);
+      ta.dispatchEvent(new Event('input'));
+    }else{
+      const wys=$('#nbWys');if(!wys)return;
+      wys.focus();
+      document.execCommand('insertHTML',false,'<img src="'+url+'" alt="'+name+'" loading="lazy">');
+      nbFireInput();}
+    toast('Imagen añadida 🖼 Viaja en tu backup JSON.');});};
+
+function download(name,content,type){
+  const b=new Blob([content],{type}),a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);}
+$('#btnJson').onclick=()=>{
+  download(`bitacora-${key(new Date())}.json`,
+    JSON.stringify({app:'bitacora-olvido-v4',exportado:new Date().toISOString(),state},null,2),'application/json');
+  toast('Backup descargado ⬇ Guárdalo para cargarlo en otro navegador.');};
+$('#btnMd').onclick=()=>{
+  const today=new Date(),iv=activeIV();let md=`# 📓 Bitácora de estudio — Informe\n\n`;
+  md+=`_Generado el ${today.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'})}_\n\n`;
+  md+=`> **Repasos activos:** ${iv.length?iv.join(' · ')+' días':'ninguno'}\n`;
+  md+=`> **Método de sesión:** ${state.stepsOn?state.steps.map(s=>s.t).join(' → '):'sin checklist'}\n\n`;
+  const ents=entries(),tot=ents.reduce((a,e)=>a+e.minutes,0);
+  md+=`**Totales:** ${state.topics.length} temas · ${ents.length} sesiones · ${fmtH(tot)} · racha ${calcStreak()} días · ${state.pomodoros} pomodoros\n\n`;
+  md+=`| Tema | Asignatura | Sesiones | Horas | Estado |\n|---|---|---|---|---|\n`;
+  state.topics.forEach(tp=>{const sub=subjectOf(tp.subjectId),s=topicStatus(tp);
+    md+=`| ${tp.name} | ${sub?sub.name:'—'} | ${s.n} | ${fmtH(tp.studies.reduce((a,x)=>a+x.minutes,0))} | ${s.label} |\n`;});
+  md+=`\n---\n\n`;
+  state.subjects.forEach(sub=>{
+    const topics=state.topics.filter(t=>t.subjectId===sub.id);if(!topics.length)return;
+    const totS=topics.reduce((a,t)=>a+t.studies.reduce((b,s)=>b+s.minutes,0),0);
+    md+=`## ${sub.name}\n_${topics.length} temas · ${fmtH(totS)}_\n\n`;
+    topics.forEach(tp=>{const s=topicStatus(tp);
+      md+=`### ${tp.name}\n- Estado: **${s.label}** · ${s.n} sesiones · retención: ${s.n?s.ret+'%':'—'}\n`;
+      if(tp.studies.length){md+='\n| Fecha | Minutos | Pasos | Nota |\n|---|---|---|---|\n';
+        [...tp.studies].sort((a,b)=>a.date<b.date?-1:1).forEach(x=>{
+          md+=`| ${x.date} | ${x.minutes}′ | ${x.steps.filter(Boolean).length}/${x.steps.length} | ${x.note||''} |\n`;});}
+      if(tp.notes&&tp.notes.length){
+        md+=`\n#### Cuaderno\n\n`;
+        tp.notes.forEach(n=>{md+=`##### ${n.name}\n\n${n.md.trim()||'_página vacía_'}\n\n`;});
+      }
+      md+='\n';});
+    md+=`---\n\n`;});
+  md+=`## Fuentes consultadas\n\n`;
+  SOURCES.forEach(s=>md+=`- ${s.cite.replace(/<[^>]+>/g,'')} — ${s.url}\n`);
+  download(`bitacora-informe-${key(new Date())}.md`,md,'text/markdown');
+  toast('Informe .md descargado 📓');};
+$('#btnLoad').onclick=()=>$('#fileInput').click();
+
+/* ═══ FIX: cargar respaldo correctamente ═══
+   Antes: tras asignar state=st se llamaba a load(), que sobre-escribía state
+   con lo que había en localStorage (el estado VIEJO).
+   Ahora: se asigna state, se normaliza (para respaldos de versiones antiguas
+   que no tenían archived, ivActive, etc.), se guarda PRIMERO en localStorage
+   con save(), y solo después se renderiza. */
+$('#fileInput').onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const obj=JSON.parse(r.result);
+      const st=obj.state||obj;
+      if(!st||!Array.isArray(st.topics)||!Array.isArray(st.subjects)){
+        throw new Error('formato inválido');
+      }
+      mConfirm('Cargar respaldo',
+        'Esto <b>reemplazará</b> tus datos actuales por el archivo. ¿Continuar?','Cargar')
+      .then(ok=>{
+        if(!ok)return;
+        // 1) Asignar el nuevo estado
+        state=st;
+        // 2) Normalizar campos faltantes (respaldos antiguos o archivos editados a mano)
+        normalizeState(state);
+        // 3) GUARDAR en localStorage ANTES de cualquier otra operación
+        save();
+        // 4) Resetear estado de UI
+        selectedTopicId=null;
+        firstRender=true;
+        collapsed.clear();
+        state.subjects.forEach(s=>collapsed.add(s.id));
+        // 5) Resetear el pomodoro (por si estaba en medio de algo)
+        stopTimer();exitFocus();
+        T.left=T.dur;T.dur=1500;$('#pomoState').textContent='listo';drawTimer();updateFocusTime();
+        // 6) Re-renderizar todo
+        renderAll();
+        toast(`Respaldo cargado ✓ ${state.subjects.length} asignaturas, ${state.topics.length} temas.`);
+      });
+    }catch(err){
+      toast('Archivo no válido ✕ No se reconoce el formato del respaldo.');
+      console.error('Error al cargar respaldo:',err);
+    }
+  };
+  r.readAsText(f);
+  e.target.value=''; // reset para poder cargar el mismo archivo dos veces
+};
+
+$('#btnDemo').onclick=()=>mConfirm('Restablecer demo','Se reemplazarán tus datos actuales por los de ejemplo.','Restablecer',true)
+  .then(ok=>{if(!ok)return;localStorage.removeItem(KEY);state=null;load();selectedTopicId=null;firstRender=true;
+    state.subjects.forEach(s=>collapsed.add(s.id));renderAll();toast('Demo restablecida');});
+$('#btnWipe').onclick=()=>mConfirm('Comenzar a usar','Se eliminarán los temas de ejemplo y se iniciará un cuaderno en blanco para crear los tuyos.','Comenzar',true)
+  .then(ok=>{if(!ok)return;const nm=state.name;
+    state={name:nm,weeklyGoal:20,pomodoros:0,ivActive:[true,true,true,true,true],stepsOn:true,
+      steps:DEFAULT_STEPS.map(s=>({...s})),subjects:[],topics:[],loose:[],archived:[],lastNb:{subjId:null,topicId:null,pageId:null,mode:'w'}};
+    selectedTopicId=null;save();renderAll();toast('Lienzo en blanco ✦');});
+
+load();
+if(state.subjects.length>0&&!localStorage.getItem('hbAlertSeen')){
+  localStorage.setItem('hbAlertSeen','1');
+  openModal({title:'✨ Esto es un ejemplo',msg:'Una vez lo hayas entendido, presiona en <b>Comenzar a usar</b> (abajo) y se reiniciarán los datos para crear tus propios temas.',okText:'Entendido',showCancel:false});
+}
+state.subjects.forEach(s=>collapsed.add(s.id));
+renderAll();drawTimer();updateFocusTime();
+requestAnimationFrame(()=>document.body.classList.add('in'));
+})();
+</script>
+</body>
+</html>
