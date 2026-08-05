@@ -143,7 +143,7 @@ export async function importBackup(text: string): Promise<State> {
   const obj = JSON.parse(text);
   const st = obj?.state || obj;
   if (!st || !Array.isArray(st.topics) || !Array.isArray(st.subjects)) {
-    throw new Error('formato inválido');
+    throw new Error('invalid format');
   }
   normalizeState(st);
   for (const tp of st.topics) {

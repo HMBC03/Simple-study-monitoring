@@ -12,7 +12,7 @@ import PomodoroCard from '@/components/pomodoro/PomodoroCard';
 const fmtHM = (v: number) => fmtH(Math.round(v));
 const fmtInt = (v: number) => String(Math.round(v));
 
-/* ─── números animados (como tween del original) ─── */
+/* ─── animated numbers (tween like the original) ─── */
 function AnimatedNumber({ value, fmt }: { value: number; fmt: (n: number) => string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const first = useRef(true);
@@ -43,11 +43,11 @@ function HoyOpening() {
   const updateName = useBitacora(s => s.updateName);
   const openModal = useBitacora(s => s.openModal);
   const d = new Date();
-  const f = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(d);
-  const g = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long' }).format(d);
+  const f = new Intl.DateTimeFormat('en', { weekday: 'long' }).format(d);
+  const g = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' }).format(d);
   const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
   const h = d.getHours();
-  const greet = h < 12 ? 'Buenos días' : h < 20 ? 'Buenas tardes' : 'Buenas noches';
+  const greet = h < 12 ? 'Good morning' : h < 20 ? 'Good afternoon' : 'Good evening';
   const dueN = state.topics.filter(t => { const s = topicStatus(t, state); return s.diff !== null && s.diff <= 0; }).length;
   const nm = state.name ? `, <b>${esc(state.name)}</b>` : '';
   const wk = weekMins(state);
@@ -55,7 +55,7 @@ function HoyOpening() {
   return (
     <div className="grid opening">
       <div className="c7">
-        <p className="eyebrow">Repaso espaciado contra la curva del olvido · {greet.toLowerCase()}</p>
+        <p className="eyebrow">Spaced repetition against the forgetting curve · {greet.toLowerCase()}</p>
         <h1>
           <span className="rl"><span>{cap(f)},</span></span>
           <span className="rl"><span>{cap(g)}.</span></span>
@@ -64,13 +64,13 @@ function HoyOpening() {
           <path d="M4 16 C 90 4, 180 24, 280 10 S 420 16, 466 8" />
         </svg>
         <p className="sub">
-          ¡{greet}{nm}! Llevas <b>{fmtH(wk)}</b> esta semana y{' '}
-          <b>{dueN}</b> {dueN === 1 ? 'repaso espera' : 'repasos esperan'} hoy. La constancia vence a la curva del olvido.{' '}
+          {greet}{nm}! You&apos;ve logged <b>{fmtH(wk)}</b> this week and{' '}
+          <b>{dueN}</b> {dueN === 1 ? 'review awaits' : 'reviews await'} today. Consistency beats the forgetting curve.{' '}
           <button
             className="edit-name"
-            title="Cambiar nombre"
+            title="Change name"
             onClick={async () => {
-              const n = await openModal({ title: 'Tu nombre', msg: '¿Cómo te llamas? Solo para saludarte.', inputValue: '' });
+              const n = await openModal({ title: 'Your name', msg: "What's your name? Just to greet you.", inputValue: '' });
               if (n !== null && typeof n === 'string') updateName(n);
             }}
           >
@@ -78,37 +78,37 @@ function HoyOpening() {
           </button>
         </p>
       </div>
-      <aside className="card c5" aria-label="Resumen de hoy">
+      <aside className="card c5" aria-label="Today's summary">
         <div className="card-head">
           <div>
-            <p className="eyebrow">Resumen</p>
-            <h2>Hoy</h2>
-            <p className="card-desc">Tu día de un vistazo: tiempo, racha y repasos.</p>
+            <p className="eyebrow">Summary</p>
+            <h2>Today</h2>
+            <p className="card-desc">Your day at a glance: time, streak and reviews.</p>
           </div>
-          <span className="head-note">{d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+          <span className="head-note">{d.toLocaleDateString('en', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
         </div>
         <div className="tiles">
-          <div className="tile"><p className="big"><AnimatedNumber value={todayMins(state)} fmt={fmtHM} /></p><p className="lbl">horas hoy</p></div>
-          <div className="tile"><p className="big"><AnimatedNumber value={wk} fmt={fmtHM} /></p><p className="lbl">esta semana</p></div>
-          <div className="tile"><p className="big"><em><AnimatedNumber value={calcStreak(state)} fmt={fmtInt} /></em></p><p className="lbl">racha · días</p></div>
+          <div className="tile"><p className="big"><AnimatedNumber value={todayMins(state)} fmt={fmtHM} /></p><p className="lbl">hours today</p></div>
+          <div className="tile"><p className="big"><AnimatedNumber value={wk} fmt={fmtHM} /></p><p className="lbl">this week</p></div>
+          <div className="tile"><p className="big"><em><AnimatedNumber value={calcStreak(state)} fmt={fmtInt} /></em></p><p className="lbl">streak · days</p></div>
           <div className="tile"><p className="big"><AnimatedNumber value={state.pomodoros} fmt={fmtInt} /></p><p className="lbl">pomodoros</p></div>
         </div>
         <p
           className="next-due"
-          title="Ir a repasos"
+          title="Go to reviews"
           onClick={() => document.getElementById('queueCard')?.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' })}
         >
           <span className="pin">📌</span>
           {dueN > 0
-            ? <span><b>{dueN}</b> {dueN === 1 ? 'repaso' : 'repasos'} para hoy · primero: <b>{esc(state.topics.filter(t => { const s = topicStatus(t, state); return s.diff !== null && s.diff <= 0; })[0]?.name ?? '—')}</b> →</span>
-            : <span>Sin repasos pendientes ahora mismo. ¡Bien hecho!</span>}
+            ? <span><b>{dueN}</b> {dueN === 1 ? 'review' : 'reviews'} for today · first: <b>{esc(state.topics.filter(t => { const s = topicStatus(t, state); return s.diff !== null && s.diff <= 0; })[0]?.name ?? '—')}</b> →</span>
+            : <span>No reviews pending right now. Nice work!</span>}
         </p>
       </aside>
     </div>
   );
 }
 
-/* ─── barras de últimos 7 días ─── */
+/* ─── last 7 days bars ─── */
 function BarsCard() {
   const state = useBitacora(s => s.state);
   const goalDaily = state.weeklyGoal * 60 / 7;
@@ -117,7 +117,7 @@ function BarsCard() {
   const mins = days.map(d => minsOn(state, key(d)));
   const max = Math.max(...mins, goalDaily, 60);
   const tk = key(new Date());
-  const Ls = ['D', 'L', 'M', 'X', 'J', 'V', 'S'];
+  const Ls = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   const total = mins.reduce((a, b) => a + b, 0);
 
   useEffect(() => {
@@ -136,11 +136,11 @@ function BarsCard() {
     <article className="card c5">
       <div className="card-head">
         <div>
-          <p className="eyebrow">Últimos 7 días</p>
-          <h2>Minutos de estudio</h2>
-          <p className="card-desc">Cuánto estudiaste cada día. La línea punteada es tu meta diaria.</p>
+          <p className="eyebrow">Last 7 days</p>
+          <h2>Study minutes</h2>
+          <p className="card-desc">How much you studied each day. The dashed line is your daily goal.</p>
         </div>
-        <span className="head-note">{fmtH(total)} en total</span>
+        <span className="head-note">{fmtH(total)} in total</span>
       </div>
       <div className="bars" ref={el}>
         {days.map((d, i) => {
@@ -159,7 +159,7 @@ function BarsCard() {
           );
         })}
         <div className="goal-line" style={{ bottom: (24 + goalDaily / max * 108) + 'px' }}>
-          <i>meta diaria</i>
+          <i>daily goal</i>
         </div>
       </div>
     </article>
@@ -177,11 +177,11 @@ function GoalCard() {
     <article className="card c3">
       <div className="card-head">
         <div>
-          <p className="eyebrow">Meta semanal</p>
-          <h2>Objetivo</h2>
-          <p className="card-desc">Horas que quieres estudiar esta semana. Se edita en ⚙ Ajustes.</p>
+          <p className="eyebrow">Weekly goal</p>
+          <h2>Objective</h2>
+          <p className="card-desc">Hours you want to study this week. Edited in ⚙ Settings.</p>
         </div>
-        <button className="link-btn" onClick={openSettings}>editar</button>
+        <button className="link-btn" onClick={openSettings}>edit</button>
       </div>
       <div className="goal-ring-wrap">
         <div className="gring">
@@ -191,11 +191,11 @@ function GoalCard() {
           </svg>
           <div className="gr-center">
             <span className="v">{fmtH(wk)}</span>
-            <span className="t">de {state.weeklyGoal} h</span>
+            <span className="t">of {state.weeklyGoal} h</span>
           </div>
         </div>
       </div>
-      <p className="eyebrow" style={{ marginBottom: '.1rem' }}>Últimos 14 días</p>
+      <p className="eyebrow" style={{ marginBottom: '.1rem' }}>Last 14 days</p>
       <div className="heat">
         {heat.map((d, i) => {
           const m = minsOn(state, key(d));
@@ -203,7 +203,7 @@ function GoalCard() {
           return <i key={i} className={lvl} title={`${fmtD(d)}: ${m} min`} />;
         })}
       </div>
-      <p className="heat-cap">Cada cuadrado es un día · más color = más estudio</p>
+      <p className="heat-cap">Each square is a day · more color = more study</p>
     </article>
   );
 }
@@ -219,13 +219,13 @@ function MesaMiniCard() {
     return (
       <article className="card c7" id="mesaCardMini">
         <div className="card-head">
-          <div><p className="eyebrow">Mesa de estudio</p><h2>Tu sesión activa</h2>
-            <p className="card-desc">El tema que estás trabajando, con su curva del olvido.</p></div>
+          <div><p className="eyebrow">Study desk</p><h2>Your active session</h2>
+            <p className="card-desc">The topic you&apos;re working on, with its forgetting curve.</p></div>
           <span id="mesaPillMini"></span>
         </div>
-        <div className="mesa-empty">Aún no hay tema seleccionado.</div>
+        <div className="mesa-empty">No topic selected yet.</div>
         <div style={{ marginTop: '.9rem', display: 'flex', justifyContent: 'flex-end' }}>
-          <button className="btn" onClick={() => switchView('mesa')}>Ver vista completa →</button>
+          <button className="btn" onClick={() => switchView('mesa')}>View full desk →</button>
         </div>
       </article>
     );
@@ -234,25 +234,25 @@ function MesaMiniCard() {
   return (
     <article className="card c7" id="mesaCardMini">
       <div className="card-head">
-        <div><p className="eyebrow">Mesa de estudio</p><h2>{sub ? sub.name + ' · ' : ''}{tp.name}</h2>
-          <p className="card-desc">El tema que estás trabajando, con su curva del olvido.</p></div>
+        <div><p className="eyebrow">Study desk</p><h2>{sub ? sub.name + ' · ' : ''}{tp.name}</h2>
+          <p className="card-desc">The topic you&apos;re working on, with its forgetting curve.</p></div>
         <span className={'pill ' + s.cls}>{s.label}</span>
       </div>
       <div>
         <div className="curve-box" dangerouslySetInnerHTML={{ __html: curveSVG(tp, iv) }} />
         <div className="milestones" dangerouslySetInnerHTML={{ __html: milestonesHTML(tp, state) }} />
         <p className="mesa-next" style={{ marginTop: '.8rem' }}>
-          Retención hoy: <b>{s.n ? s.ret + '%' : '—'}</b> · {s.cls === 'master' ? 'curva completada' : s.n === 0 ? 'primera sesión pendiente' : `próximo repaso: <b>${fmtD(s.due as Date)}</b>`}
+          Retention today: <b>{s.n ? s.ret + '%' : '—'}</b> · {s.cls === 'master' ? 'curve completed' : s.n === 0 ? 'first session pending' : `next review: <b>${fmtD(s.due as Date)}</b>`}
         </p>
       </div>
       <div style={{ marginTop: '.9rem', display: 'flex', justifyContent: 'flex-end' }}>
-        <button className="btn" onClick={() => switchView('mesa')}>Ver vista completa →</button>
+        <button className="btn" onClick={() => switchView('mesa')}>View full desk →</button>
       </div>
     </article>
   );
 }
 
-/* ─── cola de repasos ─── */
+/* ─── review queue ─── */
 function QueueCard() {
   const state = useBitacora(s => s.state);
   const selectTopic = useBitacora(s => s.selectTopic);
@@ -261,8 +261,8 @@ function QueueCard() {
   return (
     <article className="card c5" id="queueCard">
       <div className="card-head">
-        <div><p className="eyebrow">¿Qué repaso toca?</p><h2>Repasos</h2>
-          <p className="card-desc">Temas que debes reestudiar según tus intervalos activos.</p></div>
+        <div><p className="eyebrow">What&apos;s due next?</p><h2>Reviews</h2>
+          <p className="card-desc">Topics you should restudy according to your active intervals.</p></div>
         <span className="head-note">{count}</span>
       </div>
       <div
@@ -278,7 +278,7 @@ function QueueCard() {
   );
 }
 
-/* ─── asignaturas y temas ─── */
+/* ─── subjects and topics ─── */
 function SubjectsCard() {
   const state = useBitacora(s => s.state);
   const collapsed = useBitacora(s => s.collapsed);
@@ -308,9 +308,9 @@ function SubjectsCard() {
   return (
     <article className="card c12">
       <div className="card-head">
-        <div><p className="eyebrow">Tu mapa de conocimiento</p><h2>Asignaturas y temas</h2>
-          <p className="card-desc">Crea asignaturas y agrégales temas. Toca cada asignatura para desplegar sus temas.</p></div>
-        <span className="head-note">intervalos<br />{iv.length ? iv.join(' · ') + ' días' : 'sin repasos activos ⚙'}</span>
+        <div><p className="eyebrow">Your knowledge map</p><h2>Subjects and topics</h2>
+          <p className="card-desc">Create subjects and add topics to them. Tap each subject to expand its topics.</p></div>
+        <span className="head-note">intervals<br />{iv.length ? iv.join(' · ') + ' days' : 'no active reviews ⚙'}</span>
       </div>
       <form
         className="add-form"
@@ -324,18 +324,18 @@ function SubjectsCard() {
             s.subjects.push({ id, name: nm, color: ['#C8471F', '#2F5D8A', '#3E6B4F', '#8A5A17', '#7D4A92', '#A63A4B', '#22706B'][s.subjects.length % 7] });
           });
           setNewName('');
-          toast('Asignatura creada: ' + nm);
+          toast('Subject created: ' + nm);
         }}
       >
         <input
           id="subjName"
-          placeholder="Nueva asignatura… (ej. Geometría)"
+          placeholder="New subject… (e.g. Geometry)"
           maxLength={40}
           required
           value={newName}
           onChange={e => setNewName(e.target.value)}
         />
-        <button className="btn" type="submit">+ Añadir asignatura</button>
+        <button className="btn" type="submit">+ Add subject</button>
       </form>
       <div
         ref={el}
@@ -348,9 +348,9 @@ function SubjectsCard() {
             const id = dt.getAttribute('data-del-topic')!;
             const tp = state.topics.find(x => x.id === id);
             const ok = await openModal({
-              title: 'Eliminar tema',
-              msg: `¿Eliminar <b>«${esc(tp?.name ?? '')}»</b> y todo su historial de repasos?`,
-              okText: 'Eliminar', danger: true,
+              title: 'Delete topic',
+              msg: `Delete <b>“${esc(tp?.name ?? '')}”</b> and its entire review history?`,
+              okText: 'Delete', danger: true,
             });
             if (ok) deleteTopic(id);
             return;
@@ -362,9 +362,9 @@ function SubjectsCard() {
             const sub = subjectOf(state, id);
             const n = state.topics.filter(x => x.subjectId === id).length;
             const ok = await openModal({
-              title: 'Eliminar asignatura',
-              msg: `¿Eliminar <b>«${esc(sub?.name ?? '')}»</b> con sus ${n} temas?`,
-              okText: 'Eliminar', danger: true,
+              title: 'Delete subject',
+              msg: `Delete <b>“${esc(sub?.name ?? '')}”</b> with its ${n} topics?`,
+              okText: 'Delete', danger: true,
             });
             if (ok) deleteSubject(id);
             return;
@@ -392,7 +392,7 @@ function SubjectsCard() {
           });
           openSubject(subId);
           selectTopic(id);
-          toast('Tema añadido: ' + nm);
+          toast('Topic added: ' + nm);
         }}
         dangerouslySetInnerHTML={{ __html: html }}
       />

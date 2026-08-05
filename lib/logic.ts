@@ -13,7 +13,7 @@ export const monday = (d: Date) => { const x = new Date(d); x.setDate(x.getDate(
 export const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string));
 export const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 export const fmtH = (m: number) => { const h = Math.round(m / 6) / 10; return (Number.isInteger(h) ? String(h) : h.toFixed(1).replace('.', ',')) + ' h'; };
-export const fmtD = (d: Date) => d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+export const fmtD = (d: Date) => d.toLocaleDateString('en', { day: 'numeric', month: 'short' });
 export const slugNb = (s: string) => String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
   .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'nota';
 export const retClass = (r: number) => r >= 70 ? 'g-ok' : r >= 55 ? 'g-warn' : 'g-bad';
@@ -32,24 +32,24 @@ export function seed(): State {
     ivActive: [true, true, true, true, true], stepsOn: true, steps: DEFAULT_STEPS.map(s => ({ ...s })),
     archived: [],
     subjects: [
-      { id: 'g', name: 'Geometría', color: PALETTE[0] },
-      { id: 'c', name: 'Cálculo', color: PALETTE[1] },
-      { id: 'h', name: 'Historia del Arte', color: PALETTE[2] }],
+      { id: 'g', name: 'Geometry', color: PALETTE[0] },
+      { id: 'c', name: 'Calculus', color: PALETTE[1] },
+      { id: 'h', name: 'Art History', color: PALETTE[2] }],
     topics: [
-      { id: 't1', subjectId: 'g', name: 'Cálculo de áreas', created: k(22), studies: [st(20, 55, A), st(18, 50, A), st(16, 45, [1, 1, 1, 1, 0].map(Boolean)), st(13, 50, A, 'Fórmulas de figuras compuestas')],
+      { id: 't1', subjectId: 'g', name: 'Area calculations', created: k(22), studies: [st(20, 55, A), st(18, 50, A), st(16, 45, [1, 1, 1, 1, 0].map(Boolean)), st(13, 50, A, 'Compound-shape formulas')],
         notes: [
-          { id: 'n1', name: 'Fórmulas', updatedAt: Date.now(), md: '# Fórmulas clave\n\n- Triángulo: `A = (b·h)/2`\n- Círculo: `A = πr²`\n- Cuadrado: `A = l²`\n\n> Página para acumular las fórmulas que vayas dominando.' },
-          { id: 'n2', name: 'Ejemplos resueltos', updatedAt: Date.now(), md: '## Triángulo: base 10, altura 5\n\n`A = (10·5)/2 = 25`\n\n| Figura | Fórmula | Ejemplo |\n|---|---|---|\n| Triángulo | (b·h)/2 | 25 |\n| Círculo | πr² | — |\n\n- [x] Revisar unidades\n- [ ] Practicar figuras compuestas' }] },
-      { id: 't2', subjectId: 'g', name: 'Cálculo de volúmenes', created: k(6), studies: [st(4, 50, A), st(1, 45, A)], notes: [] },
-      { id: 't3', subjectId: 'g', name: 'Círculo unitario y coseno', created: k(9), studies: [st(2, 55, [1, 1, 1, 0, 0].map(Boolean), 'Falta Feynman')], notes: [] },
-      { id: 't4', subjectId: 'c', name: 'Límites y continuidad', created: k(8), studies: [st(5, 50, A), st(2, 45, A)],
+          { id: 'n1', name: 'Formulas', updatedAt: Date.now(), md: '# Key formulas\n\n- Triangle: `A = (b·h)/2`\n- Circle: `A = πr²`\n- Square: `A = l²`\n\n> A page to collect the formulas you master along the way.' },
+          { id: 'n2', name: 'Worked examples', updatedAt: Date.now(), md: '## Triangle: base 10, height 5\n\n`A = (10·5)/2 = 25`\n\n| Shape | Formula | Example |\n|---|---|---|\n| Triangle | (b·h)/2 | 25 |\n| Circle | πr² | — |\n\n- [x] Check units\n- [ ] Practice compound shapes' }] },
+      { id: 't2', subjectId: 'g', name: 'Volume calculations', created: k(6), studies: [st(4, 50, A), st(1, 45, A)], notes: [] },
+      { id: 't3', subjectId: 'g', name: 'Unit circle and cosine', created: k(9), studies: [st(2, 55, [1, 1, 1, 0, 0].map(Boolean), 'Feynman pending')], notes: [] },
+      { id: 't4', subjectId: 'c', name: 'Limits and continuity', created: k(8), studies: [st(5, 50, A), st(2, 45, A)],
         notes: [
-          { id: 'n3', name: 'Apuntes', updatedAt: Date.now(), md: '## Lo que me cuesta\n\n- Entender qué significa el límite en la gráfica.\n\n## Ideas\n\n1. El límite es «a dónde se acerca».\n2. Repasarlo con la técnica Feynman.' }] },
-      { id: 't5', subjectId: 'c', name: 'Derivadas', created: k(4), studies: [st(4, 50, A, 'Regla de la cadena')], notes: [] },
-      { id: 't6', subjectId: 'c', name: 'Integrales básicas', created: k(1), studies: [], notes: [] },
-      { id: 't7', subjectId: 'h', name: 'Renacimiento italiano', created: k(30), studies: [st(26, 40, A), st(24, 40, A), st(22, 35, A), st(21, 40, A), st(20, 45, A)],
+          { id: 'n3', name: 'Notes', updatedAt: Date.now(), md: '## What I find hard\n\n- Understanding what the limit means on the graph.\n\n## Ideas\n\n1. The limit is «where it approaches».\n2. Review it with the Feynman technique.' }] },
+      { id: 't5', subjectId: 'c', name: 'Derivatives', created: k(4), studies: [st(4, 50, A, 'Chain rule')], notes: [] },
+      { id: 't6', subjectId: 'c', name: 'Basic integrals', created: k(1), studies: [], notes: [] },
+      { id: 't7', subjectId: 'h', name: 'Italian Renaissance', created: k(30), studies: [st(26, 40, A), st(24, 40, A), st(22, 35, A), st(21, 40, A), st(20, 45, A)],
         notes: [
-          { id: 'n4', name: 'Línea del tiempo', updatedAt: Date.now(), md: '## Artistas clave\n\n- **Leonardo da Vinci** (1452–1519)\n- **Miguel Ángel** (1475–1564)\n\n> Añadir imágenes de las obras estudiadas.' }] }],
+          { id: 'n4', name: 'Timeline', updatedAt: Date.now(), md: '## Key artists\n\n- **Leonardo da Vinci** (1452–1519)\n- **Michelangelo** (1475–1564)\n\n> Add images of the works studied.' }] }],
     loose: [{ id: uid(), ts: Date.now(), date: key(new Date()), minutes: 25 }] as Loose[],
   };
 }
@@ -88,10 +88,10 @@ export function entries(state: State): Entry[] {
   state.archived.forEach((a: Archived) => out.push({
     kind: 'archivo', date: a.date, ts: a.ts, minutes: a.minutes,
     subName: a.subName, color: a.color, topic: a.topic, archId: a.id,
-    steps: a.steps.filter(Boolean).length, stepsTot: a.steps.length, note: '↺ archivado (tema restablecido)' }));
+    steps: a.steps.filter(Boolean).length, stepsTot: a.steps.length, note: '↺ archived (topic reset)' }));
   state.loose.forEach(l => out.push({
     kind: 'pomo', date: l.date, ts: l.ts, minutes: l.minutes,
-    subName: 'Sesión libre', color: '#8a8272', topic: 'Pomodoro sin tema', looseId: l.id, steps: null, note: '' }));
+    subName: 'Free session', color: '#8a8272', topic: 'Pomodoro without topic', looseId: l.id, steps: null, note: '' }));
   return out.sort((a, b) => a.date < b.date ? 1 : a.date > b.date ? -1 : b.ts - a.ts);
 }
 export const minsOn = (state: State, k: string) => entries(state).filter(e => e.date === k).reduce((a, e) => a + e.minutes, 0);
@@ -104,23 +104,23 @@ export function calcStreak(state: State) {
   return n;
 }
 
-/* ─── repaso espaciado ─── */
+/* ─── spaced review ─── */
 export function topicStatus(tp: Topic, state: State): TopicStatus {
   const iv = activeIV(state), n = tp.studies.length;
-  if (!n) return { cls: 'new', label: 'Nuevo', diff: null, due: null, ret: 100, n };
+  if (!n) return { cls: 'new', label: 'New', diff: null, due: null, ret: 100, n };
   const last = noon(tp.studies[n - 1].date), today = noon(new Date());
   const since = Math.max(0, (today.getTime() - last.getTime()) / 864e5);
-  if (!iv.length) return { cls: 'master', label: 'Sin repasos activos', diff: null, due: null, ret: Math.round(Math.exp(-since / 50) * 100), n };
+  if (!iv.length) return { cls: 'master', label: 'No active reviews', diff: null, due: null, ret: Math.round(Math.exp(-since / 50) * 100), n };
   const S = iv[Math.min(n - 1, iv.length - 1)] / 0.6;
   const ret = Math.round(Math.exp(-since / S) * 100);
-  if (n > iv.length) return { cls: 'master', label: 'Dominado ✓', diff: null, due: null, ret, n };
+  if (n > iv.length) return { cls: 'master', label: 'Mastered ✓', diff: null, due: null, ret, n };
   const due = addDays(last, iv[n - 1]);
   const diff = Math.round((due.getTime() - today.getTime()) / 864e5);
   let cls: string, label: string;
-  if (diff < 0) { cls = 'late'; label = diff === -1 ? 'Vencido 1d' : 'Vencido ' + (-diff) + 'd'; }
-  else if (diff === 0) { cls = 'today'; label = '¡Repasar hoy!'; }
-  else if (diff === 1) { cls = 'soon'; label = 'Mañana'; }
-  else { cls = 'ok'; label = 'En ' + diff + ' días'; }
+  if (diff < 0) { cls = 'late'; label = diff === -1 ? 'Overdue 1d' : 'Overdue ' + (-diff) + 'd'; }
+  else if (diff === 0) { cls = 'today'; label = 'Review today!'; }
+  else if (diff === 1) { cls = 'soon'; label = 'Tomorrow'; }
+  else { cls = 'ok'; label = 'In ' + diff + ' days'; }
   return { cls, label, diff, due, ret, n };
 }
 
@@ -130,7 +130,7 @@ export function curveSVG(tp: Topic, iv: number[]): string {
   const frame = `<line x1="${L}" y1="${H - B}" x2="${W - Rp}" y2="${H - B}" stroke="rgba(38,34,26,.35)" stroke-width="1.5"/>
     <line x1="${L}" y1="${T}" x2="${L}" y2="${H - B}" stroke="rgba(38,34,26,.35)" stroke-width="1.5"/>`;
   if (!st.length) return `<svg class="curve" viewBox="0 0 ${W} ${H}">${frame}
-    <text x="${W / 2}" y="${H / 2}" text-anchor="middle" font-size="12.5" fill="#6E6553" font-style="italic">Tu curva empieza con la primera sesión de estudio ✦</text></svg>`;
+    <text x="${W / 2}" y="${H / 2}" text-anchor="middle" font-size="12.5" fill="#6E6553" font-style="italic">Your curve starts with your first study session ✦</text></svg>`;
   const stab = (i: number) => ((iv.length ? iv[Math.min(i, iv.length - 1)] : 30)) / 0.6;
   const t0 = noon(st[0].date), dayOf = (d: string | Date) => (noon(d).getTime() - t0.getTime()) / 864e5;
   const todayF = Math.max(0, (noon(new Date()).getTime() - t0.getTime()) / 864e5), n = st.length;
@@ -143,7 +143,7 @@ export function curveSVG(tp: Topic, iv: number[]): string {
     grid += `<line x1="${L}" y1="${y(g)}" x2="${W - Rp}" y2="${y(g)}" stroke="rgba(38,34,26,.08)"/>
     <text x="${L - 5}" y="${y(g) + 3}" text-anchor="end" font-size="8.5" fill="#6E6553" font-family="IBM Plex Mono,monospace">${g * 100}</text>`; });
   const thr = `<line x1="${L}" y1="${y(.55)}" x2="${W - Rp}" y2="${y(.55)}" stroke="rgba(200,71,31,.5)" stroke-dasharray="4 4" stroke-width="1.5"/>
-    <text x="${L + 6}" y="${y(.55) - 6}" text-anchor="start" font-size="9" fill="#C8471F" font-family="IBM Plex Mono,monospace" ${halo}>umbral de repaso · 55%</text>`;
+    <text x="${L + 6}" y="${y(.55) - 6}" text-anchor="start" font-size="9" fill="#C8471F" font-family="IBM Plex Mono,monospace" ${halo}>review threshold · 55%</text>`;
   let areas = '', curves = '', connect = '', dots = '', ghost = '';
   st.forEach((s, i) => {
     const f0 = dayOf(s.date), S = stab(i);
@@ -159,7 +159,7 @@ export function curveSVG(tp: Topic, iv: number[]): string {
       connect += `<line x1="${x(f0)}" y1="${y(rP)}" x2="${x(f0)}" y2="${y(1)}" stroke="#3E6B4F" stroke-width="2" stroke-dasharray="2 3"/>`;
     }
     dots += `<circle cx="${x(f0)}" cy="${y(1)}" r="4" fill="${i ? '#3E6B4F' : '#26221A'}" stroke="#FCF9F0" stroke-width="1.5">
-      <title>${i ? 'Repaso R' + i : 'Primera sesión'} · ${fmtD(noon(s.date))} · ${s.minutes} min · pasos ${s.steps.filter(Boolean).length}/${s.steps.length}</title></circle>`;
+      <title>${i ? 'Review R' + i : 'First session'} · ${fmtD(noon(s.date))} · ${s.minutes} min · steps ${s.steps.filter(Boolean).length}/${s.steps.length}</title></circle>`;
     if (i === n - 1 && nextF !== null) {
       const from = Math.max(f0, todayF);
       if (from < nextF) {
@@ -177,7 +177,7 @@ export function curveSVG(tp: Topic, iv: number[]): string {
   const hxc = Math.min(Math.max(hx, L + 40), W - Rp - 40);
   const hoy = `<line x1="${hx}" y1="${T}" x2="${hx}" y2="${H - B}" stroke="rgba(200,71,31,.6)" stroke-dasharray="3 4" stroke-width="1.5"/>
     <circle cx="${hx}" cy="${y(rT)}" r="5" fill="#C8471F" stroke="#FCF9F0" stroke-width="2"/>
-    <text x="${hxc}" y="${T + 4}" text-anchor="middle" font-size="11" font-weight="bold" fill="#C8471F" font-family="IBM Plex Mono,monospace" ${halo}>hoy · ${Math.round(rT * 100)}%</text>`;
+    <text x="${hxc}" y="${T + 4}" text-anchor="middle" font-size="11" font-weight="bold" fill="#C8471F" font-family="IBM Plex Mono,monospace" ${halo}>today · ${Math.round(rT * 100)}%</text>`;
   let ticks = ''; const tstep = Math.max(1, Math.round(xMax / 4));
   for (let f = 0; f <= xMax; f += tstep) ticks += `<text x="${x(f)}" y="${H - 9}" text-anchor="middle" font-size="9" fill="#6E6553" font-family="IBM Plex Mono,monospace">${fmtD(addDays(t0, Math.round(f)))}</text>`;
   return `<svg class="curve" viewBox="0 0 ${W} ${H}">${grid}${frame}${areas}${thr}${curves}${connect}${ghost}${hoy}${dots}${ticks}</svg>`;
@@ -188,8 +188,8 @@ export function milestonesHTML(tp: Topic, state: State): string {
     done = Math.min(Math.max(n - 1, 0), iv.length), target = Math.max(n, 1);
   return iv.map((d, k) => {
     const kx = k + 1; const cls = kx <= done ? 'done' : (kx === target && n <= iv.length ? 'now' : '');
-    return `<span class="ms ${cls}" title="Repaso ${kx}: ${d} día${d > 1 ? 's' : ''} después"><i></i>R${kx} · ${d}d</span>`;
-  }).join('') || '<span style="font-size:.72rem;color:var(--ink2);font-style:italic">Sin repasos activos — actívalos en ⚙ Ajustes.</span>';
+    return `<span class="ms ${cls}" title="Review ${kx}: ${d} day${d > 1 ? 's' : ''} after"><i></i>R${kx} · ${d}d</span>`;
+  }).join('') || '<span style="font-size:.72rem;color:var(--ink2);font-style:italic">No active reviews — enable them in ⚙ Settings.</span>';
 }
 
 export const CURVE_HELP_HTML = CURVE_HELP;
@@ -268,7 +268,7 @@ export function mdToHTML(src: string | null | undefined, resolveSrc?: (s: string
     html += '<p>' + inline(ln) + '</p>\n'; i++;
   }
   closeList(); closeQuote(); closeTable();
-  return html || '<p class="empty">Esta página está en blanco. Empieza a escribir ✍</p>';
+  return html || '<p class="empty">This page is blank. Start writing ✍</p>';
 }
 
 export function domToMd(root: HTMLElement, srcResolver?: (url: string) => string): string {
@@ -344,40 +344,40 @@ export function domToMd(root: HTMLElement, srcResolver?: (url: string) => string
   return out.replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
 }
 
-/* ─── builders HTML para vistas (portados del original) ─── */
+/* ─── HTML builders for views (ported from the original) ─── */
 export function mesaBodyHTML(tp: Topic, state: State, xl: boolean): string {
   const s = topicStatus(tp, state), iv = activeIV(state);
   const todayK = key(new Date()), ex = tp.studies.find(x => x.date === todayK);
   const totMin = tp.studies.reduce((a, x) => a + x.minutes, 0);
   let nextTxt: string;
-  if (s.n === 0) nextTxt = 'Tu primera sesión pone en marcha la curva. Después llega el repaso R1.';
-  else if (s.cls === 'master') nextTxt = 'Curva completada: todos los repasos hechos. Memoria de largo plazo 🎉';
-  else nextTxt = `Próximo repaso <b>R${s.n}</b>: ${fmtD(s.due as Date)} (${s.diff === 0 ? '¡hoy!' : (s.diff as number) < 0 ? 'vencido' : 'en ' + s.diff + ' días'}). Retención estimada hoy: <b>${s.ret}%</b>.`;
+  if (s.n === 0) nextTxt = 'Your first session kicks off the curve. Then review R1 arrives.';
+  else if (s.cls === 'master') nextTxt = 'Curve complete: all reviews done. Long-term memory 🎉';
+  else nextTxt = `Next review <b>R${s.n}</b>: ${fmtD(s.due as Date)} (${s.diff === 0 ? 'today!' : (s.diff as number) < 0 ? 'overdue' : 'in ' + s.diff + ' days'}). Estimated retention today: <b>${s.ret}%</b>.`;
   const useSteps = state.stepsOn && state.steps.length;
   const lateWarn = s.cls === 'late'
-    ? `<div class="warn-box">⚠ <b>Repaso vencido ${s.diff === -1 ? 'hace 1 día' : 'hace ' + (-(s.diff as number)) + ' días'}:</b> tu retención cayó por debajo del umbral. <b>Se recomienda restablecer el repaso</b> (empezar la curva de nuevo) o repasarlo hoy mismo con sesión completa.</div>` : '';
-  const saveLabel = s.n === 0 ? '✓ Guardar primera sesión' : s.cls === 'master' ? '✓ Guardar sesión de refuerzo' : `✓ Guardar repaso nº${s.n} (R${s.n})`;
+    ? `<div class="warn-box">⚠ <b>Review overdue by ${s.diff === -1 ? '1 day' : (-(s.diff as number)) + ' days'}:</b> your retention fell below the threshold. <b>It is recommended to reset the review</b> (start the curve over) or review it today with a full session.</div>` : '';
+  const saveLabel = s.n === 0 ? '✓ Save first session' : s.cls === 'master' ? '✓ Save reinforcement session' : `✓ Save review no. ${s.n} (R${s.n})`;
   const saveExpl = s.n === 0
-    ? 'Al guardar: queda registrada la fecha de hoy, suman los minutos y se agenda tu repaso R1.'
+    ? 'On save: today’s date is logged, minutes are added and review R1 is scheduled.'
     : s.cls === 'master'
-      ? 'Este tema ya completó toda la curva: guarda refuerzos cuando quieras.'
-      : `R${s.n} significa «repaso número ${s.n}» (${iv.join(' · ')} días). Al guardar se programa R${s.n + 1}.`;
+      ? 'This topic already completed the whole curve: save reinforcements whenever you like.'
+      : `R${s.n} means «review number ${s.n}» (${iv.join(' · ')} days). On save, R${s.n + 1} is scheduled.`;
   return `<div class="mesa-grid">
     <div><div class="curve-box">${curveSVG(tp, iv)}</div>
       <div class="milestones">${milestonesHTML(tp, state)}</div>
       ${CURVE_HELP}</div>
     <div class="mesa-side">
-      <div><p class="big-ret ${xl ? 'xl' : ''} ${retClass(s.ret)}">${s.n ? s.ret + '%' : '—'}</p><p class="ret-lbl">retención estimada</p></div>
+      <div><p class="big-ret ${xl ? 'xl' : ''} ${retClass(s.ret)}">${s.n ? s.ret + '%' : '—'}</p><p class="ret-lbl">estimated retention</p></div>
       <div class="side-meta">
-        <span>Sesiones: <b>${s.n}</b> · <b>${fmtH(totMin)}</b></span>
-        <span>Última: <b>${s.n ? fmtD(noon(tp.studies[s.n - 1].date)) : '—'}</b></span>
-        <span>Repasos completados: <b>${Math.min(Math.max(s.n - 1, 0), iv.length)} / ${iv.length}</b></span>
+        <span>Sessions: <b>${s.n}</b> · <b>${fmtH(totMin)}</b></span>
+        <span>Last: <b>${s.n ? fmtD(noon(tp.studies[s.n - 1].date)) : '—'}</b></span>
+        <span>Reviews completed: <b>${Math.min(Math.max(s.n - 1, 0), iv.length)} / ${iv.length}</b></span>
       </div>
       <div class="mesa-actions">
-        <button class="btn btn-mini" id="mesaPomo">⏱ Pomodoro de este tema</button>
-        <button class="btn btn-mini" id="mesaResetT">↺ Restablecer tema</button>
+        <button class="btn btn-mini" id="mesaPomo">⏱ Pomodoro for this topic</button>
+        <button class="btn btn-mini" id="mesaResetT">↺ Reset topic</button>
       </div>
-      ${ex ? `<p class="today-info">✓ Hoy ya registraste ${ex.minutes} min en este tema.</p>` : ''}
+      ${ex ? `<p class="today-info">✓ Today you already logged ${ex.minutes} min on this topic.</p>` : ''}
       <p class="mesa-next">${nextTxt}</p>
     </div></div>
     ${lateWarn}
@@ -386,14 +386,14 @@ export function mesaBodyHTML(tp: Topic, state: State, xl: boolean): string {
         <label class="step-check"><input type="checkbox" ${ex && ex.steps[i] ? 'checked' : ''}>
           <span class="n">${i + 1}</span>
           <span class="s-txt">${esc(stp.t)}${stp.s ? `<small>${esc(stp.s)}</small>` : ''}</span></label>
-        <button class="step-pomo" data-steppomo="${i}" title="Lanzar pomodoro; al terminar, este paso se marca completo">⏱</button>
+        <button class="step-pomo" data-steppomo="${i}" title="Start a pomodoro; when it ends, this step is marked as complete">⏱</button>
       </div>`).join('')}</div>`
-    : `<p style="font-size:.78rem;color:var(--ink2);font-style:italic;margin-bottom:1rem">Checklist desactivado — puedes activarlo en ⚙ Ajustes.</p>`}
+    : `<p style="font-size:.78rem;color:var(--ink2);font-style:italic;margin-bottom:1rem">Checklist disabled — you can enable it in ⚙ Settings.</p>`}
     <div class="mesa-foot">
-      <label class="fld"><span>Minutos de esta sesión</span>
+      <label class="fld"><span>Minutes for this session</span>
         <input class="f-sm" type="number" id="mesaMin" min="5" max="600" step="5" value="45"></label>
-      <label class="fld f-grow"><span>Nota breve (opcional)</span>
-        <input type="text" id="mesaNote" maxlength="90" placeholder="ej. Regla de la cadena…" value="${esc(ex ? ex.note : '')}"></label>
+      <label class="fld f-grow"><span>Short note (optional)</span>
+        <input type="text" id="mesaNote" maxlength="90" placeholder="e.g. Chain rule…" value="${esc(ex ? ex.note : '')}"></label>
       <button class="btn btn-primary" id="mesaSave" style="flex:none">${saveLabel}</button>
     </div>
     <p class="foot-note">${saveExpl}</p>`;
@@ -404,19 +404,19 @@ export function queueHTML(state: State): { count: string; html: string } {
   const due = all.filter(x => x.s.diff !== null && x.s.diff <= 0).sort((a, b) => (a.s.diff as number) - (b.s.diff as number));
   const news = all.filter(x => x.s.n === 0);
   const soon = all.filter(x => x.s.diff !== null && x.s.diff > 0 && x.s.diff <= 2).sort((a, b) => (a.s.diff as number) - (b.s.diff as number));
-  const count = due.length + ' para hoy';
+  const count = due.length + ' due today';
   const row = (x: { t: Topic; s: TopicStatus }, btn: boolean) => {
     const sub = subjectOf(state, x.t.subjectId);
     return `<div class="qrow"><span class="pill ${x.s.cls}">${x.s.label}</span>
       <div class="q-main"><span class="dot" style="background:${sub ? sub.color : '#888'}"></span>
       <b>${esc(x.t.name)}</b><small>${sub ? esc(sub.name) : ''} · ret. ${x.s.ret}%</small></div>
-      ${btn ? `<button class="btn btn-mini" data-open="${x.t.id}">Estudiar →</button>` : ''}</div>`;
+      ${btn ? `<button class="btn btn-mini" data-open="${x.t.id}">Study →</button>` : ''}</div>`;
   };
   let html = '';
-  if (due.length) html += `<p class="q-head">Vencidos y de hoy</p>` + due.map(x => row(x, true)).join('');
-  if (news.length) html += `<p class="q-head">Sin estudiar aún</p>` + news.map(x => row(x, true)).join('');
-  if (soon.length) html += `<p class="q-head">Próximos (1–2 días)</p>` + soon.map(x => row(x, false)).join('');
-  html = html || '<p class="empty">Todo al día ✦ La curva del olvido no puede contigo.</p>';
+  if (due.length) html += `<p class="q-head">Overdue and today</p>` + due.map(x => row(x, true)).join('');
+  if (news.length) html += `<p class="q-head">Not studied yet</p>` + news.map(x => row(x, true)).join('');
+  if (soon.length) html += `<p class="q-head">Coming up (1–2 days)</p>` + soon.map(x => row(x, false)).join('');
+  html = html || '<p class="empty">All caught up ✦ The forgetting curve has nothing on you.</p>';
   return { count, html };
 }
 
@@ -429,8 +429,8 @@ export function subjectsHTML(state: State, collapsed: Set<string>, selectedTopic
     return `<div class="subj-block ${col ? 'collapsed' : ''}">
       <div class="subj-head" data-subhead="${sub.id}">
         <span class="chip" style="background:${sub.color}"></span><h3>${esc(sub.name)}</h3>
-        <span class="subj-counts">${topics.length} ${topics.length === 1 ? 'tema' : 'temas'} · ${fmtH(tot)}${due ? ` · <b style="color:var(--accent)">${due} hoy</b>` : ''}</span>
-        <button class="del" data-del-subject="${sub.id}" title="Eliminar asignatura">×</button>
+        <span class="subj-counts">${topics.length} ${topics.length === 1 ? 'topic' : 'topics'} · ${fmtH(tot)}${due ? ` · <b style="color:var(--accent)">${due} today</b>` : ''}</span>
+        <button class="del" data-del-subject="${sub.id}" title="Delete subject">×</button>
         <span class="chev">▾</span></div>
       <div class="subj-body" ${col ? 'hidden' : ''}>
         ${topics.map(tp => {
@@ -438,40 +438,40 @@ export function subjectsHTML(state: State, collapsed: Set<string>, selectedTopic
         return `<div class="topic ${tp.id === selectedTopicId ? 'selected' : ''}" data-topic="${tp.id}">
             <span class="pill ${s.cls}">${s.label}</span>
             <div><p class="t-name">${esc(tp.name)}</p>
-              <p class="t-meta">${s.n} ${s.n === 1 ? 'sesión' : 'sesiones'} · ${s.n ? 'últ. ' + fmtD(noon(tp.studies[s.n - 1].date)) : 'sin estudiar'} · ret. ${s.n ? s.ret + '%' : '—'}</p></div>
+              <p class="t-meta">${s.n} ${s.n === 1 ? 'session' : 'sessions'} · ${s.n ? 'last ' + fmtD(noon(tp.studies[s.n - 1].date)) : 'not studied'} · ret. ${s.n ? s.ret + '%' : '—'}</p></div>
             <div class="retbar"><i class="${retClass(s.ret)}" data-w="${s.n ? s.ret : 0}"></i></div>
-            <button class="del" data-del-topic="${tp.id}" title="Eliminar tema">×</button></div>`;
-      }).join('') || '<p class="empty" style="padding-left:1.6rem">Sin temas todavía.</p>'}
+            <button class="del" data-del-topic="${tp.id}" title="Delete topic">×</button></div>`;
+      }).join('') || '<p class="empty" style="padding-left:1.6rem">No topics yet.</p>'}
         <form class="topic-form" data-add-topic="${sub.id}">
-          <input placeholder="Nuevo tema… (ej. Cálculo de volúmenes)" maxlength="60" required>
-          <button class="btn btn-mini" type="submit">+ Tema</button></form>
+          <input placeholder="New topic… (e.g. Volume calculations)" maxlength="60" required>
+          <button class="btn btn-mini" type="submit">+ Topic</button></form>
       </div></div>`;
   }).join('');
-  if (!state.subjects.length) return '<p class="empty">Crea tu primera asignatura arriba para empezar. ✍</p>';
+  if (!state.subjects.length) return '<p class="empty">Create your first subject above to get started. ✍</p>';
   return el;
 }
 
 export function logHTML(state: State): { total: string; html: string } {
   const list = entries(state).slice(0, 150), total = entries(state).reduce((a, e) => a + e.minutes, 0);
-  const totalTxt = entries(state).length + ' sesiones · ' + fmtH(total) + ' de estudio total';
+  const totalTxt = entries(state).length + ' sessions · ' + fmtH(total) + ' total study time';
   const html = list.map(e => `<div class="sess">
-      <span class="sess-date">${noon(e.date).toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
+      <span class="sess-date">${noon(e.date).toLocaleDateString('en', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
       <span class="sess-subj"><span class="dot" style="background:${e.color}"></span><span class="nm">${esc(e.topic)}</span></span>
       <span class="sess-min">${e.minutes}′</span>
-      <span class="sess-note">${e.kind === 'estudio' ? esc(e.subName) + ' · pasos ' + e.steps + '/' + (e.stepsTot || 5) + (e.note ? ' · “' + esc(e.note) + '”' : '') : esc(e.note)}</span>
-      <button class="del" data-del-entry="${e.kind === 'estudio' ? 't:' + e.topicId + ':' + e.stTs : e.kind === 'archivo' ? 'a:' + e.archId : 'l:' + e.looseId}" title="Eliminar">×</button></div>`).join('') || '<p class="empty">Todavía no hay sesiones registradas.</p>';
+      <span class="sess-note">${e.kind === 'estudio' ? esc(e.subName) + ' · steps ' + e.steps + '/' + (e.stepsTot || 5) + (e.note ? ' · “' + esc(e.note) + '”' : '') : esc(e.note)}</span>
+      <button class="del" data-del-entry="${e.kind === 'estudio' ? 't:' + e.topicId + ':' + e.stTs : e.kind === 'archivo' ? 'a:' + e.archId : 'l:' + e.looseId}" title="Delete">×</button></div>`).join('') || '<p class="empty">No sessions logged yet.</p>';
   return { total: totalTxt, html };
 }
 
 export function informeMd(state: State): string {
   const iv = activeIV(state);
-  let md = `# 📓 Bitácora de estudio — Informe\n\n`;
-  md += `_Generado el ${new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}_\n\n`;
-  md += `> **Repasos activos:** ${iv.length ? iv.join(' · ') + ' días' : 'ninguno'}\n`;
-  md += `> **Método de sesión:** ${state.stepsOn ? state.steps.map(s => s.t).join(' → ') : 'sin checklist'}\n\n`;
+  let md = `# 📓 Study log — Report\n\n`;
+  md += `_Generated on ${new Date().toLocaleDateString('en', { day: 'numeric', month: 'long', year: 'numeric' })}_\n\n`;
+  md += `> **Active reviews:** ${iv.length ? iv.join(' · ') + ' days' : 'none'}\n`;
+  md += `> **Session method:** ${state.stepsOn ? state.steps.map(s => s.t).join(' → ') : 'no checklist'}\n\n`;
   const ents = entries(state), tot = ents.reduce((a, e) => a + e.minutes, 0);
-  md += `**Totales:** ${state.topics.length} temas · ${ents.length} sesiones · ${fmtH(tot)} · racha ${calcStreak(state)} días · ${state.pomodoros} pomodoros\n\n`;
-  md += `| Tema | Asignatura | Sesiones | Horas | Estado |\n|---|---|---|---|---|\n`;
+  md += `**Totals:** ${state.topics.length} topics · ${ents.length} sessions · ${fmtH(tot)} · ${calcStreak(state)}-day streak · ${state.pomodoros} pomodoros\n\n`;
+  md += `| Topic | Subject | Sessions | Hours | Status |\n|---|---|---|---|---|\n`;
   state.topics.forEach(tp => {
     const sub = subjectOf(state, tp.subjectId), s = topicStatus(tp, state);
     md += `| ${tp.name} | ${sub ? sub.name : '—'} | ${s.n} | ${fmtH(tp.studies.reduce((a, x) => a + x.minutes, 0))} | ${s.label} |\n`;
@@ -480,19 +480,19 @@ export function informeMd(state: State): string {
   state.subjects.forEach(sub => {
     const topics = state.topics.filter(t => t.subjectId === sub.id); if (!topics.length) return;
     const totS = topics.reduce((a, t) => a + t.studies.reduce((b, s) => b + s.minutes, 0), 0);
-    md += `## ${sub.name}\n_${topics.length} temas · ${fmtH(totS)}_\n\n`;
+    md += `## ${sub.name}\n_${topics.length} topics · ${fmtH(totS)}_\n\n`;
     topics.forEach(tp => {
       const s = topicStatus(tp, state);
-      md += `### ${tp.name}\n- Estado: **${s.label}** · ${s.n} sesiones · retención: ${s.n ? s.ret + '%' : '—'}\n`;
+      md += `### ${tp.name}\n- Status: **${s.label}** · ${s.n} sessions · retention: ${s.n ? s.ret + '%' : '—'}\n`;
       if (tp.studies.length) {
-        md += '\n| Fecha | Minutos | Pasos | Nota |\n|---|---|---|---|\n';
+        md += '\n| Date | Minutes | Steps | Note |\n|---|---|---|---|\n';
         [...tp.studies].sort((a, b) => a.date < b.date ? -1 : 1).forEach(x => {
           md += `| ${x.date} | ${x.minutes}′ | ${x.steps.filter(Boolean).length}/${x.steps.length} | ${x.note || ''} |\n`;
         });
       }
       if (tp.notes && tp.notes.length) {
-        md += `\n#### Cuaderno\n\n`;
-        tp.notes.forEach(n => { md += `##### ${n.name}\n\n${n.md.trim() || '_página vacía_'}\n\n`; });
+        md += `\n#### Notebook\n\n`;
+        tp.notes.forEach(n => { md += `##### ${n.name}\n\n${n.md.trim() || '_empty page_'}\n\n`; });
       }
       md += '\n';
     });

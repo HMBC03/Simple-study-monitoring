@@ -36,7 +36,7 @@ export default function BitacoraApp() {
   if (!ready) {
     return (
       <div className="wrap" style={{ paddingTop: '5rem', textAlign: 'center', color: 'var(--ink2)' }}>
-        Cargando tu bitácora…
+        Loading your study log…
       </div>
     );
   }
@@ -55,38 +55,38 @@ export default function BitacoraApp() {
         {currentView === 'fuentes' && <FuentesView />}
       </main>
       <footer>
-        <span>✦ Repaso espaciado y método Feynman: técnicas de estudio libres.</span>
+        <span>✦ Spaced repetition and the Feynman technique: free study methods.</span>
         <span>
           <button
             className="link-btn"
             onClick={async () => {
               const ok = await openModal({
-                title: 'Restablecer demo',
-                msg: 'Se reemplazarán tus datos actuales por los de ejemplo.',
-                okText: 'Restablecer', danger: true,
+                title: 'Reset demo',
+                msg: 'Your current data will be replaced with the sample data.',
+                okText: 'Reset', danger: true,
               });
               if (!ok) return;
               await demo();
-              toast('Demo restablecida');
+              toast('Demo reset');
             }}
           >
-            Restablecer demo
+            Reset demo
           </button>
           {' · '}
           <button
             className="btn btn-primary"
             onClick={async () => {
               const ok = await openModal({
-                title: 'Comenzar a usar',
-                msg: 'Se eliminarán los temas de ejemplo y se iniciará un cuaderno en blanco para crear los tuyos.',
-                okText: 'Comenzar', danger: true,
+                title: 'Start fresh',
+                msg: 'The sample topics will be removed and a blank notebook will be started for you to create your own.',
+                okText: 'Start', danger: true,
               });
               if (!ok) return;
               await wipe();
-              toast('Lienzo en blanco ✦');
+              toast('Blank canvas ✦');
             }}
           >
-            Comenzar a usar
+            Start fresh
           </button>
         </span>
       </footer>

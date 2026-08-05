@@ -52,7 +52,7 @@ export default function Modal() {
         <div className="modal-btns">
           {modal.showCancel !== false && (
             <button className="btn" onClick={() => resolveModal(hasInput ? null : false)}>
-              Cancelar
+              Cancel
             </button>
           )}
           <button
@@ -63,7 +63,7 @@ export default function Modal() {
               resolveModal(v);
             }}
           >
-            {modal.okText || 'Aceptar'}
+            {modal.okText || 'OK'}
           </button>
         </div>
       </div>

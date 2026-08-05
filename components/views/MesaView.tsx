@@ -28,13 +28,13 @@ export default function MesaView() {
       if (t.closest('#mesaPomo')) { startPomoFor(tp.id, tp.subjectId, null); return; }
       if (t.closest('#mesaResetT')) {
         void openModal({
-          title: 'Restablecer tema',
-          msg: `¿Restablecer <b>«${esc(tp.name)}»</b>? Sus sesiones actuales se archivarán en el Historial y el tema volverá a «Nuevo» (primera sesión).`,
-          okText: 'Restablecer', danger: true,
+          title: 'Reset topic',
+          msg: `Reset <b>“${esc(tp.name)}”</b>? Its current sessions will be archived in History and the topic returns to “New” (first session).`,
+          okText: 'Reset', danger: true,
         }).then(ok => {
           if (!ok) return;
           resetTopic(tp.id);
-          toast('Tema restablecido ↺ Lo anterior quedó archivado en Historial.');
+          toast('Topic reset ↺ Previous sessions archived in History.');
         });
         return;
       }
@@ -48,8 +48,8 @@ export default function MesaView() {
         const note = (noteInp?.value ?? '').trim();
         saveSession(tp.id, min, note, steps);
         const ns = topicStatus(tp, useBitacora.getState().state);
-        toast(ns.cls === 'master' ? '¡Tema dominado! Curva completada 🎉'
-          : ns.due ? `Sesión registrada ✓ Próximo repaso: ${fmtD(ns.due)}` : 'Sesión registrada ✓');
+        toast(ns.cls === 'master' ? 'Topic mastered! Curve completed 🎉'
+          : ns.due ? `Session logged ✓ Next review: ${fmtD(ns.due)}` : 'Session logged ✓');
         confetti(btn as HTMLElement);
       }
     };
@@ -72,19 +72,19 @@ export default function MesaView() {
     <section data-view="mesa">
       <div className="view-top">
         <div>
-          <p className="eyebrow">Vista completa · gráfico a detalle</p>
-          <h1 className="view-title">Mesa de estudio</h1>
-          <p className="view-sub">Observa la curva del olvido de tu tema, lanza pomodoros por paso y registra tu sesión.</p>
+          <p className="eyebrow">Full view · detailed chart</p>
+          <h1 className="view-title">Study desk</h1>
+          <p className="view-sub">Watch your topic&apos;s forgetting curve, launch pomodoros per step and log your session.</p>
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
           <select
             id="mesaTopicSel"
             style={{ minWidth: 240 }}
-            aria-label="Elegir tema"
+            aria-label="Choose topic"
             value={tp?.id ?? ''}
             onChange={e => selectTopic(e.target.value || null)}
           >
-            <option value="">— elige un tema —</option>
+            <option value="">— choose a topic —</option>
             {state.subjects.map(sub => {
               const tps = state.topics.filter(t => t.subjectId === sub.id);
               if (!tps.length) return null;
@@ -111,8 +111,8 @@ export default function MesaView() {
         ) : (
           <div className="mesa-empty">
             {state.topics.length
-              ? 'Elige un tema en el selector de arriba para ver su curva a detalle.'
-              : 'Crea una asignatura y un tema en «Hoy» para empezar. ✍'}
+              ? 'Pick a topic in the selector above to see its curve in detail.'
+              : 'Create a subject and a topic under “Today” to get started. ✍'}
           </div>
         )}
       </div>

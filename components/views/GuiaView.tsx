@@ -20,72 +20,72 @@ export default function GuiaView() {
   return (
     <section data-view="guia">
       <article className="card guide">
-        <p className="eyebrow">Guía completa</p>
-        <h1 className="view-title" style={{ marginBottom: '.6rem' }}>Cómo funciona</h1>
+        <p className="eyebrow">Complete guide</p>
+        <h1 className="view-title" style={{ marginBottom: '.6rem' }}>How it works</h1>
         <p>
-          Esta bitácora convierte métodos de la psicología del aprendizaje —todos de dominio público y uso libre— en una rutina diaria simple: estudias un tema, y la app te dice <b>cuándo repasarlo</b> para que no lo olvides.
+          This study log turns methods from learning psychology —all public domain and free to use— into a simple daily routine: you study a topic, and the app tells you <b>when to review it</b> so you don&apos;t forget it.
         </p>
 
-        <h2><span className="gnum">1 ·</span> La curva del olvido</h2>
+        <h2><span className="gnum">1 ·</span> The forgetting curve</h2>
         <p>
-          Desde los experimentos de Hermann Ebbinghaus (1885) sabemos que lo aprendido se desvanece de forma exponencial si no se repasa. Cada repaso «rescata» la memoria y hace que la siguiente caída sea más lenta.
+          Since Hermann Ebbinghaus&apos;s experiments (1885) we know that what you learn fades exponentially if you don&apos;t review it. Each review “rescues” the memory and makes the next drop slower.
         </p>
         <div className="curve-box" dangerouslySetInnerHTML={{ __html: curveSVG(fake, [1, 3, 7, 15, 30]) }} />
         <div className="legend">
-          <span><i className="dot" style={{ background: '#3E6B4F' }}></i> repaso realizado</span>
-          <span><i className="dot" style={{ background: '#C8471F' }}></i> hoy / próximo repaso</span>
-          <span style={{ color: '#C8471F' }}>— — umbral del 55%</span>
+          <span><i className="dot" style={{ background: '#3E6B4F' }}></i> review done</span>
+          <span><i className="dot" style={{ background: '#C8471F' }}></i> today / next review</span>
+          <span style={{ color: '#C8471F' }}>— — 55% threshold</span>
         </div>
 
-        <h3>Cómo leer el gráfico, sin haber leído nada antes</h3>
+        <h3>How to read the chart, with no prior knowledge</h3>
         <ol>
-          <li><b>Eje vertical (0–100):</b> tu <b>retención estimada</b>, es decir, cuánto recuerdas hoy de lo estudiado.</li>
-          <li><b>Eje horizontal:</b> los días transcurridos, con fechas reales abajo.</li>
-          <li><b>Línea negra sólida:</b> tu memoria <b>cayendo</b> desde cada sesión.</li>
-          <li><b>Puntos verdes:</b> repasos que ya hiciste. Cada uno devuelve la memoria a ~100% y aplana la siguiente caída.</li>
-          <li><b>Punto naranja «hoy»:</b> dónde estás ahora mismo, con tu porcentaje de retención.</li>
-          <li><b>Línea gris punteada:</b> la <b>predicción</b> de hacia dónde va tu memoria si no repasas.</li>
-          <li><b>Círculo naranja (R# · fecha):</b> el día en que esa predicción cruzará el umbral: es tu <b>próximo repaso programado</b>.</li>
-          <li><b>Línea roja punteada = umbral de repaso (~55%):</b> ver abajo qué significa.</li>
+          <li><b>Vertical axis (0–100):</b> your <b>estimated retention</b>, i.e. how much you remember today of what you studied.</li>
+          <li><b>Horizontal axis:</b> the days elapsed, with real dates below.</li>
+          <li><b>Solid black line:</b> your memory <b>declining</b> since each session.</li>
+          <li><b>Green dots:</b> reviews you already did. Each one brings memory back to ~100% and flattens the next drop.</li>
+          <li><b>Orange “today” dot:</b> where you are right now, with your retention percentage.</li>
+          <li><b>Dashed gray line:</b> the <b>prediction</b> of where your memory is heading if you don&apos;t review.</li>
+          <li><b>Orange circle (R# · date):</b> the day that prediction crosses the threshold: your <b>next scheduled review</b>.</li>
+          <li><b>Dashed red line = review threshold (~55%):</b> see below what it means.</li>
         </ol>
         <p>
-          <b>¿Qué es un umbral?</b> Es el <b>límite mínimo de retención que decides tolerar</b> antes de repasar. Aquí usamos ~55%: si repasas <i>por encima</i> del umbral, el repaso es rápido y fortalece; si dejas que la memoria caiga <i>por debajo</i>, ya no estarías repasando sino <b>reaprendiendo</b> (cuesta casi como aprender de cero). Por eso, cuando un repaso se vence por muchos días, la bitácora te recomienda <b>restablecer el tema</b> y empezar la curva de nuevo.
+          <b>What is a threshold?</b> It&apos;s the <b>minimum retention level you decide to tolerate</b> before reviewing. Here we use ~55%: if you review <i>above</i> the threshold, the review is quick and reinforcing; if you let memory fall <i>below</i> it, you&apos;re no longer reviewing but <b>relearning</b> (it costs almost as much as learning from scratch). That&apos;s why, when a review becomes overdue by many days, the log recommends <b>resetting the topic</b> and starting the curve again.
         </p>
 
-        <h2><span className="gnum">2 ·</span> Repasos espaciados (1 · 3 · 7 · 15 · 30 días)</h2>
+        <h2><span className="gnum">2 ·</span> Spaced reviews (1 · 3 · 7 · 15 · 30 days)</h2>
         <p>
-          Cuando estudias un tema por primera vez, se agenda tu primer repaso para <b>1 día</b> después. Al completarlo, el siguiente cae a los <b>3 días</b>, luego <b>7</b>, <b>15</b> y <b>30</b>. Tras el último, el tema queda <b>Dominado ✓</b>.
+          When you study a topic for the first time, your first review is scheduled <b>1 day</b> later. When you complete it, the next one falls <b>3 days</b> later, then <b>7</b>, <b>15</b> and <b>30</b>. After the last one, the topic is <b>Mastered ✓</b>.
         </p>
         <ul>
-          <li>La cola <b>«Repasos»</b> te muestra lo vencido, lo de hoy y lo próximo.</li>
-          <li>En <b>⚙ Ajustes</b> decides <b>cuántos repasos quieres activar</b>. El calendario y la curva se adaptan.</li>
-          <li>Si un repaso <b>se venció</b>, verás en la Mesa de estudio el aviso «se recomienda restablecer el repaso» con su botón para hacerlo (el historial viejo se archiva, no se pierde).</li>
+          <li>The <b>“Reviews”</b> queue shows you what&apos;s overdue, due today and coming up.</li>
+          <li>In <b>⚙ Settings</b> you decide <b>how many reviews to activate</b>. The calendar and the curve adapt.</li>
+          <li>If a review <b>becomes overdue</b>, the Study desk shows the notice “resetting the review is recommended” with its button to do so (the old history is archived, not lost).</li>
         </ul>
 
-        <h2><span className="gnum">3 ·</span> Tu método de sesión</h2>
-        <p>La plantilla de ejemplo trae 5 pasos inspirados en técnicas conocidas:</p>
+        <h2><span className="gnum">3 ·</span> Your session method</h2>
+        <p>The sample template comes with 5 steps inspired by well-known techniques:</p>
         <ol id="guideSteps">
           {state.steps.map((s, i) => (
             <li key={i}><b>{esc(s.t)}</b>{s.s ? ' — ' + esc(s.s) : ''}</li>
           ))}
         </ol>
         <p>
-          Es solo una plantilla: en <b>⚙ Ajustes</b> puedes <b>renombrar, añadir o quitar pasos</b>, o <b>desactivar el checklist</b>. Cada paso tiene un botón ⏱ que lanza un pomodoro y, al terminar, marca ese paso como completo.
+          It&apos;s only a template: in <b>⚙ Settings</b> you can <b>rename, add or remove steps</b>, or <b>disable the checklist</b>. Each step has a ⏱ button that launches a pomodoro and, when it ends, marks that step as complete.
         </p>
 
-        <h2><span className="gnum">4 ·</span> Tus datos: son tuyos, cuídalos</h2>
+        <h2><span className="gnum">4 ·</span> Your data: it&apos;s yours, take care of it</h2>
         <div className="warn-box">
-          ⚠️ Todo se guarda en el <b>almacenamiento local de tu navegador (IndexedDB)</b>: mucho más espacio que antes y <b>solo en este navegador</b>. Si borras los datos de navegación, usas modo incógnito o cambias de equipo, <b>se pierde todo</b>.
+          ⚠️ Everything is stored in your browser&apos;s <b>local storage (IndexedDB)</b>: much more space than before and <b>only in this browser</b>. If you clear browsing data, use incognito mode or switch devices, <b>everything is lost</b>.
         </div>
         <ul>
-          <li><b>⬇ Backup .json</b>: descarga <b>todo</b> tu progreso.</li>
-          <li><b>⬆ Cargar</b>: restaura ese archivo y sigues donde ibas.</li>
-          <li><b>⬇ Informe .md</b>: un notebook legible por asignatura → tema.</li>
+          <li><b>⬇ Backup .json</b>: downloads <b>all</b> your progress.</li>
+          <li><b>⬆ Restore</b>: loads that file and you continue where you left off.</li>
+          <li><b>⬇ Report .md</b>: a notebook readable by subject → topic.</li>
         </ul>
 
         <p style={{ marginTop: '1.4rem' }}>
           <button className="btn btn-primary" style={{ flex: 'none' }} onClick={() => switchView('hoy')}>
-            Entendido, ¡a estudiar! →
+            Got it, let&apos;s study! →
           </button>
         </p>
       </article>

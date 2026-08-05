@@ -90,8 +90,8 @@ function completeTimer() {
   const stepIdx = st.pendingStep;
   const topicName = st.state.topics.find(t => t.id === topicId)?.name ?? null;
   const msg = topicName
-    ? `¡Pomodoro! +${mins} min en «${topicName}»${stepIdx != null && st.state.stepsOn ? ` · paso ${stepIdx + 1} ✓` : ''} ⏱`
-    : `¡Pomodoro completado! +${mins} min ⏱`;
+    ? `Pomodoro done! +${mins} min on “${topicName}”${stepIdx != null && st.state.stepsOn ? ` · step ${stepIdx + 1} ✓` : ''} ⏱`
+    : `Pomodoro completed! +${mins} min ⏱`;
   st.mut(s => {
     const tp = s.topics.find(t => t.id === topicId);
     if (tp) {

@@ -10,7 +10,7 @@ import { download } from '@/lib/ui';
 
 const slug = (s: string) =>
   String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'nota';
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'note';
 
 const countWords = (md: string) => (md.trim() ? md.trim().split(/\s+/).length : 0);
 
@@ -27,7 +27,7 @@ export default function NotebookView() {
   const [chosenPage, setPageId] = useState<string | null>(null);
   const [mode, setMode] = useState<Mode>(() => (state.lastNb?.mode === 'md' ? 'md' : 'w'));
   const [words, setWords] = useState(0);
-  const [savedText, setSavedText] = useState('guardado ✓');
+  const [savedText, setSavedText] = useState('saved ✓');
   const [savedWarn, setSavedWarn] = useState(false);
   const [updatedAtText, setUpdatedAtText] = useState('—');
   const [preview, setPreview] = useState('');
@@ -91,7 +91,7 @@ export default function NotebookView() {
       savedMdRef.current = p.md;
       draftRef.current = p.md;
       setWords(countWords(p.md));
-      setUpdatedAtText(p.updatedAt ? 'editado ' + new Date(p.updatedAt).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }) : '—');
+      setUpdatedAtText(p.updatedAt ? 'edited ' + new Date(p.updatedAt).toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' }) : '—');
       for (const id of [...p.md.matchAll(/blob:([A-Za-z0-9-_]+)/g)].map(m => m[1])) {
         if (urlsRef.current.has(id)) continue;
         try {
@@ -127,8 +127,8 @@ export default function NotebookView() {
       s.lastNb = { subjId: sel.subjId, topicId: sel.topicId, pageId: sel.pageId, mode: sel.mode };
     });
     savedMdRef.current = md;
-    setUpdatedAtText('editado ' + new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }));
-    setSavedText('guardado ✓');
+    setUpdatedAtText('edited ' + new Date().toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' }));
+    setSavedText('saved ✓');
     setSavedWarn(false);
   }, [commit]);
 
@@ -183,8 +183,8 @@ export default function NotebookView() {
     commit(s => { if (s.lastNb) s.lastNb.mode = m; });
     if (m === 'md') setPreview(mdToHTML(draftRef.current, resolveIn));
     toast(m === 'md'
-      ? 'Modo Markdown: escribe con sintaxis #, **, -, [x]'
-      : 'Modo Normal: escribe como en Word — Ctrl+B negrita, Ctrl+I cursiva, Ctrl+U subrayado');
+      ? 'Markdown mode: write with #, **, -, [x] syntax'
+      : 'Normal mode: write like in Word — Ctrl+B bold, Ctrl+I italic, Ctrl+U underline');
   };
 
   const switchTopic = (id: string) => {
@@ -209,39 +209,39 @@ export default function NotebookView() {
   };
 
   const addTopic = async () => {
-    if (!subj) { toast('Primero crea una asignatura en la vista Hoy'); return; }
-    const nm = await openModal({ title: 'Nuevo tema', msg: `¿Cómo se llama este tema del cuaderno (en «${esc(subj.name)}»)?`, inputValue: '' });
+    if (!subj) { toast('Create a subject first on the Today view'); return; }
+    const nm = await openModal({ title: 'New topic', msg: `What should this notebook topic be called (under “${esc(subj.name)}”)?`, inputValue: '' });
     if (nm === null) return;
     const name = typeof nm === 'string' && nm.trim() ? nm.trim() : '';
     const id = uid();
     commit(s => {
-      s.topics.push({ id, subjectId: subj.id, name: name || 'Tema ' + (s.topics.filter(t => t.subjectId === subj.id).length + 1), created: key(new Date()), studies: [], notes: [] });
+      s.topics.push({ id, subjectId: subj.id, name: name || 'Topic ' + (s.topics.filter(t => t.subjectId === subj.id).length + 1), created: key(new Date()), studies: [], notes: [] });
       s.lastNb = { subjId: subj.id, topicId: id, pageId: null, mode: selRef.current.mode };
     });
     setTopicId(id);
     setPageId(null);
-    toast('Tema creado: ' + name);
+    toast('Topic created: ' + name);
   };
 
   const addPage = async () => {
-    if (!tp) { toast('Primero crea un tema'); return; }
-    const nm = await openModal({ title: 'Nuevo subtema', msg: `¿Cómo se llama este subtema (en «${esc(tp.name)}»)?`, inputValue: '' });
+    if (!tp) { toast('Create a topic first'); return; }
+    const nm = await openModal({ title: 'New subtopic', msg: `What should this subtopic be called (under “${esc(tp.name)}”)?`, inputValue: '' });
     if (nm === null) return;
     const name = typeof nm === 'string' && nm.trim() ? nm.trim() : '';
-    const pgn = { id: uid(), name: name || 'Subtema ' + (tp.notes.length + 1), md: '', updatedAt: now() };
+    const pgn = { id: uid(), name: name || 'Subtopic ' + (tp.notes.length + 1), md: '', updatedAt: now() };
     commit(s => {
       const t3 = s.topics.find(t => t.id === tp.id);
       t3?.notes.push(pgn);
       s.lastNb = { subjId: selRef.current.subjId, topicId: tp.id, pageId: pgn.id, mode: selRef.current.mode };
     });
     setPageId(pgn.id);
-    toast('Subtema creado: ' + pgn.name);
+    toast('Subtopic created: ' + pgn.name);
   };
 
   const dupPage = () => {
     if (!tp || !pg) return;
     flushSave();
-    const c = { id: uid(), name: pg.name + ' (copia)', md: pg.md, updatedAt: now() };
+    const c = { id: uid(), name: pg.name + ' (copy)', md: pg.md, updatedAt: now() };
     commit(s => {
       const t3 = s.topics.find(t => t.id === tp.id);
       const idx = t3?.notes.findIndex(n => n.id === pg.id) ?? -1;
@@ -249,15 +249,15 @@ export default function NotebookView() {
       s.lastNb = { subjId: selRef.current.subjId, topicId: tp.id, pageId: c.id, mode: selRef.current.mode };
     });
     setPageId(c.id);
-    toast('Subtema duplicado ⧉');
+    toast('Subtopic duplicated ⧉');
   };
 
   const delPage = () => {
     if (!tp || !pg) return;
     void openModal({
-      title: 'Borrar subtema',
-      msg: `¿Borrar el subtema <b>«${esc(pg.name)}»</b> de «${esc(tp.name)}»? Su contenido se pierde.`,
-      okText: 'Borrar', danger: true,
+      title: 'Delete subtopic',
+      msg: `Delete subtopic <b>“${esc(pg.name)}”</b> from “${esc(tp.name)}”? Its content will be lost.`,
+      okText: 'Delete', danger: true,
     }).then(ok => {
       if (!ok) return;
       const rest = tp.notes.filter(n => n.id !== pg.id);
@@ -267,18 +267,18 @@ export default function NotebookView() {
         s.lastNb = { subjId: selRef.current.subjId, topicId: tp.id, pageId: rest[0]?.id ?? null, mode: selRef.current.mode };
       });
       setPageId(rest[0]?.id ?? null);
-      toast('Subtema borrado');
+      toast('Subtopic deleted');
     });
   };
 
   const exportMd = () => {
     if (!tp || !pg) return;
     const sb = subj ? subjectOf(state, tp.subjectId) : null;
-    const md = '# ' + pg.name + '\n\n> Cuaderno de ' + tp.name + (sb ? ' · ' + sb.name : '') +
-      '\n> Generado el ' + new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) +
-      '\n\n---\n\n' + (pg.md.trim() || '_página vacía_') + '\n';
+    const md = '# ' + pg.name + '\n\n> Notebook of ' + tp.name + (sb ? ' · ' + sb.name : '') +
+      '\n> Generated on ' + new Date().toLocaleDateString('en', { day: 'numeric', month: 'long', year: 'numeric' }) +
+      '\n\n---\n\n' + (pg.md.trim() || '_blank page_') + '\n';
     download(slug(pg.name) + '.md', md, 'text/markdown');
-    toast('Página descargada ⬇ .md');
+    toast('Page downloaded ⬇ .md');
   };
 
   const onTool = (x: (typeof NB_TOOLS)[number]) => {
@@ -299,7 +299,7 @@ export default function NotebookView() {
     if (!wys) return;
     wys.focus();
     if (x.link) {
-      void openModal({ title: 'Enlace', msg: '¿A qué URL apunta el enlace?', inputValue: 'https://' }).then(u => {
+      void openModal({ title: 'Link', msg: 'Which URL should the link point to?', inputValue: 'https://' }).then(u => {
         if (u === null || u === false) return;
         document.execCommand('createLink', false, String(u));
         refreshDraft(); scheduleSave();
@@ -322,7 +322,7 @@ export default function NotebookView() {
       if (mode === 'md' && taRef.current) {
         const ta = taRef.current;
         const a = ta.selectionStart, b = ta.selectionEnd;
-        ta.value = ta.value.slice(0, a) + '![imagen](' + ref + ')' + ta.value.slice(b);
+        ta.value = ta.value.slice(0, a) + '![image](' + ref + ')' + ta.value.slice(b);
         refreshDraft(); scheduleSave();
       } else {
         const url = URL.createObjectURL(blob);
@@ -331,13 +331,13 @@ export default function NotebookView() {
         const wys = wysRef.current;
         if (wys) {
           wys.focus();
-          document.execCommand('insertHTML', false, '<img src="' + url + '" alt="imagen">');
+          document.execCommand('insertHTML', false, '<img src="' + url + '" alt="image">');
           refreshDraft(); scheduleSave();
         }
       }
-      toast('Imagen añadida ✓ (guardada en tu dispositivo)');
+      toast('Image added ✓ (saved on your device)');
     } catch {
-      toast('No se pudo procesar la imagen ✕');
+      toast('Could not process the image ✕');
     }
   };
 
@@ -345,50 +345,50 @@ export default function NotebookView() {
     <section data-view="notebook">
       <div className="view-top">
         <div>
-          <p className="eyebrow">Tu conocimiento escrito</p>
-          <h1 className="view-title">Cuaderno</h1>
-          <p className="view-sub">La asignatura es tu cuaderno: cada pestaña es un tema y dentro viven los subtemas. Escribe normal (como en Word) o en Markdown; se guarda solo y viaja en tu backup.</p>
+          <p className="eyebrow">Your written knowledge</p>
+          <h1 className="view-title">Notebook</h1>
+          <p className="view-sub">The subject is your notebook: each tab is a topic and inside it live the subtopics. Write normally (like in Word) or in Markdown; it saves itself and travels with your backup.</p>
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
-          <select style={{ minWidth: 240 }} aria-label="Elegir asignatura del cuaderno" value={subj?.id ?? ''} onChange={e => switchSubject(e.target.value)}>
-            <option value="">— elige una asignatura —</option>
+          <select style={{ minWidth: 240 }} aria-label="Choose notebook subject" value={subj?.id ?? ''} onChange={e => switchSubject(e.target.value)}>
+            <option value="">— choose a subject —</option>
             {state.subjects.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
           </select>
-          {subj && <span className="pill new" style={{ borderStyle: 'solid' }}>{topics.length} {topics.length === 1 ? 'tema' : 'temas'}</span>}
-          <button className="btn btn-mini" onClick={() => void addTopic()}>+ Tema</button>
+          {subj && <span className="pill new" style={{ borderStyle: 'solid' }}>{topics.length} {topics.length === 1 ? 'topic' : 'topics'}</span>}
+          <button className="btn btn-mini" onClick={() => void addTopic()}>+ Topic</button>
         </div>
       </div>
       <div className="card nb-card">
-        <div className="nb-tabs" role="tablist" aria-label="Temas">
+        <div className="nb-tabs" role="tablist" aria-label="Topics">
           {topics.map(t => (
             <button key={t.id} className={'nb-tab ' + (t.id === tp?.id ? 'active' : '')} role="tab" title={t.name} onClick={() => switchTopic(t.id)}>
               {t.name}
             </button>
           ))}
-          <button className="nb-tab new" title={subj ? 'Nuevo tema en «' + subj.name + '»' : 'Nuevo tema'} onClick={() => void addTopic()}>+ Tema</button>
+          <button className="nb-tab new" title={subj ? 'New topic under “' + subj.name + '”' : 'New topic'} onClick={() => void addTopic()}>+ Topic</button>
         </div>
-        <div className="nb-stabs" role="tablist" aria-label="Subtemas">
+        <div className="nb-stabs" role="tablist" aria-label="Subtopics">
           {tp?.notes.map(n => (
             <button key={n.id} className={'nb-stab ' + (n.id === pg?.id ? 'active' : '')} role="tab" title={n.name} onClick={() => switchPage(n.id)}>
               {n.name}
             </button>
           ))}
-          {tp && <button className="nb-tab new" title={'Nuevo subtema en «' + tp.name + '»'} onClick={() => void addPage()}>+ Subtema</button>}
+          {tp && <button className="nb-tab new" title={'New subtopic under “' + tp.name + '”'} onClick={() => void addPage()}>+ Subtopic</button>}
         </div>
         <div className="nb-body">
           {!subj && (
             <div className="mesa-empty" style={{ padding: '3rem 1rem' }}>
-              Todavía no hay asignaturas.<br />Crea una en la vista <b>Hoy</b> y sus temas aparecerán aquí como pestañas ✍
+              There are no subjects yet.<br />Create one on the <b>Today</b> view and its topics will appear here as tabs ✍
             </div>
           )}
           {subj && !tp && (
             <div className="mesa-empty" style={{ padding: '3rem 1rem' }}>
-              «{esc(subj.name)}» no tiene temas todavía.<br />Presiona <b>+ Tema</b> para crear la primera pestaña ✍
+              “{esc(subj.name)}” has no topics yet.<br />Press <b>+ Topic</b> to create the first tab ✍
             </div>
           )}
           {tp && !pg && (
             <div className="mesa-empty" style={{ padding: '3rem 1rem' }}>
-              «{esc(tp.name)}» no tiene subtemas todavía.<br />Presiona <b>+ Subtema</b> para escribir tu primer apunte ✍
+              “{esc(tp.name)}” has no subtopics yet.<br />Press <b>+ Subtopic</b> to write your first note ✍
             </div>
           )}
           {tp && pg && (
@@ -399,18 +399,18 @@ export default function NotebookView() {
                   id="nbPageTitle"
                   maxLength={60}
                   defaultValue={pg.name}
-                  placeholder="Nombre del subtema…"
-                  aria-label="Nombre del subtema"
+                  placeholder="Subtopic name…"
+                  aria-label="Subtopic name"
                   onChange={scheduleSave}
                 />
-                <div className="nb-mode-seg" role="group" aria-label="Modo de escritura">
-                  <button className={'nb-mode-btn ' + (mode === 'w' ? 'active' : '')} type="button" title="Escribir normal, como en Word (Ctrl+B negrita, Ctrl+I cursiva, Ctrl+U subrayado)" onClick={() => changeMode('w')}>✏ Normal</button>
-                  <button className={'nb-mode-btn ' + (mode === 'md' ? 'active' : '')} type="button" title="Escribir con sintaxis Markdown (#, **, -, [x])" onClick={() => changeMode('md')}># Markdown</button>
+                <div className="nb-mode-seg" role="group" aria-label="Writing mode">
+                  <button className={'nb-mode-btn ' + (mode === 'w' ? 'active' : '')} type="button" title="Write normally, like in Word (Ctrl+B bold, Ctrl+I italic, Ctrl+U underline)" onClick={() => changeMode('w')}>✏ Normal</button>
+                  <button className={'nb-mode-btn ' + (mode === 'md' ? 'active' : '')} type="button" title="Write with Markdown syntax (#, **, -, [x])" onClick={() => changeMode('md')}># Markdown</button>
                 </div>
                 <div className="head-actions">
-                  <button className="btn btn-mini" title="Descargar esta página como .md" onClick={exportMd}>⬇ .md</button>
-                  <button className="btn btn-mini" title="Duplicar esta página" onClick={dupPage}>⧉</button>
-                  <button className="btn btn-mini" title="Borrar esta página" onClick={delPage}>🗑</button>
+                  <button className="btn btn-mini" title="Download this page as .md" onClick={exportMd}>⬇ .md</button>
+                  <button className="btn btn-mini" title="Duplicate this page" onClick={dupPage}>⧉</button>
+                  <button className="btn btn-mini" title="Delete this page" onClick={delPage}>🗑</button>
                 </div>
               </div>
               <div className="nb-toolbar">
@@ -437,16 +437,16 @@ export default function NotebookView() {
                   ref={taRef}
                   className="nb-input"
                   hidden={mode === 'w'}
-                  placeholder="Escribe tus apuntes aquí… Markdown: # Título, **negrita**, - listas, - [ ] tareas, ![alt](imagen), [texto](url)"
+                  placeholder="Write your notes here… Markdown: # Title, **bold**, - lists, - [ ] tasks, ![alt](image), [text](url)"
                   spellCheck={false}
                   defaultValue={pg.md}
                   onInput={onTaInput}
                   onKeyDown={onTaKey}
                 />
-                <div className="nb-preview" hidden={mode === 'w'} aria-label="Vista previa" dangerouslySetInnerHTML={{ __html: preview }} />
+                <div className="nb-preview" hidden={mode === 'w'} aria-label="Preview" dangerouslySetInnerHTML={{ __html: preview }} />
               </div>
               <div className="nb-foot">
-                <span>{words} palabra{words === 1 ? '' : 's'}</span>
+                <span>{words} word{words === 1 ? '' : 's'}</span>
                 <span id="nbSaved" className={savedWarn ? 'warn' : ''}>{savedText}</span>
                 <span>{updatedAtText}</span>
               </div>

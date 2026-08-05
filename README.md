@@ -1,63 +1,58 @@
-# Bitácora de Estudio
+# Study Bitácora (Study Log)
 
-Una web para trackear tu rendimiento de aprendizaje, usar la técnica Pomodoro y potenciar el estudio. Está pensada como un cuaderno de trabajo personal: llevas tus asignaturas y temas, registras cada sesión de estudio y la aplicación te dice cuándo repasar para no olvidar lo aprendido.
+A web app to track your learning performance, use the Pomodoro technique and boost your studying. It works as a personal study notebook: you keep your subjects and topics, log every study session, and the app tells you when to review so you never forget what you've learned.
 
-Se basa en la **curva del olvido** (Ebbinghaus) y el **repaso espaciado** (1 · 3 · 7 · 15 · 30 días), junto con la técnica **Feynman** para validar lo que realmente dominas.
+It is based on the **forgetting curve** (Ebbinghaus) and **spaced repetition** (1 · 3 · 7 · 15 · 30 days), together with the **Feynman technique** to validate what you truly master.
 
-## Qué hace
+## What it does
 
-- Registra tus **asignaturas** y **temas** con su estado: Nuevo, por repasar, vencido o Dominado.
-- Calcula una **retención estimada** (%) y programa el próximo repaso de cada tema.
-- **Pomodoro** integrado con modo foco a pantalla completa, duraciones de 15 · 25 · 50 min y sonidos suaves.
-- Checklist de **pasos de sesión** personalizables (lectura, ejercicios, método Feynman…).
-- **Cuaderno** con subtemas por tema, editor normal (como Word) o Markdown, con vista previa e imágenes (guardadas localmente).
-- Estadísticas diarias y semanales, racha de estudio y **historial** completo de sesiones.
-- **Backup** descargable (.json) e informe (.md) para llevar tus datos a cualquier navegador.
+- Tracks your **subjects** and **topics** with their status: New, due for review, overdue or Mastered.
+- Estimates your **retention** (%) and schedules the next review for each topic.
+- Built-in **Pomodoro** with fullscreen focus mode, 15 · 25 · 50 min durations and soft sounds.
+- Customizable **session steps** checklist (reading, exercises, Feynman technique…).
+- **Notebook** with subtopics per topic, a Word-like editor or Markdown with live preview and images (stored locally).
+- Daily and weekly statistics, study streak and a complete session **history**.
+- Downloadable **backup** (.json) and report (.md) to carry your data to any browser.
 
-## Secciones
+## Sections
 
-| Vista | Descripción |
+| View | Description |
 |---|---|
-| **Hoy** | Saludo, resumen del día, repasos programados, pomodoro, meta semanal y gestión de asignaturas y temas. |
-| **Mesa de estudio** | Gráfico detallado de la curva del olvido del tema elegido, lanzar pomodoros por paso y guardar la sesión. |
-| **Cuaderno** | Apuntes por asignatura → tema → subtema, en modo Normal o Markdown, con imágenes y guardado automático. |
-| **Historial** | Todas las sesiones registradas, filtros, uso de almacenamiento y backup/restauración. |
-| **Herramientas** | Selección de herramientas sugeridas para estudiar mejor (NotebookLM, Anki, Obsidian…). |
-| **Cómo funciona** | Guía del método: curva del olvido, umbral de repaso e intervalos espaciados. |
-| **Fuentes** | Referencias APA en las que se apoya el método. |
+| **Today** | Greeting, day summary, due reviews, pomodoro, weekly goal and subject/topic management. |
+| **Study desk** | Detailed forgetting-curve chart of the selected topic, per-step pomodoros and session logging. |
+| **Notebook** | Notes by subject → topic → subtopic, in Normal or Markdown mode, with images and autosave. |
+| **History** | Every logged session, storage usage and backup/restore. |
+| **Tools** | A curated selection of study tools (NotebookLM, Anki, Obsidian…). |
+| **How it works** | The method explained: forgetting curve, review threshold and spaced intervals. |
+| **Sources** | APA references behind the method. |
 
-## Privacidad y almacenamiento
+## Privacy & storage
 
-Todo vive **exclusivamente en tu navegador** (IndexedDB): no hay servidores ni cuentas. Esto permite guardar imágenes del cuaderno sin tocar el límite de localStorage. Descarga el **Backup .json** periódicamente: si borras los datos de navegación o cambias de equipo, los datos no viajan solos.
+Everything lives **exclusively in your browser** (IndexedDB): no servers, no accounts. This allows notebook images without hitting the localStorage limit. Download the **.json Backup** regularly: if you clear browsing data or switch devices, the data doesn't travel on its own.
 
 ## Stack
 
 - [Next.js](https://nextjs.org) (App Router) + TypeScript
-- [Zustand](https://zustand.docs.pmnd.rs) para el estado
-- [idb](https://github.com/jakearchibald/idb) para IndexedDB
-- Sin librerías de UI: estilos propios, modo foco y `prefers-reduced-motion` soportados
+- [Zustand](https://zustand.docs.pmnd.rs) for state
+- [idb](https://github.com/jakearchibald/idb) for IndexedDB
+- No UI libraries: custom styles, focus mode and `prefers-reduced-motion` supported
 
-> Proyecto creado y desarrollado con asistencia de modelos de IA: **Qwen** y **DeepSeek**.
+> Project created and developed with AI model assistance: **Qwen** and **DeepSeek**.
 
-## Puesta en marcha
+## Getting started
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).
 
-Producción:
+Production:
 
 ```bash
 npm run build
 npm run start
 ```
 
-La app es 100% estática en el cliente, así que puede desplegarse en cualquier hosting estático o en Vercel/Netlify.
-
-## IMG
-![alt text](image.png)
-
-![alt text](image-1.png)
+The app is fully static on the client, so it can be deployed to any static host or Vercel/Netlify.

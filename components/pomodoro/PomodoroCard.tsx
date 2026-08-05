@@ -32,18 +32,18 @@ export default function PomodoroCard() {
   const running = snap.running;
   const m = Math.floor(snap.left / 60), s = snap.left % 60;
   const offset = CIRC * (1 - snap.left / snap.dur);
-  const stateTxt = done ? '¡hecho!' : running ? 'en foco' : (snap.left < snap.dur ? 'en pausa' : 'listo');
+  const stateTxt = done ? 'done!' : running ? 'in focus' : (snap.left < snap.dur ? 'paused' : 'ready');
 
   return (
     <article className="card c4" id="pomoCard" ref={selfRef}>
       <div className="card-head">
-        <div><p className="eyebrow">En foco</p><h2>Pomodoro</h2>
-          <p className="card-desc">Temporizador de concentración. Al iniciar, entras al modo foco a pantalla completa.</p></div>
+        <div><p className="eyebrow">In focus</p><h2>Pomodoro</h2>
+          <p className="card-desc">Focus timer. When you start it, you enter full-screen focus mode.</p></div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '.3rem', alignItems: 'flex-end' }}>
-          <span className="head-note" style={{ whiteSpace: 'nowrap' }}>15 · 25 · 50<br />minutos</span>
-          <label className="sound-toggle" title="Sonidos suaves de inicio y cierre">
+          <span className="head-note" style={{ whiteSpace: 'nowrap' }}>15 · 25 · 50<br />minutes</span>
+          <label className="sound-toggle" title="Soft start and end sounds">
             <input type="checkbox" checked={soundOn} onChange={e => setSoundOn(e.target.checked)} />
-            <span>🔔 sonidos</span>
+            <span>🔔 sounds</span>
           </label>
         </div>
       </div>
@@ -59,23 +59,23 @@ export default function PomodoroCard() {
           </div>
         </div>
         <select
-          aria-label="Asignatura"
+          aria-label="Subject"
           value={pomoSubjectId ?? ''}
           onChange={e => setPomoSelection(e.target.value || null, null)}
         >
-          <option value="">— Sin asignatura (libre) —</option>
+          <option value="">— No subject (free) —</option>
           {state.subjects.map(sub => <option key={sub.id} value={sub.id}>{sub.name}</option>)}
         </select>
         <select
-          aria-label="Tema"
+          aria-label="Topic"
           disabled={!pomoSubjectId}
           value={pomoTopicId ?? ''}
           onChange={e => setPomoSelection(pomoSubjectId, e.target.value || null)}
         >
-          <option value="">— elegir tema —</option>
+          <option value="">— choose topic —</option>
           {state.topics.filter(t => t.subjectId === pomoSubjectId).map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
         </select>
-        <div className="presets" role="group" aria-label="Duración">
+        <div className="presets" role="group" aria-label="Duration">
           {[15, 25, 50].map(min => (
             <button
               key={min}
@@ -92,9 +92,9 @@ export default function PomodoroCard() {
             style={{ flex: 1 }}
             onClick={() => { if (running) stopTimer(); else beginTimer(); }}
           >
-            {running ? '❚❚ Pausar' : '▶ Empezar'}
+            {running ? '❚❚ Pause' : '▶ Start'}
           </button>
-          <button className="btn" aria-label="Reiniciar" onClick={() => resetTimer()}>↺</button>
+          <button className="btn" aria-label="Reset" onClick={() => resetTimer()}>↺</button>
         </div>
       </div>
     </article>

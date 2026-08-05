@@ -20,32 +20,32 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Bitácora de Estudio · Pomodoro, Repaso Espaciado y Curva del Olvido',
+  title: 'Study Log · Pomodoro, Spaced Repetition and the Forgetting Curve',
   description:
-    'Bitácora de estudio con Pomodoro, repaso espaciado y curva del olvido. Registra tus asignaturas y temas, y descubre qué estudiar cada día para no olvidar.',
+    'A study tracker with Pomodoro, spaced repetition and the forgetting curve. Log your subjects and topics, and find out what to review each day so you never forget.',
   metadataBase: new URL('https://www.hectorbeltran.com'),
   alternates: { canonical: '/bitacora' },
-  applicationName: 'Bitácora de Estudio',
+  applicationName: 'Study Log',
   authors: [{ name: 'Héctor Beltrán', url: 'https://www.hectorbeltran.com' }],
-  keywords: ['estudio', 'pomodoro', 'repaso espaciado', 'curva del olvido', 'técnicas de estudio'],
+  keywords: ['study', 'pomodoro', 'spaced repetition', 'forgetting curve', 'study techniques'],
   creator: 'Héctor Beltrán',
   robots: { index: true, follow: true, 'max-image-preview': 'large' },
   icons: { icon: '/logo.jpg', apple: '/logo.jpg' },
   openGraph: {
     siteName: 'Héctor Beltrán',
-    title: 'Bitácora de Estudio · Pomodoro, Repaso Espaciado y Curva del Olvido',
+    title: 'Study Log · Pomodoro, Spaced Repetition and the Forgetting Curve',
     description:
-      'Bitácora de estudio con Pomodoro, repaso espaciado y curva del olvido. Registra tus asignaturas y temas, y descubre qué estudiar cada día para no olvidar.',
+      'A study tracker with Pomodoro, spaced repetition and the forgetting curve. Log your subjects and topics, and find out what to review each day so you never forget.',
     url: 'https://www.hectorbeltran.com/bitacora',
     type: 'website',
-    locale: 'es_CO',
+    locale: 'en_US',
     images: [{ url: 'https://www.hectorbeltran.com/logo.jpg' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bitácora de Estudio · Pomodoro, Repaso Espaciado y Curva del Olvido',
+    title: 'Study Log · Pomodoro, Spaced Repetition and the Forgetting Curve',
     description:
-      'Bitácora de estudio con Pomodoro, repaso espaciado y curva del olvido. Registra tus asignaturas y temas, y descubre qué estudiar cada día para no olvidar.',
+      'A study tracker with Pomodoro, spaced repetition and the forgetting curve. Log your subjects and topics, and find out what to review each day so you never forget.',
     images: ['https://www.hectorbeltran.com/logo.jpg'],
   },
 };
@@ -57,21 +57,21 @@ export const viewport: Viewport = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'Bitácora de Estudio',
+  name: 'Study Log',
   url: 'https://www.hectorbeltran.com/bitacora',
-  description: 'Herramienta gratuita de estudio con Pomodoro, repaso espaciado y curva del olvido. Registra asignaturas y temas, y sabe qué repasar cada día.',
+  description: 'Free study tool with Pomodoro, spaced repetition and the forgetting curve. Track subjects and topics, and know what to review every day.',
   applicationCategory: 'EducationalApplication',
   operatingSystem: 'Web',
-  inLanguage: 'es-CO',
+  inLanguage: 'en',
   isAccessibleForFree: true,
-  featureList: ['Temporizador Pomodoro', 'Repaso espaciado', 'Curva del olvido', 'Registro de asignaturas y temas', 'Modo foco'],
+  featureList: ['Pomodoro timer', 'Spaced repetition', 'Forgetting curve', 'Subject and topic tracking', 'Focus mode'],
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   author: { '@type': 'Person', name: 'Héctor Beltrán', url: 'https://www.hectorbeltran.com' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${fraunces.variable} ${karla.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${karla.variable} ${plexMono.variable}`}>
       <body>
         <script
           type="application/ld+json"

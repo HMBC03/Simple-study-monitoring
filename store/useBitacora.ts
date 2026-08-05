@@ -95,9 +95,9 @@ export const useBitacora = create<BitacoraStore>()((set, get) => ({
     if (st.subjects.length > 0 && !localStorage.getItem('hbAlertSeen')) {
       localStorage.setItem('hbAlertSeen', '1');
       void get().openModal({
-        title: '✨ Esto es un ejemplo',
-        msg: 'Una vez lo hayas entendido, presiona en <b>Comenzar a usar</b> (abajo) y se reiniciarán los datos para crear tus propios temas.',
-        okText: 'Entendido', showCancel: false,
+        title: '✨ This is sample data',
+        msg: 'Once you understand it, press <b>Start fresh</b> (below) and the data will be reset so you can create your own topics.',
+        okText: 'Got it', showCancel: false,
       });
     }
   },

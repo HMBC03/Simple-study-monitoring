@@ -4,24 +4,24 @@ import { SOURCES } from '@/lib/constants';
 
 export default function FuentesView() {
   const tags = [
-    ['curva', 'curva del olvido'],
-    ['bio', 'biografías'],
-    ['meta', 'métodos'],
-    ['ia', 'IA y pensamiento'],
-    ['tool', 'herramientas'],
+    ['curva', 'forgetting curve'],
+    ['bio', 'biographies'],
+    ['meta', 'methods'],
+    ['ia', 'AI and thinking'],
+    ['tool', 'tools'],
   ] as const;
   return (
     <section data-view="fuentes">
       <div className="view-top">
         <div>
-          <p className="eyebrow">Sobre qué se sostiene esta bitácora</p>
-          <h1 className="view-title">Fuentes y referencias</h1>
-          <p className="view-sub">Este proyecto se basa en búsquedas que buscan fortalecer el aprendizaje <b>sin depender de inteligencia artificial</b>: construir pensamiento profundo, cultivar la memoria propia y mejorar cada día.</p>
+          <p className="eyebrow">What this study log stands on</p>
+          <h1 className="view-title">Sources and references</h1>
+          <p className="view-sub">This project is based on searches that aim to strengthen learning <b>without depending on artificial intelligence</b>: build deep thinking, cultivate your own memory and improve every day.</p>
         </div>
       </div>
       <div className="card src-intro">
         <p className="lead">
-          Cada referencia está citada según las normas <b>APA (7ª edición)</b> e incluye un breve resumen. Áreas:{' '}
+          Each reference is cited according to <b>APA (7th edition)</b> rules and includes a short summary. Areas:{' '}
           {tags.map(([cls, txt]) => <span key={cls} className={`src-tag ${cls}`}>{txt}</span>)}
           .
         </p>

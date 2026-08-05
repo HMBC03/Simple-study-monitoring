@@ -24,7 +24,7 @@ export default function HistorialView() {
         const est = await navigator.storage.estimate();
         if (!alive || !est.quota) return;
         const mb = (n: number) => (n / 1048576).toFixed(1).replace('.', ',');
-        setUsage(`Uso local: ${mb(est.usage ?? 0)} MB de ${mb(est.quota)} MB`);
+        setUsage(`Local usage: ${mb(est.usage ?? 0)} MB of ${mb(est.quota)} MB`);
       } catch { /* ignorar */ }
     })();
     return () => { alive = false; };
@@ -37,9 +37,9 @@ export default function HistorialView() {
       const d = (e.target as HTMLElement).closest('[data-del-entry]');
       if (!d) return;
       void openModal({
-        title: 'Eliminar sesión',
-        msg: '¿Eliminar esta entrada del historial?',
-        okText: 'Eliminar', danger: true,
+        title: 'Delete session',
+        msg: 'Delete this entry from the history?',
+        okText: 'Delete', danger: true,
       }).then(ok => { if (ok) deleteEntry(d.getAttribute('data-del-entry')!); });
     };
     el.addEventListener('click', onClick);
@@ -50,18 +50,18 @@ export default function HistorialView() {
     <section data-view="historial">
       <div className="view-top">
         <div>
-          <p className="eyebrow">Todo tu recorrido</p>
-          <h1 className="view-title">Historial</h1>
-          <p className="view-sub">Cada sesión registrada, incluidos los archivados al restablecer un tema.</p>
+          <p className="eyebrow">Your whole journey</p>
+          <h1 className="view-title">History</h1>
+          <p className="view-sub">Every logged session, including those archived when you reset a topic.</p>
         </div>
         <div className="head-actions">
           <button
             className="btn btn-tiny"
             onClick={async () => {
-              toast('Preparando backup…');
+              toast('Preparing backup…');
               const json = await exportBackupV5(state);
-              download(`bitacora-${key(new Date())}.json`, json, 'application/json');
-              toast('Backup descargado ⬇ Guárdalo para cargarlo en otro navegador.');
+              download(`study-log-${key(new Date())}.json`, json, 'application/json');
+              toast('Backup downloaded ⬇ Keep it to restore in another browser.');
             }}
           >
             ⬇ Backup .json
@@ -69,13 +69,13 @@ export default function HistorialView() {
           <button
             className="btn btn-tiny"
             onClick={() => {
-              download(`bitacora-informe-${key(new Date())}.md`, informeMd(state), 'text/markdown');
-              toast('Informe .md descargado 📓');
+              download(`study-log-report-${key(new Date())}.md`, informeMd(state), 'text/markdown');
+              toast('Report .md downloaded 📓');
             }}
           >
-            ⬇ Informe .md
+            ⬇ Report .md
           </button>
-          <button className="btn btn-tiny" onClick={() => fileRef.current?.click()}>⬆ Cargar</button>
+          <button className="btn btn-tiny" onClick={() => fileRef.current?.click()}>⬆ Restore</button>
           <input
             ref={fileRef}
             type="file"
@@ -89,9 +89,9 @@ export default function HistorialView() {
                 const text = await f.text();
                 const st = await importBackup(text);
                 const ok = await openModal({
-                  title: 'Cargar respaldo',
-                  msg: 'Esto <b>reemplazará</b> tus datos actuales por el archivo. ¿Continuar?',
-                  okText: 'Cargar',
+                  title: 'Restore backup',
+                  msg: 'This will <b>replace</b> your current data with the file. Continue?',
+                  okText: 'Restore',
                 });
                 if (!ok) return;
                 useBitacora.getState().mut(s => {
@@ -101,9 +101,9 @@ export default function HistorialView() {
                 useBitacora.getState().selectTopic(null);
                 useBitacora.getState().setNavOpen(false);
                 void (await import('@/lib/storage')).persist(st);
-                toast(`Respaldo cargado ✓ ${st.subjects.length} asignaturas, ${st.topics.length} temas.`);
+                toast(`Backup restored ✓ ${st.subjects.length} subjects, ${st.topics.length} topics.`);
               } catch {
-                toast('Archivo no válido ✕ No se reconoce el formato del respaldo.');
+                toast('Invalid file ✕ The backup format was not recognized.');
               }
             }}
           />
@@ -111,8 +111,8 @@ export default function HistorialView() {
       </div>
       <div className="card">
         <div className="warn-box">
-          ⚠️ <b>Tus datos viven solo en este navegador.</b> Si borras caché o cambias de equipo, descarga antes el{' '}
-          <b>Backup .json</b> y restáuralo con <b>⬆ Cargar</b>.
+          ⚠️ <b>Your data lives only in this browser.</b> If you clear the cache or switch devices, download the{' '}
+          <b>Backup .json</b> first and restore it with <b>⬆ Restore</b>.
         </div>
         {usage && <p className="head-note" style={{ textAlign: 'left', marginBottom: '.5rem' }}>{usage}</p>}
         <p className="head-note" style={{ textAlign: 'left', marginBottom: '.5rem' }}>{total}</p>

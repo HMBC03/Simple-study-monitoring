@@ -27,11 +27,11 @@ function SettingsBody() {
   return (
     <div className="veil" style={{ display: 'flex' }} onClick={() => closeSettings()}>
       <div className="modal wide" role="dialog" aria-modal="true" aria-labelledby="setTitle" onClick={e => e.stopPropagation()}>
-        <h3 id="setTitle">⚙ Personaliza tu bitácora</h3>
+        <h3 id="setTitle">⚙ Customize your study log</h3>
         <div className="set-body">
           <div className="set-sec">
-            <p className="set-title">Repasos espaciados</p>
-            <p className="set-note">Activa los intervalos que quieras usar.</p>
+            <p className="set-title">Spaced reviews</p>
+            <p className="set-note">Activate the intervals you want to use.</p>
             <div className="iv-chips">
               {IV.map((d, i) => (
                 <button
@@ -41,16 +41,16 @@ function SettingsBody() {
                   aria-pressed={!!iv[i]}
                   onClick={() => setIv(prev => prev.map((v, j) => (j === i ? !v : v)))}
                 >
-                  {d} {d === 1 ? 'día' : 'días'}
+                  {d} {d === 1 ? 'day' : 'days'}
                 </button>
               ))}
             </div>
           </div>
           <div className="set-sec">
-            <p className="set-title">Pasos de tu sesión</p>
+            <p className="set-title">Your session steps</p>
             <label className="set-toggle">
               <input type="checkbox" checked={stepsOn} onChange={e => setStepsOn(e.target.checked)} />
-              Usar checklist antes de guardar cada sesión
+              Use a checklist before saving each session
             </label>
             <div className={stepsOn ? '' : 'steps-off'}>
               {steps.map((s, i) => (
@@ -60,42 +60,42 @@ function SettingsBody() {
                     data-step={i}
                     value={s.t}
                     maxLength={70}
-                    placeholder={`Paso ${i + 1}…`}
-                    aria-label={`Paso ${i + 1}`}
+                    placeholder={`Step ${i + 1}…`}
+                    aria-label={`Step ${i + 1}`}
                     onChange={e => editStep(i, e.target.value)}
                   />
-                  <button className="del" style={{ opacity: 1 }} title="Quitar paso" type="button" onClick={() => delStep(i)}>×</button>
+                  <button className="del" style={{ opacity: 1 }} title="Remove step" type="button" onClick={() => delStep(i)}>×</button>
                 </div>
               ))}
               <div className="set-links">
-                <button className="link-btn" type="button" onClick={() => setSteps(prev => [...prev, { t: '', s: '' }])}>+ Añadir paso</button>
-                <button className="link-btn" type="button" onClick={() => setSteps(DEFAULT_STEPS.map(s => ({ ...s })))}>Restaurar plantilla de ejemplo</button>
+                <button className="link-btn" type="button" onClick={() => setSteps(prev => [...prev, { t: '', s: '' }])}>+ Add step</button>
+                <button className="link-btn" type="button" onClick={() => setSteps(DEFAULT_STEPS.map(s => ({ ...s })))}>Restore the sample template</button>
               </div>
             </div>
           </div>
           <div className="set-sec">
-            <p className="set-title">Meta semanal</p>
+            <p className="set-title">Weekly goal</p>
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
               <input
                 type="number" min={1} max={168} step={0.5}
                 style={{ width: 90 }} value={goal}
-                aria-label="Meta semanal en horas"
+                aria-label="Weekly goal in hours"
                 onChange={e => setGoal(Number(e.target.value))}
-              /> <span style={{ fontSize: '.85rem' }}>horas por semana</span>
+              /> <span style={{ fontSize: '.85rem' }}>hours per week</span>
             </div>
           </div>
         </div>
         <div className="modal-btns">
-          <button className="btn" onClick={() => closeSettings()}>Cancelar</button>
+          <button className="btn" onClick={() => closeSettings()}>Cancel</button>
           <button
             className="btn btn-primary" style={{ flex: 'none' }}
             onClick={() => {
               saveSettings(iv, steps.map(s => ({ t: s.t.trim(), s: s.s || '' })).filter(s => s.t), stepsOn, goal);
               closeSettings();
-              toast('Ajustes guardados ✓');
+              toast('Settings saved ✓');
             }}
           >
-            Guardar cambios
+            Save changes
           </button>
         </div>
       </div>

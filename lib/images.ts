@@ -8,13 +8,13 @@ function loadImage(file: File): Promise<HTMLImageElement> {
     const url = URL.createObjectURL(file);
     const img = new Image();
     img.onload = () => { URL.revokeObjectURL(url); res(img); };
-    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('imagen inválida')); };
+    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('invalid image')); };
     img.src = url;
   });
 }
 
 function canvasToBlob(cv: HTMLCanvasElement, type: string, quality: number): Promise<Blob> {
-  return new Promise((res, rej) => cv.toBlob(b => b ? res(b) : rej(new Error('toBlob falló')), type, quality));
+  return new Promise((res, rej) => cv.toBlob(b => b ? res(b) : rej(new Error('toBlob failed')), type, quality));
 }
 
 export async function shrinkImageFile(file: File): Promise<Blob> {

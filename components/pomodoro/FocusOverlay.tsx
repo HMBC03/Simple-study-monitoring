@@ -59,14 +59,14 @@ export default function FocusOverlay() {
       <div className="grain" aria-hidden="true" style={{ zIndex: 505 }} />
       <button
         className="focus-close"
-        title="Salir del modo foco"
+        title="Exit focus mode"
         onClick={() => { stopTimer(); resetTimer(); setFocusVisible(false); }}
       >
         ×
       </button>
       <div className="focus-inner">
-        <p className="focus-subject">{sub ? sub.name : 'Sesión libre'}</p>
-        <p className="focus-topic">{tp ? tp.name : 'Pomodoro sin tema específico'}</p>
+        <p className="focus-subject">{sub ? sub.name : 'Free session'}</p>
+        <p className="focus-topic">{tp ? tp.name : 'Pomodoro without a specific topic'}</p>
         <div className="focus-ring-wrap">
           <svg viewBox="0 0 440 440">
             <circle className="focus-ring-bg" cx="220" cy="220" r="190" />
@@ -75,7 +75,7 @@ export default function FocusOverlay() {
           <div className="focus-digits">
             <span className="focus-time">{pad(m)}:{pad(s)}</span>
             <span className="focus-state">
-              {done ? '¡completado!' : pausedState ? <span>en pausa</span> : <><span className="dot-live"></span>en foco</>}
+              {done ? 'completed!' : pausedState ? <span>paused</span> : <><span className="dot-live"></span>in focus</>}
             </span>
           </div>
         </div>
@@ -89,23 +89,23 @@ export default function FocusOverlay() {
             else if (pausedState) resumeTimer();
           }}
         >
-          {running || pausedState ? '❚❚ Pausar' : '▶ Continuar'}
+          {running || pausedState ? '❚❚ Pause' : '▶ Resume'}
         </button>
         <button
           className="focus-btn"
           onClick={async () => {
             const ok = await openModal({
-              title: 'Restablecer pomodoro',
-              msg: 'Se detiene el pomodoro actual y el reloj vuelve a su duración completa. ¿Continuar?',
-              okText: 'Restablecer', danger: true,
+              title: 'Reset pomodoro',
+              msg: 'The current pomodoro stops and the clock returns to its full duration. Continue?',
+              okText: 'Reset', danger: true,
             });
             if (!ok) return;
             resetTimer();
             setFocusVisible(false);
-            useBitacora.getState().toast('Pomodoro restablecido ↺');
+            useBitacora.getState().toast('Pomodoro reset ↺');
           }}
         >
-          ↺ <span className="short">Detener</span><span className="long">Restablecer</span>
+          ↺ <span className="short">Stop</span><span className="long">Reset</span>
         </button>
       </div>
     </div>

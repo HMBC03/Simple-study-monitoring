@@ -3,12 +3,12 @@
 import { useState } from 'react';
 
 const TOOLS = [
-  { tag: 'meta', tagText: 'repaso espaciado', name: 'Anki', desc: 'Tarjetas de memoria con repetición espaciada automática.', url: 'https://apps.ankiweb.net/' },
-  { tag: 'tool', tagText: 'notas enlazadas', name: 'Obsidian', desc: 'Cuaderno local en Markdown con enlaces bidireccionales.', url: 'https://obsidian.md/' },
-  { tag: 'meta', tagText: 'foco', name: 'Pomofocus', desc: 'Temporizador Pomodoro web minimalista.', url: 'https://pomofocus.io/' },
-  { tag: 'bio', tagText: 'cursos libres', name: 'Khan Academy', desc: 'Cursos gratuitos con ejercicios y videos.', url: 'https://es.khanacademy.org/' },
-  { tag: 'tool', tagText: 'citas APA', name: 'Zotero', desc: 'Gestor de referencias gratuito con citaciones APA automáticas.', url: 'https://www.zotero.org/' },
-  { tag: 'bio', tagText: 'lectura', name: 'Project Gutenberg', desc: 'Más de 70 000 libros libres para tu lectura primaria.', url: 'https://www.gutenberg.org/' },
+  { tag: 'meta', tagText: 'spaced repetition', name: 'Anki', desc: 'Flashcards with automatic spaced repetition.', url: 'https://apps.ankiweb.net/' },
+  { tag: 'tool', tagText: 'linked notes', name: 'Obsidian', desc: 'Local Markdown notebook with bidirectional links.', url: 'https://obsidian.md/' },
+  { tag: 'meta', tagText: 'focus', name: 'Pomofocus', desc: 'Minimalist web Pomodoro timer.', url: 'https://pomofocus.io/' },
+  { tag: 'bio', tagText: 'free courses', name: 'Khan Academy', desc: 'Free courses with exercises and videos.', url: 'https://www.khanacademy.org/' },
+  { tag: 'tool', tagText: 'APA citations', name: 'Zotero', desc: 'Free reference manager with automatic APA citations.', url: 'https://www.zotero.org/' },
+  { tag: 'bio', tagText: 'reading', name: 'Project Gutenberg', desc: 'More than 70,000 free books for your primary reading.', url: 'https://www.gutenberg.org/' },
 ];
 
 export default function HerramientasView() {
@@ -19,45 +19,45 @@ export default function HerramientasView() {
     <section data-view="herr">
       <div className="view-top">
         <div>
-          <p className="eyebrow">Complementan tu esfuerzo, no lo reemplazan</p>
-          <h1 className="view-title">Herramientas de aprendizaje sugeridas</h1>
-          <p className="view-sub">Selección curada para estudiar mejor: primero tu cerebro (lectura, ejercicios, Feynman), después la tecnología como andamio y verificación.</p>
+          <p className="eyebrow">They complement your effort, not replace it</p>
+          <h1 className="view-title">Suggested learning tools</h1>
+          <p className="view-sub">Curated selection to study better: first your brain (reading, exercises, Feynman), then technology as scaffolding and verification.</p>
         </div>
       </div>
       <div className="tools-wrap">
         <article className="card tool-feat">
-          <p className="eyebrow">Destacada · IA como andamio</p>
+          <p className="eyebrow">Featured · AI as scaffolding</p>
           <h2>NotebookLM (Google)</h2>
-          <p>Un «cuaderno de investigación» gratuito de Google que <b>responde únicamente con las fuentes que tú subes</b> (PDF, Docs, enlaces web, videos de YouTube, texto) y muestra <b>citaciones clicables</b> en cada afirmación. Por eso es ideal para estudiar: no inventa, te devuelve tu propio material organizado, y te obliga a trabajar con tus apuntes en vez de con respuestas genéricas.</p>
+          <p>A free Google “research notebook” that <b>answers only with the sources you upload</b> (PDF, Docs, web links, YouTube videos, text) and shows <b>clickable citations</b> for every claim. That&apos;s why it&apos;s ideal for studying: it doesn&apos;t make things up, it gives you back your own material organized, and it forces you to work with your notes instead of generic answers.</p>
           <div className="nb-figs">
             {!imgFail.f1 && (
               <figure>
-                <img loading="lazy" src="https://image.qwenlm.ai/public_source/5a4d554f-47ec-41b9-844c-bf601688ebd4/26ab26334-a126-4261-aad5-6e3c6c9be61e1094.png" alt="Flujo de trabajo de NotebookLM" onError={() => hide('f1')} />
-                <figcaption>Flujo típico: de tus fuentes a una guía de estudio en 6 pasos.</figcaption>
+                <img loading="lazy" src="https://image.qwenlm.ai/public_source/5a4d554f-47ec-41b9-844c-bf601688ebd4/26ab26334-a126-4261-aad5-6e3c6c9be61e1094.png" alt="NotebookLM workflow" onError={() => hide('f1')} />
+                <figcaption>Typical flow: from your sources to a study guide in 6 steps.</figcaption>
               </figure>
             )}
             {!imgFail.f2 && (
               <figure>
-                <img loading="lazy" src="https://image.qwenlm.ai/public_source/5a4d554f-47ec-41b9-844c-bf601688ebd4/56ab26334-a126-4261-aad5-6e3c6c9be61e3536.png" alt="Panel principal de NotebookLM" onError={() => hide('f2')} />
-                <figcaption>Panel de cuadernos: cada tema puede ser su propio cuaderno.</figcaption>
+                <img loading="lazy" src="https://image.qwenlm.ai/public_source/5a4d554f-47ec-41b9-844c-bf601688ebd4/56ab26334-a126-4261-aad5-6e3c6c9be61e3536.png" alt="NotebookLM main panel" onError={() => hide('f2')} />
+                <figcaption>Notebooks panel: each topic can be its own notebook.</figcaption>
               </figure>
             )}
           </div>
-          <h3>Guía oficial, paso a paso</h3>
+          <h3>Official guide, step by step</h3>
           <ol>
-            <li><b>Crea un cuaderno</b> en notebooklm.google.com con tu cuenta de Google.</li>
-            <li><b>Añade fuentes</b>: hasta 50 por cuaderno (PDF, Docs, enlaces, YouTube, texto pegado).</li>
-            <li><b>Pregunta</b> y lee las citaciones en línea: cada respuesta indica de qué fuente sale.</li>
-            <li><b>Guarda notas</b> dentro del cuaderno con lo que valga la pena reutilizar.</li>
-            <li><b>Genera salidas de estudio</b>: guías de estudio, FAQ, flashcards, quizzes y el <b>Audio Overview</b>, una conversación tipo podcast entre dos anfitriones que resume tus fuentes.</li>
-            <li><b>Refina</b> con instrucciones propias («hazme 10 preguntas difíciles de…», «explícalo como para un niño»).</li>
+            <li><b>Create a notebook</b> at notebooklm.google.com with your Google account.</li>
+            <li><b>Add sources</b>: up to 50 per notebook (PDF, Docs, links, YouTube, pasted text).</li>
+            <li><b>Ask</b> and read the inline citations: each answer indicates which source it comes from.</li>
+            <li><b>Save notes</b> inside the notebook with anything worth reusing.</li>
+            <li><b>Generate study outputs</b>: study guides, FAQ, flashcards, quizzes and the <b>Audio Overview</b>, a podcast-like conversation between two hosts that summarizes your sources.</li>
+            <li><b>Refine</b> with your own instructions (“make me 10 hard questions about…”, “explain it like I&apos;m a child”).</li>
           </ol>
-          <p>Consejos del propio equipo de Google: empieza con ~10 fuentes buenas, convierte cada documento en Audio Overview para repasarlo caminando, y haz preguntas específicas en lugar de pedir resúmenes genéricos.</p>
-          <div className="warn-box"><b>Cómo usarlo sin depender de él:</b> la lectura, los dibujos y los ejercicios propios van primero. <i>Después</i> la herramienta sirve para verificarse: pedir quizzes, detectar lagunas en la explicación Feynman o aclarar lo que no quedó claro. Copiar el resumen no equivale a aprender: si algo no se puede explicar sin la herramienta, todavía no se domina.</div>
+          <p>Tips from Google&apos;s own team: start with ~10 good sources, turn each document into an Audio Overview to review it while walking, and ask specific questions instead of requesting generic summaries.</p>
+          <div className="warn-box"><b>How to use it without depending on it:</b> reading, drawing and your own exercises come first. <i>Afterwards</i> the tool serves to check yourself: take quizzes, spot gaps in your Feynman explanation or clarify what wasn&apos;t clear. Copying the summary is not learning: if something can&apos;t be explained without the tool, it isn&apos;t mastered yet.</div>
           <p style={{ marginTop: '.6rem' }}>
             <a className="src-link" href="https://notebooklm.google.com/" target="_blank" rel="noopener noreferrer">notebooklm.google.com</a> ·
-            <a className="src-link" href="https://support.google.com/gemininotebook/" target="_blank" rel="noopener noreferrer">Ayuda oficial (Google)</a> ·
-            <a className="src-link" href="https://blog.google/innovation-and-ai/products/notebooklm-beginner-tips/" target="_blank" rel="noopener noreferrer">Tips oficiales para empezar</a>
+            <a className="src-link" href="https://support.google.com/gemininotebook/" target="_blank" rel="noopener noreferrer">Official help (Google)</a> ·
+            <a className="src-link" href="https://blog.google/innovation-and-ai/products/notebooklm-beginner-tips/" target="_blank" rel="noopener noreferrer">Official tips to get started</a>
           </p>
         </article>
         <div className="tools-grid">
